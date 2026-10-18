@@ -2467,8 +2467,6 @@
         const searchIndex = normalizeVietnamese([
           student.full_name,
           student.class_name,
-          student.school,
-          student.introduction,
           ...studentAchs.map(a => `${a.achievement_name} ${a.competition_name} ${a.category} ${a.award_level} ${a.award_year || ''}`)
         ].join(' '));
 
