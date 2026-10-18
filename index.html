@@ -2215,25 +2215,32 @@
      */
     function resolveAwardTier(awardLevel) {
       const norm = normalizeVietnamese(awardLevel);
+      
+      // Nhóm Vàng / Giải Nhất / Thủ khoa / Tam khoa
       if (
         norm.includes('nhat') ||
         norm.includes('vang') ||
         norm.includes('hcv') ||
         norm.includes('gold') ||
         norm.includes('thu khoa') ||
+        norm.includes('tam khoa') ||
         norm.includes('vo dich')
       ) {
         return { tier: 'gold', priority: 1, icon: '★' };
       }
+      
+      // Nhóm Bạc / Giải Nhì / Á khoa
       if (
         norm.includes('nhi') ||
         norm.includes('bac') ||
         norm.includes('hcb') ||
         norm.includes('silver') ||
-        norm.includes('a khoi')
+        norm.includes('a khoa')
       ) {
         return { tier: 'silver', priority: 2, icon: '◆' };
       }
+      
+      // Nhóm Đồng / Giải Ba
       if (
         norm.includes('ba') ||
         norm.includes('dong') ||
@@ -2242,7 +2249,17 @@
       ) {
         return { tier: 'bronze', priority: 3, icon: '▲' };
       }
-      return { tier: 'special', priority: 4, icon: '●' };
+
+      // Nhóm Giải Khuyến Khích
+      if (
+        norm.includes('khuyen khich') ||
+        norm.includes('kk')
+      ) {
+        return { tier: 'consolation', priority: 4, icon: '●' };
+      }
+
+      // Các giải khác
+      return { tier: 'special', priority: 5, icon: '✦' };
     }
 
     /**
