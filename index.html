@@ -2826,7 +2826,7 @@
               <div class="student-card__identity">
                 <span class="student-card__rank-chip">${escapeHtml(student.cpRankBadge)}</span>
                 <h2 class="student-card__name" title="${escapeHtml(student.full_name)}">${escapeHtml(student.full_name)}</h2>
-                <p class="student-card__class" title="${escapeHtml(student.class_name)}">${escapeHtml(student.class_name)}</p>
+                <p class="student-card__class" title="${escapeHtml(student.class_name)}">${escapeHtml(student.class_name)}${student.school ? ' • ' + escapeHtml(student.school) : ''}</p>
               </div>
             </div>
 
@@ -2934,7 +2934,7 @@
 
             <div class="cp-metallic-frame__info">
               <h2 id="modalStudentName" class="cp-metallic-frame__name">${escapeHtml(student.full_name)}</h2>
-              <div class="cp-metallic-frame__class">${escapeHtml(student.class_name)}</div>
+              <div class="cp-metallic-frame__class">${escapeHtml(student.class_name)} ${student.school ? '• ' + escapeHtml(student.school) : ''}</div>
               ${student.introduction ? `
                 <p class="cp-metallic-frame__bio">${escapeHtml(student.introduction)}</p>
               ` : ''}
