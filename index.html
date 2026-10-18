@@ -1,0 +1,3159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BẢNG VÀNG THÀNH TÍCH HỌC VIÊN | COMPETITIVE PROGRAMMING — NTOJ</title>
+  <meta name="description" content="Bảng vàng vinh danh các học viên xuất sắc đạt thành tích trong lĩnh vực Tin học, lập trình thi đấu, Tin học trẻ và Học sinh giỏi các cấp tại NTOJ." />
+  <meta property="og:title" content="BẢNG VÀNG THÀNH TÍCH HỌC VIÊN — COMPETITIVE PROGRAMMING NTOJ" />
+  <meta property="og:description" content="Mỗi thành tích là một cột mốc trên hành trình chinh phục thuật toán." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Anti-FOUC: Khởi tạo Light/Dark Mode tức thì trước khi render -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('ntoj_cp_theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (saved === 'dark' || saved === 'light') ? saved : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & CSS VARIABLES (LIGHT MODE & DARK MODE)
+       ========================================================================== */
+    :root,
+    /* ==========================================================================
+       1. DESIGN TOKENS & CSS VARIABLES (LAVENDER & MIDNIGHT PURPLE)
+       ========================================================================== */
+    :root,
+    [data-theme="light"] {
+      --bg-primary: #F5F3FF;       /* Nền tím oải hương pastel cực nhạt, dịu mắt */
+      --bg-secondary: #EDE9FE;     /* Nền phụ tím nhạt */
+      --bg-card: #FFFFFF;          /* Nền thẻ card trắng nổi bật */
+      --bg-card-subtle: #FAF5FF;
+      --bg-glass: rgba(245, 243, 255, 0.86);
+      --bg-modal-backdrop: rgba(46, 16, 101, 0.55);
+
+      --text-primary: #2E1065;     /* Chữ tím đậm sang trọng */
+      --text-secondary: #4C1D95;
+      --text-muted: #6D28D9;
+      --text-on-brand: #FFFFFF;
+
+      --brand-primary: #7C3AED;    /* Màu nhấn tím Violet nổi bật */
+      --brand-primary-hover: #6D28D9;
+      --brand-secondary: #059669;
+      --brand-gradient: linear-gradient(135deg, #7C3AED 0%, #A855F7 50%, #C084FC 100%);
+      --brand-soft-bg: rgba(124, 58, 237, 0.08);
+
+      --border-subtle: #DDD6FE;    /* Viền tím nhạt pastel */
+      --border-tech: rgba(124, 58, 237, 0.22);
+      --border-focus: #7C3AED;
+
+      /* Hệ màu cấp độ giải thưởng */
+      --gold-bg: linear-gradient(135deg, #FEF9C3 0%, #FDE68A 100%);
+      --gold-surface: rgba(245, 158, 11, 0.09);
+      --gold-border: #F59E0B;
+      --gold-text: #92400E;
+      --gold-accent: #D97706;
+      --gold-glow: rgba(245, 158, 11, 0.28);
+
+      --silver-bg: linear-gradient(135deg, #F1F5F9 0%, #CBD5E1 100%);
+      --silver-surface: rgba(100, 116, 139, 0.1);
+      --silver-border: #94A3B8;
+      --silver-text: #1E293B;
+      --silver-accent: #475569;
+      --silver-glow: rgba(148, 163, 184, 0.3);
+
+      --bronze-bg: linear-gradient(135deg, #FFEDD5 0%, #FDBA74 100%);
+      --bronze-surface: rgba(217, 119, 6, 0.09);
+      --bronze-border: #EA580C;
+      --bronze-text: #7C2D12;
+      --bronze-accent: #C2410C;
+      --bronze-glow: rgba(234, 88, 12, 0.24);
+
+      --special-bg: linear-gradient(135deg, #E0F2FE 0%, #D1FAE5 100%);
+      --special-surface: rgba(5, 150, 105, 0.08);
+      --special-border: #0EA5E9;
+      --special-text: #075985;
+      --special-accent: #0284C7;
+
+      --metallic-outer: linear-gradient(145deg, #EDE9FE 0%, #FFFFFF 35%, #DDD6FE 68%, #A855F7 100%);
+      --metallic-inner: linear-gradient(160deg, #2E1065 0%, #1E1B4B 100%);
+      --metallic-border: #C084FC;
+      --metallic-shine: rgba(255, 255, 255, 0.75);
+
+      --shadow-sm: 0 2px 8px rgba(46, 16, 101, 0.06);
+      --shadow-md: 0 10px 26px -4px rgba(46, 16, 101, 0.1), 0 4px 10px -2px rgba(46, 16, 101, 0.04);
+      --shadow-lg: 0 22px 45px -10px rgba(124, 58, 237, 0.18);
+      --grid-line: rgba(124, 58, 237, 0.045);
+
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0F0A1A;       /* Nền tím đêm tối sâu thẳm */
+      --bg-secondary: #181124;     /* Nền phụ tím than */
+      --bg-card: #221835;          /* Thẻ card tím đậm */
+      --bg-card-subtle: #2A1F40;
+      --bg-glass: rgba(15, 10, 26, 0.86);
+      --bg-modal-backdrop: rgba(5, 3, 10, 0.82);
+
+      --text-primary: #F3E8FF;     /* Chữ sáng ngả tím nhạt dễ chịu */
+      --text-secondary: #D8B4FE;
+      --text-muted: #C084FC;
+      --text-on-brand: #0F0A1A;
+
+      --brand-primary: #C084FC;    /* Màu nhấn tím sáng cho dark mode */
+      --brand-primary-hover: #E879F9;
+      --brand-secondary: #34D399;
+      --brand-gradient: linear-gradient(135deg, #C084FC 0%, #E879F9 52%, #F472B6 100%);
+      --brand-soft-bg: rgba(192, 132, 252, 0.12);
+
+      --border-subtle: #3B2E56;    /* Viền tím tối */
+      --border-tech: rgba(192, 132, 252, 0.28);
+      --border-focus: #C084FC;
+
+      --gold-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.26) 0%, rgba(217, 119, 6, 0.38) 100%);
+      --gold-surface: rgba(245, 158, 11, 0.11);
+      --gold-border: #FBBF24;
+      --gold-text: #FDE68A;
+      --gold-accent: #FBBF24;
+      --gold-glow: rgba(251, 191, 36, 0.28);
+
+      --silver-bg: linear-gradient(135deg, rgba(148, 163, 184, 0.24) 0%, rgba(203, 213, 225, 0.34) 100%);
+      --silver-surface: rgba(148, 163, 184, 0.11);
+      --silver-border: #CBD5E1;
+      --silver-text: #F1F5F9;
+      --silver-accent: #E2E8F0;
+      --silver-glow: rgba(203, 213, 225, 0.24);
+
+      --bronze-bg: linear-gradient(135deg, rgba(234, 88, 12, 0.25) 0%, rgba(194, 65, 12, 0.38) 100%);
+      --bronze-surface: rgba(234, 88, 12, 0.11);
+      --bronze-border: #FB923C;
+      --bronze-text: #FED7AA;
+      --bronze-accent: #FB923C;
+      --bronze-glow: rgba(251, 146, 60, 0.24);
+
+      --special-bg: linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(52, 211, 153, 0.26) 100%);
+      --special-surface: rgba(56, 189, 248, 0.1);
+      --special-border: #38BDF8;
+      --special-text: #BAE6FD;
+      --special-accent: #38BDF8;
+
+      --metallic-outer: linear-gradient(145deg, #3B2E56 0%, #4C3A70 32%, #221835 68%, #0F0A1A 100%);
+      --metallic-inner: linear-gradient(160deg, #120D20 0%, #0F0A1A 100%);
+      --metallic-border: #4C3A70;
+      --metallic-shine: rgba(192, 132, 252, 0.25);
+
+      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 12px 30px -4px rgba(0, 0, 0, 0.6);
+      --shadow-lg: 0 24px 52px -12px rgba(192, 132, 252, 0.28);
+      --grid-line: rgba(192, 132, 252, 0.045);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE LAYOUT
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color 0.28s ease, color 0.28s ease;
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+
+    button, input, select {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* ==========================================================================
+       3. TOP UTILITY BAR & HEADER (CP SIGNATURE)
+       ========================================================================== */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--bg-glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.7rem 0;
+      transition: background-color 0.28s ease, border-color 0.28s ease;
+    }
+
+    .top-bar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand__logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      background: var(--brand-gradient);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 4px 14px rgba(29, 78, 216, 0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand__logo::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 9px;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      pointer-events: none;
+    }
+
+    .brand__text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand__code {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand-primary);
+    }
+
+    .brand__name {
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .top-bar__controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .sync-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.38rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sync-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand-secondary);
+      display: inline-block;
+    }
+
+    .sync-pill[data-state="syncing"] .sync-dot {
+      background: #F59E0B;
+      animation: pulseDot 1s infinite ease-in-out;
+    }
+
+    .sync-pill[data-state="error"] .sync-dot {
+      background: #EF4444;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.45); opacity: 0.45; }
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      height: 38px;
+      padding: 0 0.8rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .icon-btn:hover {
+      border-color: var(--brand-primary);
+      color: var(--brand-primary);
+      transform: translateY(-1px);
+    }
+
+    .theme-btn {
+      width: 38px;
+      padding: 0;
+    }
+
+    /* Hero Header Section */
+    .hero {
+      position: relative;
+      padding: 2.75rem 0 2rem;
+      overflow: hidden;
+    }
+
+    .hero__bg-decor {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      opacity: 0.85;
+    }
+
+    .cp-graphic {
+      width: 250px;
+      height: 220px;
+      color: var(--brand-primary);
+      opacity: 0.16;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .cp-code-ribbon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      background: var(--brand-soft-bg);
+      border: 1px solid var(--border-tech);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--brand-primary);
+      margin-bottom: 1rem;
+    }
+
+    .cp-code-ribbon span.sep {
+      opacity: 0.45;
+    }
+
+    .hero__title {
+      font-size: clamp(1.4rem, 2.8vw, 2.75rem); /* Đã tinh chỉnh nhỏ lại một chút để vừa vặn hơn */
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      white-space: nowrap; /* Ép buộc giữ nguyên trên một hàng duy nhất */
+      background: var(--brand-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero__subtitle {
+      font-size: clamp(0.98rem, 1.8vw, 1.18rem);
+      color: var(--text-secondary);
+      font-weight: 500;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       4. STATS BAR (THỐNG KÊ TỔNG QUAN)
+       ========================================================================== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--brand-gradient);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-tech);
+    }
+
+    .stat-card__icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: var(--brand-soft-bg);
+      color: var(--brand-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .stat-card__value {
+      font-size: 1.55rem;
+      font-weight: 800;
+      line-height: 1.15;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+    }
+
+    .stat-card__label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       5. CATEGORY PILLS (HỆ THỐNG DANH MỤC THÀNH TÍCH)
+       ========================================================================== */
+    .categories-section {
+      margin-bottom: 1.6rem;
+    }
+
+    .categories-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.65rem;
+    }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.58rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border: 1.5px solid var(--border-subtle);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+
+    /* Sắc thái viền riêng cho từng danh mục khi chưa active */
+    .category-pill[data-color="gold"] { border-color: rgba(245, 158, 11, 0.45); }
+    .category-pill[data-color="blue"] { border-color: rgba(29, 78, 216, 0.4); }
+    .category-pill[data-color="emerald"] { border-color: rgba(5, 150, 105, 0.4); }
+    .category-pill[data-color="purple"] { border-color: rgba(124, 58, 237, 0.4); }
+    .category-pill[data-color="cyan"] { border-color: rgba(2, 132, 199, 0.4); }
+    .category-pill[data-color="rose"] { border-color: rgba(225, 29, 72, 0.4); }
+    .category-pill[data-color="indigo"] { border-color: rgba(79, 70, 229, 0.4); }
+    .category-pill[data-color="teal"] { border-color: rgba(20, 184, 166, 0.4); }
+
+    .category-pill:hover {
+      transform: translateY(-2px);
+      border-color: var(--brand-primary);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .category-pill.is-active {
+      background: var(--brand-gradient);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 8px 20px -4px rgba(29, 78, 216, 0.42);
+    }
+
+    .category-pill__count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      height: 22px;
+      padding: 0 0.45rem;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+
+    .category-pill.is-active .category-pill__count {
+      background: rgba(255, 255, 255, 0.22);
+      color: #FFFFFF;
+    }
+
+    /* ==========================================================================
+       6. TOOLBAR: SEARCH BAR & SORTING
+       ========================================================================== */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1 1 380px;
+      max-width: 680px;
+    }
+
+    .search-box__icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .search-box__input {
+      width: 100%;
+      height: 48px;
+      padding: 0 2.8rem 0 2.85rem;
+      border-radius: 14px;
+      border: 1.5px solid var(--border-subtle);
+      background: var(--bg-card);
+      font-size: 0.94rem;
+      font-weight: 500;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search-box__input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-box__input:focus {
+      outline: none;
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 4px var(--brand-soft-bg);
+    }
+
+    .search-box__clear {
+      position: absolute;
+      right: 0.65rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: none;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+
+    .search-box__clear.is-visible {
+      display: inline-flex;
+    }
+
+    .search-box__clear:hover {
+      background: var(--brand-primary);
+      color: #FFFFFF;
+    }
+
+    .toolbar__right {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .result-meta {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .result-meta strong {
+      font-family: var(--font-mono);
+      color: var(--brand-primary);
+    }
+
+    .sort-select-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 0 0.75rem;
+      height: 46px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sort-select-wrap label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .sort-select {
+      border: none;
+      background: transparent;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      padding-right: 0.25rem;
+      cursor: pointer;
+    }
+
+    .sort-select:focus {
+      outline: none;
+    }
+
+    .sort-select option {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      padding: 0.5rem;
+    }
+
+    /* ==========================================================================
+       7. STUDENT CARDS GRID (THẺ HỌC VIÊN)
+       ========================================================================== */
+    .students-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.35rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .student-card {
+      position: relative;
+      background: var(--bg-card);
+      border-radius: 20px;
+      border: 1.5px solid var(--border-subtle);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.26s ease;
+      cursor: pointer;
+    }
+
+    .student-card[data-tier="gold"] { border-top: 3px solid var(--gold-border); }
+    .student-card[data-tier="silver"] { border-top: 3px solid var(--silver-border); }
+    .student-card[data-tier="bronze"] { border-top: 3px solid var(--bronze-border); }
+    .student-card[data-tier="special"] { border-top: 3px solid var(--special-border); }
+
+    .student-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--brand-primary);
+    }
+
+    .student-card__top {
+      position: relative;
+      padding: 1.25rem 1.25rem 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: linear-gradient(180deg, var(--brand-soft-bg) 0%, transparent 100%);
+    }
+
+    .student-card__avatar-frame {
+      position: relative;
+      width: 76px;
+      height: 76px;
+      border-radius: 16px;
+      padding: 3px;
+      background: var(--metallic-outer);
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.14);
+      flex-shrink: 0;
+    }
+
+    .student-card[data-tier="gold"] .student-card__avatar-frame {
+      background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #B45309 100%);
+    }
+
+    .student-card__avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 13px;
+      object-fit: cover;
+      object-position: center top;
+      background: var(--bg-secondary);
+      display: block;
+    }
+
+    .student-card__year-tag {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--brand-primary);
+      color: var(--brand-primary);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.1rem 0.42rem;
+      border-radius: 999px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .student-card__identity {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .student-card__rank-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      margin-bottom: 0.3rem;
+    }
+
+    .student-card__name {
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 0.2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .student-card__class {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .student-card__body {
+      padding: 0.4rem 1.25rem 1.15rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    /* Highlighted Achievement Box inside Card */
+    .featured-award {
+      border-radius: 13px;
+      padding: 0.75rem 0.85rem;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card-subtle);
+      position: relative;
+    }
+
+    .featured-award[data-tier="gold"] {
+      background: var(--gold-surface);
+      border-color: var(--gold-border);
+    }
+    .featured-award[data-tier="silver"] {
+      background: var(--silver-surface);
+      border-color: var(--silver-border);
+    }
+    .featured-award[data-tier="bronze"] {
+      background: var(--bronze-surface);
+      border-color: var(--bronze-border);
+    }
+    .featured-award[data-tier="special"] {
+      background: var(--special-surface);
+      border-color: var(--special-border);
+    }
+
+    .featured-award__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .award-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.32rem;
+      padding: 0.18rem 0.58rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .award-badge[data-tier="gold"] {
+      background: var(--gold-bg);
+      color: var(--gold-text);
+      border: 1px solid var(--gold-border);
+    }
+    .award-badge[data-tier="silver"] {
+      background: var(--silver-bg);
+      color: var(--silver-text);
+      border: 1px solid var(--silver-border);
+    }
+    .award-badge[data-tier="bronze"] {
+      background: var(--bronze-bg);
+      color: var(--bronze-text);
+      border: 1px solid var(--bronze-border);
+    }
+    .award-badge[data-tier="special"] {
+      background: var(--special-bg);
+      color: var(--special-text);
+      border: 1px solid var(--special-border);
+    }
+
+    .featured-award__year {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .featured-award__title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.38;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .student-card__categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: auto;
+    }
+
+    .mini-cat-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 7px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .student-card__footer {
+      padding: 0.75rem 1.25rem;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-card-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .student-card__total {
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+    }
+
+    .student-card__cta {
+      color: var(--brand-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: transform 0.2s ease;
+    }
+
+    .student-card:hover .student-card__cta {
+      transform: translateX(3px);
+    }
+
+    /* ==========================================================================
+       8. MODAL CHI TIẾT HỌC VIÊN (METALLIC CP FRAME & TIMELINE)
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: var(--bg-modal-backdrop);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      overflow-y: auto;
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+      animation: fadeIn 0.22s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-dialog {
+      width: 100%;
+      max-width: 1040px;
+      max-height: 90vh;
+      background: var(--bg-card);
+      border: 1.5px solid var(--metallic-border);
+      border-radius: 24px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      animation: slideUp 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(18px) scale(0.98); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .modal-header {
+      padding: 1rem 1.5rem;
+      background: var(--bg-card-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .modal-header__terminal {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .terminal-dots span {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .terminal-dots span:nth-child(1) { background: #EF4444; }
+    .terminal-dots span:nth-child(2) { background: #F59E0B; }
+    .terminal-dots span:nth-child(3) { background: #10B981; }
+
+    .modal-header__actions {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .modal-body {
+      padding: 1.75rem;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 2rem;
+      align-items: center; /* Giữ khung ảnh cố định ở chính giữa theo chiều dọc */
+      overflow: hidden;    /* Khóa thanh cuộn tổng của modal */
+      max-height: calc(90vh - 70px);
+    }
+
+    /* Đưa thanh cuộn riêng biệt cho phần lịch sử thành tích */
+    .history-panel {
+      max-height: calc(90vh - 120px);
+      overflow-y: auto;    /* Chỉ xuất hiện thanh lướt ở cột thành tích */
+      padding-right: 0.5rem;
+    }
+
+    /* Tùy chỉnh thanh cuộn nhỏ gọn, đẹp mắt */
+    .history-panel::-webkit-scrollbar {
+      width: 6px;
+    }
+    .history-panel::-webkit-scrollbar-thumb {
+      background: var(--border-subtle);
+      border-radius: 999px;
+    }
+
+    /* 7.1. KHUNG ẢNH METALLIC COMPETITIVE PROGRAMMING */
+    .cp-metallic-frame {
+      position: relative;
+      border-radius: 22px;
+      padding: 12px;
+      background: var(--metallic-outer);
+      border: 1.5px solid var(--metallic-border);
+      box-shadow:
+        inset 0 2px 4px var(--metallic-shine),
+        0 16px 36px -8px rgba(15, 23, 42, 0.28);
+    }
+
+    .cp-metallic-frame[data-tier="gold"] {
+      background: linear-gradient(145deg, #FEF08A 0%, #F59E0B 35%, #FEF9C3 70%, #B45309 100%);
+      border-color: #F59E0B;
+      box-shadow: 0 16px 38px -8px var(--gold-glow);
+    }
+
+    /* Ốc vít góc PCB */
+    .pcb-corner {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 1.5px solid var(--text-muted);
+      z-index: 3;
+    }
+    .pcb-corner.tl { top: 8px; left: 8px; }
+    .pcb-corner.tr { top: 8px; right: 8px; }
+    .pcb-corner.bl { bottom: 8px; left: 8px; }
+    .pcb-corner.br { bottom: 8px; right: 8px; }
+
+    .cp-metallic-frame__inner {
+      background: var(--metallic-inner);
+      border-radius: 14px;
+      padding: 1rem;
+      color: #F8FAFC;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cp-metallic-frame__pcb-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.14;
+      pointer-events: none;
+    }
+
+    .cp-metallic-frame__photo-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 4.3;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid rgba(255, 255, 255, 0.22);
+      background: #1E293B;
+      margin-bottom: 0.9rem;
+    }
+
+    .cp-metallic-frame__photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .cp-metallic-frame__badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: rgba(15, 23, 42, 0.86);
+      color: #38BDF8;
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      backdrop-filter: blur(6px);
+    }
+
+    .cp-metallic-frame[data-tier="gold"] .cp-metallic-frame__badge {
+      color: #FDE047;
+      border-color: #FACC15;
+    }
+
+    .cp-metallic-frame__info {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .cp-metallic-frame__name {
+      font-size: 1.32rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 0.2rem;
+    }
+
+    .cp-metallic-frame__class {
+      font-size: 0.84rem;
+      color: #93C5FD;
+      font-weight: 600;
+      margin-bottom: 0.65rem;
+    }
+
+    .cp-metallic-frame__bio {
+      font-size: 0.82rem;
+      color: #CBD5E1;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 9px;
+      padding: 0.65rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: left;
+      margin-bottom: 0.75rem;
+    }
+
+    .cp-metallic-frame__code-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: #64748B;
+      border-top: 1px dashed rgba(255, 255, 255, 0.15);
+      padding-top: 0.55rem;
+    }
+
+    /* 7.2. KHUNG LỊCH SỬ THÀNH TÍCH METALLIC */
+    .history-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .history-panel__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1.5px solid var(--border-subtle);
+    }
+
+    .history-panel__title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .history-panel__order-note {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--brand-primary);
+      background: var(--brand-soft-bg);
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-tech);
+    }
+
+    .timeline-list {
+      position: relative;
+      padding-left: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .timeline-list::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--border-tech);
+    }
+
+    .timeline-item {
+      position: relative;
+      border-radius: 16px;
+      padding: 1rem 1.15rem;
+      background: var(--bg-card-subtle);
+      border: 1.5px solid var(--border-subtle);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(3px);
+    }
+
+    .timeline-item__dot {
+      position: absolute;
+      left: -1.5rem;
+      top: 1.25rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 3px solid var(--brand-primary);
+      transform: translateX(-0.5px);
+    }
+
+    /* 7.3. MÀU SẮC THEO CẤP ĐỘ GIẢI TRONG TIMELINE */
+    .timeline-item[data-tier="gold"] {
+      background: var(--gold-surface);
+      border-color: var(--gold-border);
+      box-shadow: 0 6px 20px -6px var(--gold-glow);
+    }
+    .timeline-item[data-tier="gold"] .timeline-item__dot {
+      border-color: var(--gold-border);
+      background: var(--gold-accent);
+    }
+
+    .timeline-item[data-tier="silver"] {
+      background: var(--silver-surface);
+      border-color: var(--silver-border);
+    }
+    .timeline-item[data-tier="silver"] .timeline-item__dot {
+      border-color: var(--silver-border);
+      background: var(--silver-accent);
+    }
+
+    .timeline-item[data-tier="bronze"] {
+      background: var(--bronze-surface);
+      border-color: var(--bronze-border);
+    }
+    .timeline-item[data-tier="bronze"] .timeline-item__dot {
+      border-color: var(--bronze-border);
+      background: var(--bronze-accent);
+    }
+
+    .timeline-item[data-tier="special"] {
+      background: var(--special-surface);
+      border-color: var(--special-border);
+    }
+    .timeline-item[data-tier="special"] .timeline-item__dot {
+      border-color: var(--special-border);
+      background: var(--special-accent);
+    }
+
+    .timeline-item__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.45rem;
+    }
+
+    .timeline-item__year {
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      font-weight: 800;
+      padding: 0.18rem 0.6rem;
+      border-radius: 7px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+    }
+
+    .timeline-item__name {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-item__competition {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-item__desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+      padding-top: 0.35rem;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    /* ==========================================================================
+       9. SKELETON LOADING, EMPTY STATE & ERROR STATE
+       ========================================================================== */
+    .skeleton-card {
+      height: 290px;
+      border-radius: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skeleton-line {
+      background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--border-subtle) 50%, var(--bg-secondary) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .state-box {
+      grid-column: 1 / -1;
+      background: var(--bg-card);
+      border: 1.5px dashed var(--border-subtle);
+      border-radius: 20px;
+      padding: 3rem 1.5rem;
+      text-align: center;
+      max-width: 580px;
+      margin: 1rem auto;
+    }
+
+    .state-box__icon {
+      font-family: var(--font-mono);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--brand-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .state-box__title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+    }
+
+    .state-box__desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 11px;
+      border: none;
+      background: var(--brand-gradient);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.88rem;
+      box-shadow: 0 6px 16px rgba(29, 78, 216, 0.3);
+    }
+
+    /* ==========================================================================
+       10. CONFIG MODAL & TOAST NOTIFICATION
+       ========================================================================== */
+    .config-form {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .form-group input {
+      height: 44px;
+      padding: 0 0.9rem;
+      border-radius: 10px;
+      border: 1.5px solid var(--border-subtle);
+      background: var(--bg-primary);
+      font-family: var(--font-mono);
+      font-size: 0.83rem;
+    }
+
+    .form-help {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 200;
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1.5px solid var(--brand-primary);
+      border-radius: 12px;
+      padding: 0.75rem 1.1rem;
+      box-shadow: var(--shadow-lg);
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: none;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .toast.is-visible {
+      display: inline-flex;
+      animation: slideUp 0.2s ease-out;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-card-subtle);
+      padding: 2rem 0;
+      margin-top: 3rem;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .footer__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* ==========================================================================
+       11. RESPONSIVE BREAKPOINTS & ACCESSIBILITY
+       ========================================================================== */
+    @media (max-width: 960px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .modal-body {
+        grid-template-columns: 1fr;
+      }
+      .cp-metallic-frame {
+        max-width: 360px;
+        margin: 0 auto;
+      }
+      .hero__bg-decor {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .categories-list {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        -webkit-overflow-scrolling: touch;
+      }
+      .category-pill {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-box {
+        max-width: 100%;
+        flex: 1 1 auto;
+      }
+      .toolbar__right {
+        justify-content: space-between;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== 1. TOP UTILITY BAR ==================== -->
+  <header class="top-bar">
+    <div class="container top-bar__inner">
+      <a href="#" class="brand" aria-label="Trang chủ NTOJ Hall of Fame">
+        <div class="brand__logo">&lt;/&gt;</div>
+        <div class="brand__text">
+          <span class="brand__code">COMPETITIVE PROGRAMMING</span>
+          <span class="brand__name">NTOJ — HALL OF FAME</span>
+        </div>
+      </a>
+
+      <div class="top-bar__controls">
+        <!-- Trạng thái đồng bộ Google Sheets -->
+        <div id="syncStatusPill" class="sync-pill" data-state="idle" role="status" aria-live="polite">
+          <span class="sync-dot"></span>
+          <span id="syncStatusText">Đã đồng bộ</span>
+        </div>
+
+        <!-- Nút làm mới dữ liệu ngay -->
+        <button type="button" id="btnManualSync" class="icon-btn" title="Đồng bộ dữ liệu từ Google Sheets ngay">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+          <span>Làm mới</span>
+        </button>
+
+
+        <!-- Nút chuyển đổi Light / Dark Mode -->
+        <button type="button" id="btnThemeToggle" class="icon-btn theme-btn" aria-label="Chuyển đổi giao diện Sáng / Tối" title="Chuyển chế độ Sáng / Tối">
+          <span id="themeIconWrap"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 2. HERO HEADER (CP SIGNATURE) ==================== -->
+  <section class="hero">
+    <!-- Họa tiết đồ thị thuật toán Segment Tree & Binary Tree hai bên -->
+    <div class="hero__bg-decor" aria-hidden="true">
+      <svg class="cp-graphic" viewBox="0 0 240 200" fill="none" stroke="currentColor" stroke-width="1.8">
+        <line x1="120" y1="30" x2="65" y2="90" stroke-dasharray="4 3" />
+        <line x1="120" y1="30" x2="175" y2="90" />
+        <line x1="65" y1="90" x2="35" y2="155" />
+        <line x1="65" y1="90" x2="95" y2="155" />
+        <line x1="175" y1="90" x2="145" y2="155" stroke-dasharray="4 3" />
+        <line x1="175" y1="90" x2="205" y2="155" />
+        <circle cx="120" cy="30" r="16" fill="currentColor" fill-opacity="0.12" />
+        <text x="108" y="34" font-family="monospace" font-size="10" fill="currentColor">[1..N]</text>
+        <circle cx="65" cy="90" r="14" fill="currentColor" fill-opacity="0.12" />
+        <circle cx="175" cy="90" r="14" fill="currentColor" fill-opacity="0.12" />
+        <circle cx="35" cy="155" r="11" />
+        <circle cx="95" cy="155" r="11" />
+        <circle cx="145" cy="155" r="11" />
+        <circle cx="205" cy="155" r="11" />
+      </svg>
+
+      <svg class="cp-graphic" viewBox="0 0 240 200" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M20 40 H90 L115 65 H210" />
+        <path d="M40 100 H130 L155 125 H220" stroke-dasharray="5 4" />
+        <path d="M15 160 H85 L110 135 H185" />
+        <rect x="82" y="32" width="16" height="16" rx="3" />
+        <circle cx="210" cy="65" r="6" fill="currentColor" />
+        <circle cx="130" cy="100" r="6" fill="currentColor" />
+        <text x="45" y="88" font-family="monospace" font-size="11" fill="currentColor">O(N log N)</text>
+        <text x="115" y="178" font-family="monospace" font-size="11" fill="currentColor">MOD = 1e9+7</text>
+      </svg>
+    </div>
+
+    <div class="container hero__content">
+      <div class="cp-code-ribbon">
+        <span>#include &lt;bits/stdc++.h&gt;</span>
+        <span class="sep">|</span>
+        <span>O(log N)</span>
+        <span class="sep">|</span>
+        <span>Segment Tree &bull; DP &bull; Graph</span>
+      </div>
+      <h1 class="hero__title">VINH DANH THÀNH TÍCH HỌC SINH</h1>
+      <p class="hero__subtitle">
+        Mỗi thành tích là một cột mốc trên hành trình chinh phục thuật toán
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== 3. MAIN CONTENT ==================== -->
+  <main class="container">
+    <!-- 3.1. Khu vực Thống kê tổng quan (Tính động 100% từ dữ liệu thực tế) -->
+    <section class="stats-grid" aria-label="Thống kê tổng quan">
+      <article class="stat-card">
+        <div class="stat-card__icon">{S}</div>
+        <div>
+          <div id="statStudents" class="stat-card__value">0</div>
+          <div class="stat-card__label">Học viên vinh danh</div>
+        </div>
+      </article>
+      <article class="stat-card">
+        <div class="stat-card__icon">++A</div>
+        <div>
+          <div id="statAchievements" class="stat-card__value">0</div>
+          <div class="stat-card__label">Tổng số giải thưởng</div>
+        </div>
+      </article>
+      <article class="stat-card">
+        <div class="stat-card__icon">[C]</div>
+        <div>
+          <div id="statCategories" class="stat-card__value">0</div>
+          <div class="stat-card__label">Danh mục kỳ thi</div>
+        </div>
+      </article>
+      <article class="stat-card">
+        <div class="stat-card__icon">T(n)</div>
+        <div>
+          <div id="statYears" class="stat-card__value">—</div>
+          <div class="stat-card__label">Giai đoạn ghi nhận</div>
+        </div>
+      </article>
+    </section>
+
+    <!-- 3.2. Hệ thống Danh mục dạng Pill -->
+    <section class="categories-section" aria-label="Danh mục thành tích">
+      <div id="categoryPillsContainer" class="categories-list" role="tablist"></div>
+    </section>
+
+    <!-- 3.3. Thanh tìm kiếm & Bộ sắp xếp -->
+    <section class="toolbar" aria-label="Công cụ tìm kiếm và sắp xếp">
+      <div class="search-box">
+        <svg class="search-box__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input
+          type="search"
+          id="searchInput"
+          class="search-box__input"
+          placeholder="Tìm kiếm học viên, thành tích hoặc kỳ thi..."
+          autocomplete="off"
+          aria-label="Tìm kiếm học viên, thành tích hoặc kỳ thi"
+        />
+        <button type="button" id="btnClearSearch" class="search-box__clear" aria-label="Xóa nội dung tìm kiếm" title="Xóa tìm kiếm">✕</button>
+      </div>
+
+      <div class="toolbar__right">
+        <div id="resultCounter" class="result-meta">Hiển thị <strong>0</strong> học viên</div>
+        <div class="sort-select-wrap">
+          <label for="sortSelect">Sắp xếp:</label>
+          <select id="sortSelect" class="sort-select" aria-label="Tiêu chí sắp xếp học viên">
+            <option value="custom_order">Thứ tự ưu tiên (Sheet)</option>
+            <option value="year_desc">Năm thành tích mới nhất</option>
+            <option value="achievement_count_desc">Số lượng thành tích</option>
+            <option value="name_asc">Tên học viên A – Z</option>
+            <option value="name_desc">Tên học viên Z – A</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3.4. Lưới Thẻ học viên -->
+    <section id="studentsGrid" class="students-grid" aria-live="polite"></section>
+  </main>
+
+  <!-- ==================== 4. MODAL HỒ SƠ CHI TIẾT HỌC VIÊN ==================== -->
+  <div id="studentModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalStudentName">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-header__terminal">
+          <div class="terminal-dots"><span></span><span></span><span></span></div>
+          <span id="modalTerminalPath">ntoj://hall-of-fame/student/profile.cpp</span>
+        </div>
+        <div class="modal-header__actions">
+          <button type="button" id="btnShareStudent" class="icon-btn" title="Chia sẻ liên kết hồ sơ học viên">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            <span>Chia sẻ thành tích</span>
+          </button>
+          <button type="button" id="btnCloseStudentModal" class="icon-btn" aria-label="Đóng cửa sổ chi tiết">✕ Đóng</button>
+        </div>
+      </div>
+
+      <div id="studentModalContent" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ==================== 5. MODAL CẤU HÌNH GOOGLE SHEETS ==================== -->
+  <div id="configModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="configModalTitle">
+    <div class="modal-dialog" style="max-width: 640px;">
+      <div class="modal-header">
+        <div class="modal-header__terminal">
+          <div class="terminal-dots"><span></span><span></span><span></span></div>
+          <strong id="configModalTitle" style="color: var(--text-primary);">Cấu hình Đồng bộ Google Sheets</strong>
+        </div>
+        <button type="button" id="btnCloseConfigModal" class="icon-btn" aria-label="Đóng cấu hình">✕</button>
+      </div>
+
+      <form id="configForm" class="config-form">
+        <div class="form-group">
+          <label for="inputGasUrl">Cách 1: Google Apps Script Web App URL (Khuyên dùng)</label>
+          <input type="url" id="inputGasUrl" placeholder="https://script.google.com/macros/s/.../exec" />
+          <span class="form-help">Dán URL Web App sau khi Deploy file <code>Code.gs</code> trên Google Sheets của bạn.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="inputSheetId">Cách 2: Google Spreadsheet ID công khai (Kết nối trực tiếp)</label>
+          <input type="text" id="inputSheetId" placeholder="Ví dụ: 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms" />
+          <span class="form-help">Nếu chưa tạo Apps Script, bạn chỉ cần bật chia sẻ "Anyone with the link can view" cho Google Sheet có 2 tab <code>Students</code> &amp; <code>Achievements</code> và dán ID vào đây.</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
+          <button type="button" id="btnResetDemoData" class="icon-btn">Khôi phục dữ liệu mẫu NTOJ</button>
+          <button type="submit" class="primary-btn">Lưu &amp; Đồng bộ ngay</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Thông báo Toast -->
+  <div id="toastNotification" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- ==================== 6. FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <strong>COMPETITIVE PROGRAMMING — NTOJ</strong> &bull; Hệ thống Bảng vàng Vinh danh Học viên Tin học.
+      </div>
+      <div style="font-family: var(--font-mono); font-size: 0.78rem;">
+        Auto-Polling: 20s | Database: Google Sheets
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== 7. APPLICATION JAVASCRIPT ==================== -->
+  <script>
+    /**
+     * ============================================================================
+     * CẤU HÌNH MẶC ĐỊNH (QUẢN TRỊ VIÊN CÓ THỂ ĐIỀN TRỰC TIẾP TẠI ĐÂY)
+     * ============================================================================
+     */
+    const DEFAULT_CONFIG = {
+      // Điền URL Google Apps Script Web App của bạn vào đây (nếu có):
+      GAS_API_URL: 'https://script.google.com/macros/s/AKfycbwOXbCeIwOkVuAgJ16H7XILqNy1U6b9aEPXyqQd2ugxASHvWK4HCm_20bwC67UTzkAshA/exec',
+      // Hoặc điền trực tiếp ID của Google Spreadsheet công khai vào đây:
+      PUBLIC_SHEET_ID: '',
+      // Chu kỳ tự động đồng bộ ngầm (20.000ms = 20 giây)
+      POLL_INTERVAL_MS: 20000
+    };
+
+    const STORAGE_KEYS = {
+      THEME: 'ntoj_cp_theme',
+      CONFIG: 'ntoj_cp_sheet_config_v1',
+      CACHE: 'ntoj_cp_data_cache_v1'
+    };
+
+    /**
+     * Danh mục chuẩn theo đúng hình tham chiếu & Master Prompt
+     */
+    const DEFAULT_CATEGORIES = [
+      { category_id: 'CAT01', category_name: 'Tin Học Trẻ Quốc Gia', color_token: 'gold', display_order: 1, is_visible: true },
+      { category_id: 'CAT02', category_name: 'Chọn Đội Tuyển Tỉnh Dự Thi Quốc Gia', color_token: 'blue', display_order: 2, is_visible: true },
+      { category_id: 'CAT03', category_name: 'Tin Học Trẻ Khu Vực', color_token: 'emerald', display_order: 3, is_visible: true },
+      { category_id: 'CAT04', category_name: 'Học Sinh Giỏi cấp Miền', color_token: 'purple', display_order: 4, is_visible: true },
+      { category_id: 'CAT05', category_name: 'Học Sinh Giỏi Tỉnh', color_token: 'cyan', display_order: 5, is_visible: true }
+    ];
+
+    /**
+     * Bộ dữ liệu thực tế mẫu (Sử dụng khi chưa cấu hình URL Google Sheets
+     * để kiểm thử đầy đủ mọi tính năng lọc, tìm kiếm, sắp xếp và modal)
+     */
+    const INITIAL_NTOJ_DATA = {
+      students: [
+        {
+          student_id: 'STU001',
+          full_name: 'Nguyễn Minh Quân',
+          avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+          class_name: 'Chuyên Tin K34 — Đội tuyển Quốc gia',
+          introduction: 'Đam mê Quy hoạch động (Dynamic Programming), Cây phân đoạn (Segment Tree) và Lý thuyết đồ thị nâng cao.',
+          display_order: 1,
+          is_visible: true
+        },
+        {
+          student_id: 'STU002',
+          full_name: 'Trần Hoàng Bảo Ngọc',
+          avatar_url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80',
+          class_name: 'Chuyên Tin K35 — NTOJ Elite',
+          introduction: 'Nữ chiến binh thuật toán xuất sắc với thế mạnh Cấu trúc dữ liệu Fenwick Tree, Heavy-Light Decomposition và Toán tổ hợp.',
+          display_order: 2,
+          is_visible: true
+        },
+        {
+          student_id: 'STU003',
+          full_name: 'Lê Đăng Khoa',
+          avatar_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80',
+          class_name: 'Lớp Thuật Toán Nâng Cao — NTOJ Pro',
+          introduction: 'Tốc độ cài đặt C++ chuẩn xác, chuyên sâu thuật toán Luồng cực đại (Max Flow) và Hình học tính toán.',
+          display_order: 3,
+          is_visible: true
+        },
+        {
+          student_id: 'STU004',
+          full_name: 'Phạm Gia Hưng',
+          avatar_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80',
+          class_name: 'Chuyên Tin K35 — NTOJ Elite',
+          introduction: 'Kiên trì chinh phục các bài toán Tối ưu hóa trên đồ thị, Dijkstra biến thể và Quy hoạch động trạng thái (Bitmask DP).',
+          display_order: 4,
+          is_visible: true
+        },
+        {
+          student_id: 'STU005',
+          full_name: 'Võ Thị Thanh Trúc',
+          avatar_url: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80',
+          class_name: 'Khóa Lập Trình Thi Đấu Trẻ — NTOJ Junior',
+          introduction: 'Tư duy thuật toán sắc bén từ bậc THCS, nổi bật ở các bài toán Số học đồng dư và Tìm kiếm nhị phân trên kết quả.',
+          display_order: 5,
+          is_visible: true
+        },
+        {
+          student_id: 'STU006',
+          full_name: 'Đặng Quốc Khánh',
+          avatar_url: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80',
+          class_name: 'Chuyên Tin K34 — Đội tuyển Tỉnh',
+          introduction: 'Chuyên gia xử lý chuỗi KMP, Z-Algorithm, Suffix Automaton và cấu trúc dữ liệu Trie.',
+          display_order: 6,
+          is_visible: true
+        },
+        {
+          student_id: 'STU007',
+          full_name: 'Hoàng Nhật Nam',
+          avatar_url: '', // Kiểm thử trường hợp học viên thiếu ảnh đại diện
+          class_name: 'Lớp Luyện Thi HSG Tỉnh — NTOJ Core',
+          introduction: 'Nền tảng vững chắc về Duyệt phân đôi tập hợp (Meet in the middle), Tham lam và Đồ thị hai phía.',
+          display_order: 7,
+          is_visible: true
+        },
+        {
+          student_id: 'STU008',
+          full_name: 'Bùi Phương Thảo',
+          avatar_url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80',
+          class_name: 'Chuyên Tin K36 — NTOJ Talent',
+          introduction: 'Gương mặt trẻ triển vọng đạt điểm tuyệt đối phần Quy hoạch động trên cây trong kỳ thi cấp Tỉnh.',
+          display_order: 8,
+          is_visible: true
+        }
+      ],
+      achievements: [
+        // Học viên STU001 (Sắp xếp năm cố tình đảo lộn để kiểm chứng hàm sort tăng dần trong Modal)
+        {
+          achievement_id: 'ACH001',
+          student_id: 'STU001',
+          achievement_name: 'Huy chương Vàng Tin Học Trẻ Toàn Quốc',
+          category: 'Tin Học Trẻ Quốc Gia',
+          competition_name: 'Hội thi Tin học trẻ Toàn quốc lần thứ XXX (Bảng C1)',
+          award_level: 'Huy chương Vàng',
+          award_year: 2025,
+          description: 'Đạt 300/300 điểm tuyệt đối vòng Chung kết Quốc gia.',
+          display_order: 1,
+          is_visible: true
+        },
+        {
+          achievement_id: 'ACH002',
+          student_id: 'STU001',
+          achievement_name: 'Giải Nhất Chọn Đội Tuyển Dự Thi HSG Quốc Gia (VOI)',
+          category: 'Chọn Đội Tuyển Tỉnh Dự Thi Quốc Gia',
+          competition_name: 'Kỳ thi Chọn đội tuyển chính thức dự thi HSG Quốc gia THPT',
+          award_level: 'Giải Nhất',
+          award_year: 2024,
+          description: 'Thủ khoa toàn tỉnh sau 2 ngày thi lập trình thuật toán.',
+          display_order: 2,
+          is_visible: true
+        },
+        {
+          achievement_id: 'ACH003',
+          student_id: 'STU001',
+          achievement_name: 'Huy chương Bạc Olympic Tin học Duyên hải & ĐBBB',
+          category: 'Học Sinh Giỏi cấp Miền',
+          competition_name: 'Kỳ thi Học sinh giỏi các trường THPT Chuyên khu vực Duyên hải',
+          award_level: 'Huy chương Bạc',
+          award_year: 2023,
+          description: 'Khối lớp 10 chuyên Tin.',
+          display_order: 3,
+          is_visible: true
+        },
+        {
+          achievement_id: 'ACH004',
+          student_id: 'STU001',
+          achievement_name: 'Giải Nhất Học Sinh Giỏi Tỉnh môn Tin học',
+          category: 'Học Sinh Giỏi Tỉnh',
+          competition_name: 'Kỳ thi Chọn Học sinh giỏi cấp Tỉnh lớp 9 THCS',
+          award_level: 'Giải Nhất',
+          award_year: 2022,
+          description: 'Giải Nhất vượt cấp từ năm lớp 8.',
+          display_order: 4,
+          is_visible: true
+        },
+
+        // Học viên STU002
+        {
+          achievement_id: 'ACH005',
+          student_id: 'STU002',
+          achievement_name: 'Giải Nhất Tin Học Trẻ Khu Vực Miền Trung',
+          category: 'Tin Học Trẻ Khu Vực',
+          competition_name: 'Vòng Khu vực Hội thi Tin học trẻ Toàn quốc',
+          award_level: 'Giải Nhất',
+          award_year: 2025,
+          description: 'Lọt vào vòng Chung kết Quốc gia với số điểm cao nhất bảng B.',
+          display_order: 1,
+          is_visible: true
+        },
+        {
+          achievement_id: 'ACH006',
+          student_id: 'STU002',
+          achievement_name: 'Huy chương Vàng Olympic Truyền thống 30/4',
+          category: 'Học Sinh Giỏi cấp Miền',
+          competition_name: 'Kỳ thi Olympic Truyền thống 30/4 môn Tin học',
+          award_level: 'Huy chương Vàng',
+          award_year: 2024,
+          description: 'Huy chương Vàng khối 10 chuyên Tin.',
+          display_order: 2,
+          is_visible: true
+        },
+        {
+          achievement_id: 'ACH007',
+          student_id: 'STU002',
+          achievement_name: 'Giải Nhì Tin Học Trẻ Quốc Gia',
+          category: 'Tin Học Trẻ Quốc Gia',
+          competition_name: 'Vòng Chung kết Hội thi Tin học trẻ Toàn quốc',
+          award_level: 'Giải Nhì',
+          award_year: 2025,
+          description: 'Bảng C1 dành cho học sinh THPT chuyên.',
+          display_order: 2,
+          is_visible: true
+        },
+
+        // Học viên STU003
+        {
+          achievement_id: 'ACH008',
+          student_id: 'STU003',
+          achievement_name: 'Chính thức vào Đội Tuyển Tỉnh dự thi HSG Quốc Gia',
+          category: 'Chọn Đội Tuyển Tỉnh Dự Thi Quốc Gia',
+          competition_name: 'Kỳ thi Chọn đội tuyển HSG Quốc gia môn Tin học',
+          award_level: 'Giải Nhì',
+          award_year: 2025,
+          description: 'Xếp hạng 2/12 thành viên đội tuyển chính thức của Tỉnh.',
+          display_order: 1,
+          is_visible: true
+        },
+        {
+          achievement_id: 'ACH009',
+          student_id: 'STU003',
+          achievement_name: 'Giải Nhất Học Sinh Giỏi Tỉnh THPT',
+          category: 'Học Sinh Giỏi Tỉnh',
+          competition_name: 'Kỳ thi Chọn Học sinh giỏi cấp Tỉnh THPT',
+          award_level: 'Giải Nhất',
+          award_year: 2024,
+          description: 'Đạt 19.5/20 điểm.',
+          display_order: 2,
+          is_visible: true
+        },
+
+        // Học viên STU004
+        {
+          achievement_id: 'ACH010',
+          student_id: 'STU004',
+          achievement_name: 'Huy chương Đồng Trại Hè Tin Học Miền Trung - Tây Nguyên',
+          category: 'Học Sinh Giỏi cấp Miền',
+          competition_name: 'Kỳ thi Olympic Tin học Miền Trung - Tây Nguyên',
+          award_level: 'Huy chương Đồng',
+          award_year: 2024,
+          description: 'Bảng Chuyên Tin.',
+          display_order: 1,
+          is_visible: true
+        },
+        {
+          achievement_id: 'ACH011',
+          student_id: 'STU004',
+          achievement_name: 'Giải Nhì Tin Học Trẻ Khu Vực',
+          category: 'Tin Học Trẻ Khu Vực',
+          competition_name: 'Vòng Khu vực Hội thi Tin học trẻ Toàn quốc',
+          award_level: 'Giải Nhì',
+          award_year: 2025,
+          description: 'Bảng C2 THPT.',
+          display_order: 2,
+          is_visible: true
+        },
+
+        // Học viên STU005
+        {
+          achievement_id: 'ACH012',
+          student_id: 'STU005',
+          achievement_name: 'Giải Ba Tin Học Trẻ Toàn Quốc Bảng B',
+          category: 'Tin Học Trẻ Quốc Gia',
+          competition_name: 'Vòng Chung kết Hội thi Tin học trẻ Toàn quốc',
+          award_level: 'Giải Ba',
+          award_year: 2025,
+          description: 'Khối THCS toàn quốc.',
+          display_order: 1,
+          is_visible: true
+        },
+        {
+          achievement_id: 'ACH013',
+          student_id: 'STU005',
+          achievement_name: 'Giải Nhất Tin Học Trẻ Khu Vực Bảng B',
+          category: 'Tin Học Trẻ Khu Vực',
+          competition_name: 'Vòng Khu vực Hội thi Tin học trẻ Toàn quốc',
+          award_level: 'Giải Nhất',
+          award_year: 2024,
+          description: 'Điểm cao nhất khối THCS.',
+          display_order: 2,
+          is_visible: true
+        },
+
+        // Học viên STU006
+        {
+          achievement_id: 'ACH014',
+          student_id: 'STU006',
+          achievement_name: 'Giải Ba Chọn Đội Tuyển Dự Thi Quốc Gia',
+          category: 'Chọn Đội Tuyển Tỉnh Dự Thi Quốc Gia',
+          competition_name: 'Kỳ thi Chọn đội tuyển dự thi HSG Quốc gia THPT',
+          award_level: 'Giải Ba',
+          award_year: 2024,
+          description: 'Thành viên chính thức đội tuyển VOI của Tỉnh.',
+          display_order: 1,
+          is_visible: true
+        },
+        {
+          achievement_id: 'ACH015',
+          student_id: 'STU006',
+          achievement_name: 'Huy chương Bạc Olympic Tin học cấp Miền',
+          category: 'Học Sinh Giỏi cấp Miền',
+          competition_name: 'Kỳ thi Olympic các trường THPT Chuyên',
+          award_level: 'Huy chương Bạc',
+          award_year: 2025,
+          description: 'Đạt 260/300 điểm.',
+          display_order: 2,
+          is_visible: true
+        },
+
+        // Học viên STU007 (Kiểm thử cả thành tích khuyết năm đạt giải)
+        {
+          achievement_id: 'ACH016',
+          student_id: 'STU007',
+          achievement_name: 'Giải Nhì Học Sinh Giỏi Tỉnh môn Tin học',
+          category: 'Học Sinh Giỏi Tỉnh',
+          competition_name: 'Kỳ thi Chọn Học sinh giỏi cấp Tỉnh THPT',
+          award_level: 'Giải Nhì',
+          award_year: 2024,
+          description: 'Bảng THPT toàn tỉnh.',
+          display_order: 1,
+          is_visible: true
+        },
+        {
+          achievement_id: 'ACH017',
+          student_id: 'STU007',
+          achievement_name: 'Giải Khuyến Khích Tin Học Trẻ Khu Vực',
+          category: 'Tin Học Trẻ Khu Vực',
+          competition_name: 'Hội thi Tin học trẻ Vòng Khu vực',
+          award_level: 'Giải Khuyến Khích',
+          award_year: null, // Thành tích thiếu năm để kiểm thử quy tắc dự phòng
+          description: 'Bản ghi kiểm thử trường hợp dữ liệu trên Sheet chưa nhập năm đạt giải.',
+          display_order: 2,
+          is_visible: true
+        },
+
+        // Học viên STU008
+        {
+          achievement_id: 'ACH018',
+          student_id: 'STU008',
+          achievement_name: 'Giải Nhất Học Sinh Giỏi Tỉnh môn Tin học',
+          category: 'Học Sinh Giỏi Tỉnh',
+          competition_name: 'Kỳ thi Chọn Học sinh giỏi cấp Tỉnh năm học 2025–2026',
+          award_level: 'Giải Nhất',
+          award_year: 2026,
+          description: 'Đạt điểm tuyệt đối bài Quy hoạch động trên cây.',
+          display_order: 1,
+          is_visible: true
+        }
+      ],
+      categories: DEFAULT_CATEGORIES
+    };
+
+    /**
+     * ============================================================================
+     * CÁC HÀM TIỆN ÍCH XỬ LÝ NGÔN NGỮ, MÀU GIẢI THƯỞNG VÀ FALLBACK ẢNH
+     * ============================================================================
+     */
+
+    /**
+     * Chuẩn hóa chuỗi tiếng Việt: chuyển chữ thường, lược bỏ dấu, đ -> d,
+     * xóa khoảng trắng dư thừa để tìm kiếm cả có dấu lẫn không dấu.
+     */
+    function normalizeVietnamese(str) {
+      if (!str) return '';
+      return String(str)
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd')
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    /**
+     * Escape HTML để chống XSS khi render dữ liệu từ Google Sheets
+     */
+    function escapeHtml(value) {
+      if (value === null || value === undefined) return '';
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    /**
+     * Phân loại cấp độ màu sắc (gold / silver / bronze / special) dựa trên award_level
+     * nhưng vẫn bảo toàn nguyên vẹn tên giải gốc khi hiển thị.
+     */
+    function resolveAwardTier(awardLevel) {
+      const norm = normalizeVietnamese(awardLevel);
+      if (
+        norm.includes('nhat') ||
+        norm.includes('vang') ||
+        norm.includes('hcv') ||
+        norm.includes('gold') ||
+        norm.includes('thu khoa') ||
+        norm.includes('vo dich')
+      ) {
+        return { tier: 'gold', priority: 1, icon: '★' };
+      }
+      if (
+        norm.includes('nhi') ||
+        norm.includes('bac') ||
+        norm.includes('hcb') ||
+        norm.includes('silver') ||
+        norm.includes('a khoi')
+      ) {
+        return { tier: 'silver', priority: 2, icon: '◆' };
+      }
+      if (
+        norm.includes('ba') ||
+        norm.includes('dong') ||
+        norm.includes('hcd') ||
+        norm.includes('bronze')
+      ) {
+        return { tier: 'bronze', priority: 3, icon: '▲' };
+      }
+      return { tier: 'special', priority: 4, icon: '●' };
+    }
+
+    /**
+     * Tạo SVG Avatar chữ cái đầu (Fallback khi học viên không có ảnh hoặc URL ảnh bị lỗi)
+     */
+    function createFallbackAvatarDataUri(fullName) {
+      const parts = String(fullName || 'NTOJ').trim().split(/\s+/);
+      const initials = parts.length >= 2
+        ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+        : String(fullName || 'CP').slice(0, 2).toUpperCase();
+
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1D4ED8"/>
+            <stop offset="100%" stop-color="#059669"/>
+          </linearGradient>
+        </defs>
+        <rect width="200" height="200" fill="url(#g)"/>
+        <circle cx="100" cy="100" r="86" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-dasharray="6 4"/>
+        <text x="50%" y="53%" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-weight="700" font-size="64">${escapeHtml(initials)}</text>
+      </svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    /**
+     * ============================================================================
+     * TRẠNG THÁI ỨNG DỤNG (APPLICATION STATE)
+     * ============================================================================
+     */
+    const state = {
+      profiles: [],
+      categories: [],
+      totalAchievementsCount: 0,
+      yearRangeText: '—',
+      selectedCategory: 'Tất cả',
+      searchQuery: '',
+      sortBy: 'custom_order',
+      activeStudentId: null,
+      dataHash: '',
+      isLoading: true,
+      errorMessage: null,
+      config: loadSavedConfig()
+    };
+
+    function loadSavedConfig() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.CONFIG);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          return {
+            GAS_API_URL: (parsed.GAS_API_URL || DEFAULT_CONFIG.GAS_API_URL).trim(),
+            PUBLIC_SHEET_ID: (parsed.PUBLIC_SHEET_ID || DEFAULT_CONFIG.PUBLIC_SHEET_ID).trim(),
+            POLL_INTERVAL_MS: DEFAULT_CONFIG.POLL_INTERVAL_MS
+          };
+        }
+      } catch (e) {}
+      return { ...DEFAULT_CONFIG };
+    }
+
+    /**
+     * ============================================================================
+     * XỬ LÝ & LIÊN KẾT DỮ LIỆU TỪ SHEETS (RELATIONAL BUILDER)
+     * ============================================================================
+     */
+    function buildRelationalData(payload) {
+      const rawStudents = Array.isArray(payload.students) ? payload.students : [];
+      const rawAchievements = Array.isArray(payload.achievements) ? payload.achievements : [];
+      const rawCategories = Array.isArray(payload.categories) && payload.categories.length > 0
+        ? payload.categories
+        : DEFAULT_CATEGORIES;
+
+      // 1. Lọc học viên đang hiển thị (is_visible !== false)
+      const visibleStudents = rawStudents.filter(s => s && s.student_id && s.is_visible !== false && String(s.is_visible).toUpperCase() !== 'FALSE');
+
+      // 2. Lọc và làm giàu thông tin thành tích
+   const visibleAchievements = rawAchievements
+        .filter(a => a && a.student_id && a.is_visible !== false && String(a.is_visible).toUpperCase() !== 'FALSE')
+        .map(a => {
+          // --- TỰ ĐỘNG CHUẨN HÓA CATEGORY THEO TỪ KHÓA ---
+          const achName = String(a.achievement_name || 'Thành tích Tin học').trim();
+          const normAch = normalizeVietnamese(achName); // Bỏ dấu và chữ hoa để dễ quét từ khóa
+          
+          let catName = achName; // Mặc định lấy nguyên tên giải làm danh mục
+
+          // Nếu tên giải chứa từ khóa "tin hoc tre" (bất kể viết hoa, có dấu hay kèm bảng C1, C2...)
+          if (normAch.includes('tin hoc tre')) {
+            catName = 'Tin học trẻ';
+          } 
+          // Bạn có thể bổ sung thêm các quy tắc nhóm khác ở đây nếu muốn:
+          else if (normAch.includes('hoc sinh gioi') || normAch.includes('hsg')) {
+            catName = 'Học sinh giỏi quốc gia';
+          }
+          else if (normAch.includes('olympic')) {
+            catName = 'Olympic 30/4';
+          }
+	  else if (normAch.includes('duyen hai') || normAch.includes('bac bo')) {
+            catName = 'Duyên hải Bắc Bộ';
+          }
+          // ----------------------------------------------
+
+          const parsedYear = (a.award_year !== null && a.award_year !== undefined && String(a.award_year).trim() !== '')
+            ? Number(a.award_year)
+            : null;
+          const validYear = (parsedYear && !Number.isNaN(parsedYear) && parsedYear > 1990 && parsedYear < 2100)
+            ? parsedYear
+            : null;
+          const tierInfo = resolveAwardTier(a.award_level || '');
+
+          return {
+            achievement_id: String(a.achievement_id || ''),
+            student_id: String(a.student_id).trim(),
+            
+            achievement_name: achName,       // Hiển thị tên đầy đủ (VD: Tin học trẻ toàn quốc bảng C1) trên thẻ Card và Timeline
+            category: catName,               // Tự động gom về chuẩn: "Tin học trẻ" để hiện nút lọc gọn gàng trên trang chủ
+            competition_name: achName,       // Tên kỳ thi hiển thị chi tiết trong Pop-up
+            
+            award_level: String(a.award_level || 'Thành tích').trim(),
+            award_year: validYear,
+            description: String(a.description || '').trim(),
+            display_order: Number(a.display_order) || 999,
+            tier: tierInfo.tier,
+            tierPriority: tierInfo.priority,
+            tierIcon: tierInfo.icon
+          };
+        });
+
+      // 3. Gom thành tích theo student_id
+      const achByStudent = new Map();
+      visibleAchievements.forEach(ach => {
+        if (!achByStudent.has(ach.student_id)) {
+          achByStudent.set(ach.student_id, []);
+        }
+        achByStudent.get(ach.student_id).push(ach);
+      });
+
+      // 4. Xây dựng hồ sơ từng học viên
+      const profiles = visibleStudents.map(student => {
+        const sid = String(student.student_id).trim();
+        const studentAchs = achByStudent.get(sid) || [];
+
+        // QUY TẮC BẮT BUỘC (Mục 7.2): Sắp xếp lịch sử thành tích theo award_year TĂNG DẦN (từ năm nhỏ nhất đến năm lớn nhất).
+        // Nếu thiếu năm (null), xếp cuối cùng và đánh dấu "Chưa rõ năm". Nếu cùng năm, xếp theo display_order rồi competition_name.
+        const sortedChronological = [...studentAchs].sort((a, b) => {
+          if (a.award_year === null && b.award_year === null) {
+            return (a.display_order - b.display_order) || a.competition_name.localeCompare(b.competition_name, 'vi');
+          }
+          if (a.award_year === null) return 1;
+          if (b.award_year === null) return -1;
+          if (a.award_year !== b.award_year) return a.award_year - b.award_year;
+          if (a.display_order !== b.display_order) return a.display_order - b.display_order;
+          return a.competition_name.localeCompare(b.competition_name, 'vi');
+        });
+
+        // Tìm thành tích nổi bật nhất để hiển thị trên Card (ưu tiên giải cao nhất -> năm mới nhất)
+        const bestSorted = [...studentAchs].sort((a, b) => {
+          if (a.tierPriority !== b.tierPriority) return a.tierPriority - b.tierPriority;
+          const yA = a.award_year || 0;
+          const yB = b.award_year || 0;
+          if (yB !== yA) return yB - yA;
+          return a.display_order - b.display_order;
+        });
+
+        const topAchievement = bestSorted[0] || null;
+        const years = studentAchs.map(x => x.award_year).filter(y => y !== null);
+        const latestYear = years.length > 0 ? Math.max(...years) : null;
+        const highestTier = topAchievement ? topAchievement.tier : 'special';
+
+        // Gắn badge CP theo thành tích
+        let cpRankBadge = 'ACHIEVER';
+        const hasNational = studentAchs.some(x => normalizeVietnamese(x.category).includes('quoc gia'));
+        if (highestTier === 'gold' && (hasNational || studentAchs.length >= 3)) {
+          cpRankBadge = 'CP LEGEND';
+        } else if (highestTier === 'gold' || highestTier === 'silver' || studentAchs.length >= 2) {
+          cpRankBadge = 'TOP CODER';
+        }
+
+        const uniqueCategories = Array.from(new Set(studentAchs.map(x => x.category).filter(Boolean)));
+
+        // Chuỗi phục vụ tìm kiếm nhanh (Họ tên + Lớp + Tất cả giải thưởng & kỳ thi)
+        const searchIndex = normalizeVietnamese([
+          student.full_name,
+          student.class_name,
+          student.introduction,
+          ...studentAchs.map(a => `${a.achievement_name} ${a.competition_name} ${a.category} ${a.award_level} ${a.award_year || ''}`)
+        ].join(' '));
+
+        return {
+          student_id: sid,
+          full_name: String(student.full_name || 'Học viên NTOJ').trim(),
+          avatar_url: String(student.avatar_url || '').trim(),
+          class_name: String(student.class_name || 'Học viên NTOJ').trim(),
+          introduction: String(student.introduction || '').trim(),
+          display_order: Number(student.display_order) || 999,
+          achievements: sortedChronological,
+          topAchievement,
+          latestYear,
+          highestTier,
+          cpRankBadge,
+          categories: uniqueCategories,
+          searchIndex
+        };
+      });
+
+      // 5. Xây dựng danh sách danh mục động + tự động thêm danh mục mới nếu phát sinh trong Sheet Achievements
+      const configuredCats = rawCategories
+        .filter(c => c && c.category_name && c.is_visible !== false && String(c.is_visible).toUpperCase() !== 'FALSE')
+        .sort((a, b) => (Number(a.display_order) || 99) - (Number(b.display_order) || 99));
+
+      const knownCatNames = new Set(configuredCats.map(c => c.category_name));
+      visibleAchievements.forEach(a => {
+        if (a.category && !knownCatNames.has(a.category)) {
+          knownCatNames.add(a.category);
+          configuredCats.push({
+            category_id: 'DYN_' + configuredCats.length,
+            category_name: a.category,
+            color_token: 'blue',
+            display_order: 99
+          });
+        }
+      });
+
+      // 6. Tính toán khoảng năm hoạt động
+      const allYears = visibleAchievements.map(a => a.award_year).filter(y => y !== null);
+      let yearRangeText = '—';
+      if (allYears.length > 0) {
+        const minY = Math.min(...allYears);
+        const maxY = Math.max(...allYears);
+        yearRangeText = minY === maxY ? `${minY}` : `${minY} – ${maxY}`;
+      }
+
+      state.profiles = profiles;
+      state.categories = configuredCats;
+      state.totalAchievementsCount = visibleAchievements.length;
+      state.yearRangeText = yearRangeText;
+    }
+
+    /**
+     * ============================================================================
+     * ĐỒNG BỘ GOOGLE SHEETS (HỖ TRỢ CẢ APPS SCRIPT API & DIRECT PUBLIC SHEET ID)
+     * ============================================================================
+     */
+
+    // Đọc 1 tab bất kỳ từ Google Sheet công khai qua Google Visualization JSON endpoint
+    async function fetchPublicGoogleSheetTab(sheetId, sheetName) {
+      const url = `https://docs.google.com/spreadsheets/d/${encodeURIComponent(sheetId)}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}&headers=1&_ts=${Date.now()}`;
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status} khi tải sheet ${sheetName}`);
+      const text = await res.text();
+      const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]+)\);?/);
+      if (!match) throw new Error(`Định dạng phản hồi từ sheet "${sheetName}" không hợp lệ.`);
+      const json = JSON.parse(match[1]);
+      const cols = (json.table.cols || []).map(c => String(c.label || '').trim());
+      const rows = json.table.rows || [];
+
+      return rows.map(r => {
+        const obj = {};
+        cols.forEach((colName, idx) => {
+          if (!colName) return;
+          const cell = r.c ? r.c[idx] : null;
+          obj[colName] = cell && cell.v !== undefined && cell.v !== null ? cell.v : '';
+        });
+        return obj;
+      });
+    }
+
+    async function fetchWithRetry(fn, retries = 2, delayMs = 900) {
+      let lastErr;
+      for (let i = 0; i <= retries; i++) {
+        try {
+          return await fn();
+        } catch (err) {
+          lastErr = err;
+          if (i < retries) {
+            await new Promise(r => setTimeout(r, delayMs * Math.pow(2, i)));
+          }
+        }
+      }
+      throw lastErr;
+    }
+
+    async function syncFromGoogleSheets({ isSilentPolling = false } = {}) {
+      updateSyncBadge('syncing', 'Đang đồng bộ...');
+
+      try {
+        let payload = null;
+
+        // Ưu tiên 1: Google Apps Script Web App API
+        if (state.config.GAS_API_URL) {
+          payload = await fetchWithRetry(async () => {
+            const sep = state.config.GAS_API_URL.includes('?') ? '&' : '?';
+            const res = await fetch(`${state.config.GAS_API_URL}${sep}_ts=${Date.now()}`, {
+              method: 'GET',
+              headers: { 'Accept': 'application/json' }
+            });
+            if (!res.ok) throw new Error(`API trả về mã lỗi ${res.status}`);
+            const data = await res.json();
+            if (data.status && data.status !== 'ok') {
+              throw new Error(data.message || 'Lỗi từ Google Apps Script');
+            }
+            return data;
+          });
+        }
+        // Ưu tiên 2: Đọc trực tiếp từ Google Spreadsheet ID công khai
+        else if (state.config.PUBLIC_SHEET_ID) {
+          payload = await fetchWithRetry(async () => {
+            const [students, achievements] = await Promise.all([
+              fetchPublicGoogleSheetTab(state.config.PUBLIC_SHEET_ID, 'Students'),
+              fetchPublicGoogleSheetTab(state.config.PUBLIC_SHEET_ID, 'Achievements')
+            ]);
+            let categories = DEFAULT_CATEGORIES;
+            try {
+              const catRows = await fetchPublicGoogleSheetTab(state.config.PUBLIC_SHEET_ID, 'Categories');
+              if (catRows && catRows.length > 0) categories = catRows;
+            } catch (_) {}
+            return { students, achievements, categories };
+          });
+        }
+        // Ưu tiên 3: Chế độ dữ liệu mẫu tích hợp sẵn khi chưa nhập URL
+        else {
+          payload = INITIAL_NTOJ_DATA;
+        }
+
+        const newHash = JSON.stringify({
+          s: payload.students,
+          a: payload.achievements,
+          c: payload.categories
+        });
+
+        const hasChanged = state.dataHash !== '' && state.dataHash !== newHash;
+        state.dataHash = newHash;
+        state.errorMessage = null;
+        state.isLoading = false;
+
+        // Lưu cache vào localStorage để khởi động tức thì ở lần mở tiếp theo
+        try {
+          localStorage.setItem(STORAGE_KEYS.CACHE, JSON.stringify(payload));
+        } catch (_) {}
+
+        buildRelationalData(payload);
+        renderAll();
+
+        const isLiveSource = Boolean(state.config.GAS_API_URL || state.config.PUBLIC_SHEET_ID);
+        const nowStr = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        updateSyncBadge(
+          'updated',
+          isLiveSource ? `Đã cập nhật (${nowStr})` : `Dữ liệu mẫu NTOJ (${nowStr})`
+        );
+
+        if (hasChanged && isSilentPolling) {
+          showToast('✨ Dữ liệu mới từ Google Sheets vừa được cập nhật tự động!');
+        }
+      } catch (err) {
+        console.error('[NTOJ Sync Error]:', err);
+        state.isLoading = false;
+
+        // Nếu đã có dữ liệu đang hiển thị thì giữ nguyên giao diện, không làm sập trang
+        if (state.profiles.length === 0) {
+          try {
+            const cached = localStorage.getItem(STORAGE_KEYS.CACHE);
+            if (cached) {
+              buildRelationalData(JSON.parse(cached));
+            } else {
+              buildRelationalData(INITIAL_NTOJ_DATA);
+            }
+          } catch (_) {
+            buildRelationalData(INITIAL_NTOJ_DATA);
+          }
+          renderAll();
+        }
+
+        updateSyncBadge('error', 'Lỗi đồng bộ Sheet (Đang dùng bản lưu)');
+        if (!isSilentPolling) {
+          showToast('⚠️ Không thể kết nối Google Sheets. Vui lòng kiểm tra lại URL hoặc quyền chia sẻ.');
+        }
+      }
+    }
+
+    function updateSyncBadge(statusState, text) {
+      const pill = document.getElementById('syncStatusPill');
+      const label = document.getElementById('syncStatusText');
+      if (pill && label) {
+        pill.setAttribute('data-state', statusState);
+        label.textContent = text;
+      }
+    }
+
+    /**
+     * ============================================================================
+     * RENDER GIAO DIỆN (STATS, CATEGORY PILLS, CARDS, MODAL)
+     * ============================================================================
+     */
+
+    function renderStats() {
+      document.getElementById('statStudents').textContent = state.profiles.length;
+      document.getElementById('statAchievements').textContent = state.totalAchievementsCount;
+      document.getElementById('statCategories').textContent = state.categories.length;
+      document.getElementById('statYears').textContent = state.yearRangeText;
+    }
+
+    function renderCategoryPills() {
+      const container = document.getElementById('categoryPillsContainer');
+      if (!container) return;
+
+      // Tính số lượng học viên đạt thành tích trong từng danh mục từ dữ liệu thực tế
+      const allItem = {
+        name: 'Tất cả',
+        color: 'all',
+        count: state.profiles.length
+      };
+
+      const catItems = state.categories.map(cat => {
+        const count = state.profiles.filter(p => p.categories.includes(cat.category_name)).length;
+        return {
+          name: cat.category_name,
+          color: cat.color_token || 'blue',
+          count
+        };
+      });
+
+      const items = [allItem, ...catItems];
+
+      container.innerHTML = items.map(item => {
+        const isActive = state.selectedCategory === item.name;
+        return `
+          <button
+            type="button"
+            role="tab"
+            aria-selected="${isActive}"
+            class="category-pill ${isActive ? 'is-active' : ''}"
+            data-category="${escapeHtml(item.name)}"
+            data-color="${escapeHtml(item.color)}"
+          >
+            <span>${escapeHtml(item.name)}</span>
+            <span class="category-pill__count" title="${item.count} học viên">${item.count}</span>
+          </button>
+        `;
+      }).join('');
+
+      container.querySelectorAll('.category-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.selectedCategory = btn.getAttribute('data-category') || 'Tất cả';
+          renderCategoryPills();
+          renderStudentCards();
+        });
+      });
+    }
+
+    function getFilteredAndSortedStudents() {
+      const normQuery = normalizeVietnamese(state.searchQuery);
+
+      // 1. Lọc kết hợp theo Danh mục đang chọn + Từ khóa tìm kiếm
+      const filtered = state.profiles.filter(profile => {
+        const matchCategory =
+          state.selectedCategory === 'Tất cả' ||
+          profile.categories.includes(state.selectedCategory);
+
+        if (!matchCategory) return false;
+        if (!normQuery) return true;
+
+        return profile.searchIndex.includes(normQuery);
+      });
+
+      // 2. Sắp xếp theo tiêu chí người dùng chọn
+      return filtered.sort((a, b) => {
+        switch (state.sortBy) {
+          case 'name_asc':
+            return a.full_name.localeCompare(b.full_name, 'vi');
+          case 'name_desc':
+            return b.full_name.localeCompare(a.full_name, 'vi');
+          case 'year_desc': {
+            const yA = a.latestYear || 0;
+            const yB = b.latestYear || 0;
+            if (yB !== yA) return yB - yA;
+            return a.display_order - b.display_order;
+          }
+          case 'achievement_count_desc': {
+            if (b.achievements.length !== a.achievements.length) {
+              return b.achievements.length - a.achievements.length;
+            }
+            return a.display_order - b.display_order;
+          }
+          case 'custom_order':
+          default:
+            if (a.display_order !== b.display_order) return a.display_order - b.display_order;
+            return a.full_name.localeCompare(b.full_name, 'vi');
+        }
+      });
+    }
+
+    function renderStudentCards() {
+      const grid = document.getElementById('studentsGrid');
+      const counter = document.getElementById('resultCounter');
+      if (!grid) return;
+
+      if (state.isLoading) {
+        grid.innerHTML = Array.from({ length: 6 }).map(() => `
+          <div class="skeleton-card" aria-hidden="true">
+            <div style="display:flex;gap:1rem;align-items:center;">
+              <div class="skeleton-line" style="width:74px;height:74px;border-radius:16px;flex-shrink:0;"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:0.5rem;">
+                <div class="skeleton-line" style="width:45%;height:14px;"></div>
+                <div class="skeleton-line" style="width:80%;height:20px;"></div>
+                <div class="skeleton-line" style="width:60%;height:14px;"></div>
+              </div>
+            </div>
+            <div class="skeleton-line" style="width:100%;height:78px;border-radius:12px;"></div>
+            <div class="skeleton-line" style="width:65%;height:22px;margin-top:auto;"></div>
+          </div>
+        `).join('');
+        return;
+      }
+
+      const list = getFilteredAndSortedStudents();
+      if (counter) {
+        counter.innerHTML = `Hiển thị <strong>${list.length}</strong> / ${state.profiles.length} học viên`;
+      }
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="state-box">
+            <div class="state-box__icon">return 0;</div>
+            <h3 class="state-box__title">Không tìm thấy học viên phù hợp</h3>
+            <p class="state-box__desc">
+              Không có bản ghi nào khớp với từ khóa <strong>"${escapeHtml(state.searchQuery)}"</strong>
+              trong danh mục <strong>"${escapeHtml(state.selectedCategory)}"</strong>.
+            </p>
+            <button type="button" id="btnResetFilters" class="primary-btn">Đặt lại bộ lọc &amp; Tìm kiếm</button>
+          </div>
+        `;
+        const resetBtn = document.getElementById('btnResetFilters');
+        if (resetBtn) {
+          resetBtn.addEventListener('click', () => {
+            state.selectedCategory = 'Tất cả';
+            state.searchQuery = '';
+            const input = document.getElementById('searchInput');
+            if (input) input.value = '';
+            document.getElementById('btnClearSearch').classList.remove('is-visible');
+            renderCategoryPills();
+            renderStudentCards();
+          });
+        }
+        return;
+      }
+
+      grid.innerHTML = list.map(student => {
+        // Nếu người dùng đang chọn 1 danh mục cụ thể, ưu tiên hiển thị thành tích thuộc danh mục đó trên Card
+        let featured = student.topAchievement;
+        if (state.selectedCategory !== 'Tất cả') {
+          const matchCatAch = student.achievements
+            .filter(a => a.category === state.selectedCategory)
+            .sort((a, b) => a.tierPriority - b.tierPriority)[0];
+          if (matchCatAch) featured = matchCatAch;
+        }
+
+        const fallbackAvatar = createFallbackAvatarDataUri(student.full_name);
+        const avatarSrc = student.avatar_url || fallbackAvatar;
+        const yearBadge = featured && featured.award_year ? featured.award_year : (student.latestYear || 'NTOJ');
+
+        return `
+          <article
+            class="student-card"
+            data-tier="${escapeHtml(student.highestTier)}"
+            data-student-id="${escapeHtml(student.student_id)}"
+            tabindex="0"
+            role="button"
+            aria-label="Xem chi tiết thành tích của học viên ${escapeHtml(student.full_name)}"
+          >
+            <div class="student-card__top">
+              <div class="student-card__avatar-frame">
+                <img
+                  src="${escapeHtml(avatarSrc)}"
+                  alt="Ảnh đại diện ${escapeHtml(student.full_name)}"
+                  class="student-card__avatar"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='${fallbackAvatar}';"
+                />
+                <span class="student-card__year-tag">${escapeHtml(yearBadge)}</span>
+              </div>
+              <div class="student-card__identity">
+                <span class="student-card__rank-chip">${escapeHtml(student.cpRankBadge)}</span>
+                <h2 class="student-card__name" title="${escapeHtml(student.full_name)}">${escapeHtml(student.full_name)}</h2>
+                <p class="student-card__class" title="${escapeHtml(student.class_name)}">${escapeHtml(student.class_name)}</p>
+              </div>
+            </div>
+
+            <div class="student-card__body">
+              ${featured ? `
+                <div class="featured-award" data-tier="${escapeHtml(featured.tier)}">
+                  <div class="featured-award__head">
+                    <span class="award-badge" data-tier="${escapeHtml(featured.tier)}">
+                      <span>${featured.tierIcon}</span>
+                      <span>${escapeHtml(featured.award_level)}</span>
+                    </span>
+                    <span class="featured-award__year">
+                      ${featured.award_year ? `Năm ${featured.award_year}` : 'Chưa rõ năm'}
+                    </span>
+                  </div>
+                  <div class="featured-award__title">${escapeHtml(featured.achievement_name)}</div>
+                </div>
+              ` : `
+                <div class="featured-award" data-tier="special">
+                  <div class="featured-award__title">Học viên tiêu biểu tại NTOJ</div>
+                </div>
+              `}
+
+              <div class="student-card__categories">
+                ${student.categories.slice(0, 2).map(cat => `
+                  <span class="mini-cat-tag">${escapeHtml(cat)}</span>
+                `).join('')}
+                ${student.categories.length > 2 ? `
+                  <span class="mini-cat-tag">+${student.categories.length - 2} danh mục</span>
+                ` : ''}
+              </div>
+            </div>
+
+            <div class="student-card__footer">
+              <span class="student-card__total">${student.achievements.length} thành tích ghi nhận</span>
+              <span class="student-card__cta">Chi tiết hồ sơ &rarr;</span>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      // Gắn sự kiện click và bàn phím (Enter / Space) cho từng Card
+      grid.querySelectorAll('.student-card').forEach(card => {
+        const sid = card.getAttribute('data-student-id');
+        card.addEventListener('click', () => openStudentModal(sid));
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openStudentModal(sid);
+          }
+        });
+      });
+    }
+
+    /**
+     * ============================================================================
+     * MODAL CHI TIẾT HỌC VIÊN (KHUNG ẢNH METALLIC & LỊCH SỬ THÀNH TÍCH)
+     * ============================================================================
+     */
+    function openStudentModal(studentId, updateHistoryUrl = true) {
+      const student = state.profiles.find(p => p.student_id === studentId);
+      if (!student) return;
+
+      // Ngăn mở chồng nhiều modal
+      state.activeStudentId = student.student_id;
+
+      const backdrop = document.getElementById('studentModalBackdrop');
+      const content = document.getElementById('studentModalContent');
+      const terminalPath = document.getElementById('modalTerminalPath');
+
+      if (terminalPath) {
+        terminalPath.textContent = `ntoj://hall-of-fame/${student.student_id.toLowerCase()}/achievements.cpp`;
+      }
+
+      const fallbackAvatar = createFallbackAvatarDataUri(student.full_name);
+      const avatarSrc = student.avatar_url || fallbackAvatar;
+
+      content.innerHTML = `
+        <!-- CỘT TRÁI: KHUNG ẢNH METALLIC COMPETITIVE PROGRAMMING -->
+        <aside class="cp-metallic-frame" data-tier="${escapeHtml(student.highestTier)}">
+          <span class="pcb-corner tl"></span>
+          <span class="pcb-corner tr"></span>
+          <span class="pcb-corner bl"></span>
+          <span class="pcb-corner br"></span>
+
+          <div class="cp-metallic-frame__inner">
+            <!-- Đường mạch PCB trang trí -->
+            <svg class="cp-metallic-frame__pcb-svg" viewBox="0 0 300 400" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M10 30 H80 L105 55 H260" />
+              <path d="M20 360 H110 L135 335 H280" />
+              <circle cx="80" cy="30" r="4" fill="currentColor" />
+              <circle cx="260" cy="55" r="4" fill="currentColor" />
+              <circle cx="110" cy="360" r="4" fill="currentColor" />
+            </svg>
+
+            <div class="cp-metallic-frame__photo-wrap">
+              <img
+                src="${escapeHtml(avatarSrc)}"
+                alt="Ảnh chân dung học viên ${escapeHtml(student.full_name)}"
+                class="cp-metallic-frame__photo"
+                onerror="this.onerror=null;this.src='${fallbackAvatar}';"
+              />
+              <span class="cp-metallic-frame__badge">${escapeHtml(student.cpRankBadge)}</span>
+            </div>
+
+            <div class="cp-metallic-frame__info">
+              <h2 id="modalStudentName" class="cp-metallic-frame__name">${escapeHtml(student.full_name)}</h2>
+              <div class="cp-metallic-frame__class">${escapeHtml(student.class_name)}</div>
+              ${student.introduction ? `
+                <p class="cp-metallic-frame__bio">${escapeHtml(student.introduction)}</p>
+              ` : ''}
+              <div class="cp-metallic-frame__code-footer">
+                <span>ID: ${escapeHtml(student.student_id)}</span>
+                <span>AC: ${student.achievements.length} awards</span>
+                <span>O(log N)</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- CỘT PHẢI: KHUNG LỊCH SỬ THÀNH TÍCH (SẮP XẾP NĂM TĂNG DẦN) -->
+        <section class="history-panel" aria-label="Lịch sử thành tích học viên">
+          <div class="history-panel__header">
+            <h3 class="history-panel__title">
+              <span>Hành trình Chinh phục Giải thưởng</span>
+            </h3>
+            <span class="history-panel__order-note">Sắp xếp: Năm tăng dần &uarr;</span>
+          </div>
+
+          ${student.achievements.length > 0 ? `
+            <div class="timeline-list">
+              ${student.achievements.map(ach => `
+                <article class="timeline-item" data-tier="${escapeHtml(ach.tier)}">
+                  <span class="timeline-item__dot" aria-hidden="true"></span>
+                  <div class="timeline-item__top">
+                    <span class="timeline-item__year">
+                      ${ach.award_year !== null ? `Năm ${ach.award_year}` : 'Chưa rõ năm'}
+                    </span>
+                    <span class="award-badge" data-tier="${escapeHtml(ach.tier)}">
+                      <span>${ach.tierIcon}</span>
+                      <span>${escapeHtml(ach.award_level)}</span>
+                    </span>
+                  </div>
+                  <h4 class="timeline-item__name">${escapeHtml(ach.achievement_name)}</h4>
+                  <div class="timeline-item__competition">
+                    Kỳ thi: <strong>${escapeHtml(ach.competition_name || ach.category)}</strong>
+                  </div>
+                  <span class="mini-cat-tag">${escapeHtml(ach.category)}</span>
+                  ${ach.description ? `
+                    <p class="timeline-item__desc">${escapeHtml(ach.description)}</p>
+                  ` : ''}
+                </article>
+              `).join('')}
+            </div>
+          ` : `
+            <p style="color:var(--text-muted);">Chưa có dữ liệu thành tích chi tiết.</p>
+          `}
+        </section>
+      `;
+
+      backdrop.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+
+      if (updateHistoryUrl) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('student', student.student_id);
+        window.history.replaceState({}, '', url.toString());
+      }
+
+      document.getElementById('btnCloseStudentModal').focus();
+    }
+
+    function closeStudentModal() {
+      const backdrop = document.getElementById('studentModalBackdrop');
+      if (!backdrop.classList.contains('is-open')) return;
+      backdrop.classList.remove('is-open');
+      document.body.style.overflow = '';
+      state.activeStudentId = null;
+
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('student')) {
+        url.searchParams.delete('student');
+        window.history.replaceState({}, '', url.toString());
+      }
+    }
+
+    /**
+     * ============================================================================
+     * LIGHT MODE / DARK MODE & TOAST
+     * ============================================================================
+     */
+    function renderThemeIcon() {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const wrap = document.getElementById('themeIconWrap');
+      if (!wrap) return;
+      if (current === 'dark') {
+        // Mặt trời
+        wrap.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
+      } else {
+        // Mặt trăng
+        wrap.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try {
+        localStorage.setItem(STORAGE_KEYS.THEME, next);
+      } catch (_) {}
+      renderThemeIcon();
+    }
+
+    let toastTimer = null;
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.add('is-visible');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('is-visible');
+      }, 3600);
+    }
+
+    function renderAll() {
+      renderStats();
+      renderCategoryPills();
+      renderStudentCards();
+
+      // Nếu modal của 1 học viên đang mở khi dữ liệu đồng bộ ngầm về, tự động làm mới nội dung modal
+      if (state.activeStudentId) {
+        openStudentModal(state.activeStudentId, false);
+      }
+    }
+
+    /**
+     * ============================================================================
+     * KHỞI TẠO SỰ KIỆN & VÒNG LẶP ĐỒNG BỘ TỰ ĐỘNG (POLLING)
+     * ============================================================================
+     */
+    document.addEventListener('DOMContentLoaded', async () => {
+      renderThemeIcon();
+
+      // 1. Sự kiện đổi Theme
+      document.getElementById('btnThemeToggle').addEventListener('click', toggleTheme);
+
+      // 2. Sự kiện Tìm kiếm có Debounce (180ms)
+      const searchInput = document.getElementById('searchInput');
+      const clearBtn = document.getElementById('btnClearSearch');
+      let searchDebounce = null;
+
+      searchInput.addEventListener('input', (e) => {
+        const val = e.target.value || '';
+        clearBtn.classList.toggle('is-visible', val.length > 0);
+        clearTimeout(searchDebounce);
+        searchDebounce = setTimeout(() => {
+          state.searchQuery = val;
+          renderStudentCards();
+        }, 180);
+      });
+
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        state.searchQuery = '';
+        clearBtn.classList.remove('is-visible');
+        renderStudentCards();
+        searchInput.focus();
+      });
+
+      // 3. Sự kiện Sắp xếp
+      document.getElementById('sortSelect').addEventListener('change', (e) => {
+        state.sortBy = e.target.value;
+        renderStudentCards();
+      });
+
+      // 4. Sự kiện đóng Modal học viên & Chia sẻ hồ sơ
+      document.getElementById('btnCloseStudentModal').addEventListener('click', closeStudentModal);
+      document.getElementById('studentModalBackdrop').addEventListener('click', (e) => {
+        if (e.target.id === 'studentModalBackdrop') closeStudentModal();
+      });
+
+      document.getElementById('btnShareStudent').addEventListener('click', async () => {
+        if (!state.activeStudentId) return;
+        const student = state.profiles.find(p => p.student_id === state.activeStudentId);
+        const shareUrl = window.location.href;
+        const shareTitle = student
+          ? `Bảng vàng thành tích: ${student.full_name} — COMPETITIVE PROGRAMMING NTOJ`
+          : 'Bảng vàng thành tích học viên NTOJ';
+
+        if (navigator.share) {
+          try {
+            await navigator.share({ title: shareTitle, text: shareTitle, url: shareUrl });
+            return;
+          } catch (_) {}
+        }
+
+        try {
+          await navigator.clipboard.writeText(shareUrl);
+          showToast('📋 Đã sao chép liên kết hồ sơ học viên vào bộ nhớ tạm!');
+        } catch (_) {
+          showToast('Liên kết hồ sơ: ' + shareUrl);
+        }
+      });
+
+      
+      // 6. Sự kiện phím Escape đóng Modal
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeStudentModal();
+          configBackdrop.classList.remove('is-open');
+        }
+      });
+
+      // 7. Nút làm mới dữ liệu thủ công
+      document.getElementById('btnManualSync').addEventListener('click', () => {
+        syncFromGoogleSheets({ isSilentPolling: false });
+      });
+
+      // 8. Tải dữ liệu lần đầu & Kiểm tra URL chia sẻ trực tiếp (?student=STU001)
+      renderStudentCards(); // Hiển thị skeleton trước
+      await syncFromGoogleSheets({ isSilentPolling: false });
+
+      const params = new URLSearchParams(window.location.search);
+      const sharedStudentId = params.get('student');
+      if (sharedStudentId) {
+        openStudentModal(sharedStudentId, false);
+      }
+
+      // 9. Cơ chế Polling định kỳ (20 giây) + Tạm dừng thông minh khi tab ẩn
+      setInterval(() => {
+        if (document.visibilityState === 'visible') {
+          syncFromGoogleSheets({ isSilentPolling: true });
+        }
+      }, state.config.POLL_INTERVAL_MS);
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+          syncFromGoogleSheets({ isSilentPolling: true });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
