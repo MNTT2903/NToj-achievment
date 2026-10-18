@@ -2449,12 +2449,18 @@
         const latestYear = years.length > 0 ? Math.max(...years) : null;
         const highestTier = topAchievement ? topAchievement.tier : 'special';
 
+        // Gắn badge CP theo yêu cầu mới
         let cpRankBadge = 'ACHIEVER';
-        const hasNational = studentAchs.some(x => normalizeVietnamese(x.category).includes('quoc gia'));
-        if (highestTier === 'gold' && (hasNational || studentAchs.length >= 3)) {
-          cpRankBadge = 'CP LEGEND';
+        const hasNational = studentAchs.some(x => normalizeVietnamese(x.category).includes('quoc gia') || normalizeVietnamese(x.achievement_name).includes('quoc gia'));
+        
+        if (hasNational) {
+          cpRankBadge = 'TOP CODER'; // Cứ có giải quốc gia là thành TOP CODER hết
+        } else if (highestTier === 'gold' && studentAchs.length >= 3) {
+          cpRankBadge = 'CP LEGEND';  // Các trường hợp không phải quốc gia giữ nguyên logic cũ
         } else if (highestTier === 'gold' || highestTier === 'silver' || studentAchs.length >= 2) {
           cpRankBadge = 'TOP CODER';
+        } else {
+          cpRankBadge = 'ACHIEVER';
         }
 
         const uniqueCategories = Array.from(new Set(studentAchs.map(x => x.category).filter(Boolean)));
