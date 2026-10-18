@@ -2315,34 +2315,55 @@
         ? payload.categories
         : DEFAULT_CATEGORIES;
 
-      // 1. Lọc học viên đang hiển thị (is_visible !== false)
+      // 1. Lọc học viên đang hiển thị
       const visibleStudents = rawStudents.filter(s => s && s.student_id && s.is_visible !== false && String(s.is_visible).toUpperCase() !== 'FALSE');
 
-      // 2. Lọc và làm giàu thông tin thành tích
-   const visibleAchievements = rawAchievements
-        .filter(a => a && a.student_id && a.is_visible !== false && String(a.is_visible).toUpperCase() !== 'FALSE')
-        .map(a => {
-          // --- TỰ ĐỘNG CHUẨN HÓA CATEGORY THEO TỪ KHÓA ---
-          const achName = String(a.achievement_name || 'Thành tích Tin học').trim();
-          const normAch = normalizeVietnamese(achName); // Bỏ dấu và chữ hoa để dễ quét từ khóa
-          
-          let catName = achName; // Mặc định lấy nguyên tên giải làm danh mục
+      // --- TẠO BẢNG TRA CỨU (MAP) ĐỂ TỰ ĐỘNG ĐỔI TÊN SANG STUDENT_ID ---
+      const studentMap = new Map();
+      visibleStudents.forEach(s => {
+        const sid = String(s.student_id).trim();
+        studentMap.set(sid.toLowerCase(), sid);
+        if (s.full_name) {
+          const cleanName = String(s.full_name).trim();
+          studentMap.set(cleanName.toLowerCase(), sid);
+          studentMap.set(normalizeVietnamese(cleanName), sid);
+        }
+      });
+      // -----------------------------------------------------------------
 
-          // Nếu tên giải chứa từ khóa "tin hoc tre" (bất kể viết hoa, có dấu hay kèm bảng C1, C2...)
-          if (normAch.includes('tin hoc tre')) {
-            catName = 'Tin học trẻ';
-          } 
-          // Bạn có thể bổ sung thêm các quy tắc nhóm khác ở đây nếu muốn:
-          else if (normAch.includes('hoc sinh gioi') || normAch.includes('hsg')) {
-            catName = 'Học sinh giỏi quốc gia';
+      // 2. Lọc và làm giàu thông tin thành tích
+      const visibleAchievements = rawAchievements
+        .filter(a => a && (a.student_id || a.student_name || a.full_name) && a.is_visible !== false && String(a.is_visible).toUpperCase() !== 'FALSE')
+        .map(a => {
+          // Tự động quy đổi Tên học viên (hoặc ID) nhập trong sheet sang student_id chuẩn
+          const rawStudentKey = String(a.student_id || a.student_name || a.full_name || '').trim();
+          const resolvedStudentId = studentMap.get(rawStudentKey.toLowerCase()) || 
+                                    studentMap.get(normalizeVietnamese(rawStudentKey)) || 
+                                    rawStudentKey;
+
+          // Xử lý gộp 3 thông tin từ cột achievement_info hoặc achievement_name
+          const rawInfo = String(a.achievement_info || a.achievement_name || '').trim();
+          const parts = rawInfo.split('|').map(p => p.trim());
+          
+          const achName = parts[0] || 'Thành tích Tin học';
+          const compName = parts[1] || achName;
+          
+          // Tự động chuẩn hóa category theo từ khóa
+          const normAch = normalizeVietnamese(achName);
+          let catName = parts[2] || achName;
+          if (!parts[2]) {
+            if (normAch.includes('tin hoc tre')) {
+              catName = 'Tin học trẻ';
+            } else if (normAch.includes('hoc sinh gioi quốc gia') || normAch.includes('hsg quoc gia')) {
+              catName = 'Học sinh giỏi quốc gia';
+            } else if (normAch.includes('hoc sinh gioi') || normAch.includes('hsg')) {
+              catName = 'Học sinh giỏi tỉnh';
+            } else if (normAch.includes('olympic')) {
+              catName = 'Olympic 30/4';
+            } else if (normAch.includes('duyen hai') || normAch.includes('bac bo')) {
+              catName = 'Duyên hải Bắc Bộ';
+            }
           }
-          else if (normAch.includes('olympic')) {
-            catName = 'Olympic 30/4';
-          }
-	  else if (normAch.includes('duyen hai') || normAch.includes('bac bo')) {
-            catName = 'Duyên hải Bắc Bộ';
-          }
-          // ----------------------------------------------
 
           const parsedYear = (a.award_year !== null && a.award_year !== undefined && String(a.award_year).trim() !== '')
             ? Number(a.award_year)
@@ -2354,12 +2375,10 @@
 
           return {
             achievement_id: String(a.achievement_id || ''),
-            student_id: String(a.student_id).trim(),
-            
-            achievement_name: achName,       // Hiển thị tên đầy đủ (VD: Tin học trẻ toàn quốc bảng C1) trên thẻ Card và Timeline
-            category: catName,               // Tự động gom về chuẩn: "Tin học trẻ" để hiện nút lọc gọn gàng trên trang chủ
-            competition_name: achName,       // Tên kỳ thi hiển thị chi tiết trong Pop-up
-            
+            student_id: resolvedStudentId, // <--- Đã được tự động quy đổi chuẩn xác
+            achievement_name: achName,
+            category: catName,
+            competition_name: compName,
             award_level: String(a.award_level || 'Thành tích').trim(),
             award_year: validYear,
             description: String(a.description || '').trim(),
@@ -2384,8 +2403,6 @@
         const sid = String(student.student_id).trim();
         const studentAchs = achByStudent.get(sid) || [];
 
-        // QUY TẮC BẮT BUỘC (Mục 7.2): Sắp xếp lịch sử thành tích theo award_year TĂNG DẦN (từ năm nhỏ nhất đến năm lớn nhất).
-        // Nếu thiếu năm (null), xếp cuối cùng và đánh dấu "Chưa rõ năm". Nếu cùng năm, xếp theo display_order rồi competition_name.
         const sortedChronological = [...studentAchs].sort((a, b) => {
           if (a.award_year === null && b.award_year === null) {
             return (a.display_order - b.display_order) || a.competition_name.localeCompare(b.competition_name, 'vi');
@@ -2397,7 +2414,6 @@
           return a.competition_name.localeCompare(b.competition_name, 'vi');
         });
 
-        // Tìm thành tích nổi bật nhất để hiển thị trên Card (ưu tiên giải cao nhất -> năm mới nhất)
         const bestSorted = [...studentAchs].sort((a, b) => {
           if (a.tierPriority !== b.tierPriority) return a.tierPriority - b.tierPriority;
           const yA = a.award_year || 0;
@@ -2411,7 +2427,6 @@
         const latestYear = years.length > 0 ? Math.max(...years) : null;
         const highestTier = topAchievement ? topAchievement.tier : 'special';
 
-        // Gắn badge CP theo thành tích
         let cpRankBadge = 'ACHIEVER';
         const hasNational = studentAchs.some(x => normalizeVietnamese(x.category).includes('quoc gia'));
         if (highestTier === 'gold' && (hasNational || studentAchs.length >= 3)) {
@@ -2421,11 +2436,10 @@
         }
 
         const uniqueCategories = Array.from(new Set(studentAchs.map(x => x.category).filter(Boolean)));
-
-        // Chuỗi phục vụ tìm kiếm nhanh (Họ tên + Lớp + Tất cả giải thưởng & kỳ thi)
         const searchIndex = normalizeVietnamese([
           student.full_name,
           student.class_name,
+          student.school,
           student.introduction,
           ...studentAchs.map(a => `${a.achievement_name} ${a.competition_name} ${a.category} ${a.award_level} ${a.award_year || ''}`)
         ].join(' '));
@@ -2435,7 +2449,7 @@
           full_name: String(student.full_name || 'Học viên NTOJ').trim(),
           avatar_url: String(student.avatar_url || '').trim(),
           class_name: String(student.class_name || 'Học viên NTOJ').trim(),
-		  school: String(student.school || '').trim(),
+          school: String(student.school || '').trim(),
           introduction: String(student.introduction || '').trim(),
           display_order: Number(student.display_order) || 999,
           achievements: sortedChronological,
@@ -2448,7 +2462,6 @@
         };
       });
 
-      // 5. Xây dựng danh sách danh mục động + tự động thêm danh mục mới nếu phát sinh trong Sheet Achievements
       const configuredCats = rawCategories
         .filter(c => c && c.category_name && c.is_visible !== false && String(c.is_visible).toUpperCase() !== 'FALSE')
         .sort((a, b) => (Number(a.display_order) || 99) - (Number(b.display_order) || 99));
@@ -2466,7 +2479,12 @@
         }
       });
 
-      // 6. Tính toán khoảng năm hoạt động
+      configuredCats.sort((a, b) => {
+        if (a.category_name === 'Học sinh giỏi quốc gia') return -1;
+        if (b.category_name === 'Học sinh giỏi quốc gia') return 1;
+        return (Number(a.display_order) || 99) - (Number(b.display_order) || 99);
+      });
+
       const allYears = visibleAchievements.map(a => a.award_year).filter(y => y !== null);
       let yearRangeText = '—';
       if (allYears.length > 0) {
