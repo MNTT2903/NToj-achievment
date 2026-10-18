@@ -1540,9 +1540,18 @@
       }
       .modal-body {
         grid-template-columns: 1fr;
+        align-items: stretch;
+        overflow-y: auto; /* Cho phép cuộn toàn bộ nội dung pop-up (cả avatar lẫn thành tích) */
+        -webkit-overflow-scrolling: touch; /* Giúp lướt mượt hơn trên iOS/Android */
+      }
+      .history-panel {
+        max-height: none; /* Bỏ giới hạn chiều cao riêng của cột thành tích */
+        overflow-y: visible; /* Tắt thanh cuộn riêng của thành tích để cuộn chung với avatar */
+        padding-right: 0;
       }
       .cp-metallic-frame {
         max-width: 360px;
+        width: 100%;
         margin: 0 auto;
       }
       .hero__bg-decor {
@@ -3105,7 +3114,8 @@
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           closeStudentModal();
-          configBackdrop.classList.remove('is-open');
+          const configBackdrop = document.getElementById('configModalBackdrop');
+          if (configBackdrop) configBackdrop.classList.remove('is-open');
         }
       });
 
@@ -3137,8 +3147,6 @@
         }
       });
     });
-
-
   </script>
 </body>
 </html>
