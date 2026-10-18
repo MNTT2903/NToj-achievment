@@ -2350,20 +2350,25 @@
           
           // Tự động chuẩn hóa category theo từ khóa
           const normAch = normalizeVietnamese(achName);
-          let catName = parts[2] || achName;
-          if (!parts[2]) {
-            if (normAch.includes('tin hoc tre')) {
-              catName = 'Tin học trẻ';
-            } else if (normAch.includes('hoc sinh gioi quốc gia') || normAch.includes('hsg quoc gia')) {
-              catName = 'Học sinh giỏi quốc gia';
-            } else if (normAch.includes('hoc sinh gioi') || normAch.includes('hsg')) {
-              catName = 'Học sinh giỏi tỉnh';
-            } else if (normAch.includes('olympic')) {
-              catName = 'Olympic 30/4';
-            } else if (normAch.includes('duyen hai') || normAch.includes('bac bo')) {
-              catName = 'Duyên hải Bắc Bộ';
-            }
+        let catName = parts[2] || achName;
+        if (!parts[2]) {
+          if (normAch.includes('tin hoc tre')) {
+            catName = 'Tin học trẻ';
+          } 
+          // Đặt kiểm tra "quoc gia" lên trước để bắt chính xác
+          else if (normAch.includes('quoc gia') || normAch.includes('hsg quoc gia')) {
+            catName = 'Học sinh giỏi quốc gia';
+          } 
+          else if (normAch.includes('hoc sinh gioi') || normAch.includes('hsg')) {
+            catName = 'Học sinh giỏi tỉnh';
+          } 
+          else if (normAch.includes('olympic')) {
+            catName = 'Olympic 30/4';
+          } 
+          else if (normAch.includes('duyen hai') || normAch.includes('bac bo')) {
+            catName = 'Duyên hải Bắc Bộ';
           }
+        }
 
           const parsedYear = (a.award_year !== null && a.award_year !== undefined && String(a.award_year).trim() !== '')
             ? Number(a.award_year)
