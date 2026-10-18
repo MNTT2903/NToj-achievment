@@ -1585,10 +1585,20 @@
         transition-duration: 0.01ms !important;
       }
     }
+#particleCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 3;
+}
   </style>
 </head>
 <body>
-
+<!-- Hiệu ứng Particle theo chuột -->
+  <canvas id="particleCanvas"></canvas>
   <!-- ==================== 1. TOP UTILITY BAR ==================== -->
   <header class="top-bar">
     <div class="container top-bar__inner">
@@ -1752,11 +1762,7 @@
           <span id="modalTerminalPath">ntoj://hall-of-fame/student/profile.cpp</span>
         </div>
         <div class="modal-header__actions">
-          <button type="button" id="btnShareStudent" class="icon-btn" title="Chia sẻ liên kết hồ sơ học viên">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-            <span>Chia sẻ thành tích</span>
-          </button>
-          <button type="button" id="btnCloseStudentModal" class="icon-btn" aria-label="Đóng cửa sổ chi tiết">✕ Đóng</button>
+                    <button type="button" id="btnCloseStudentModal" class="icon-btn" aria-label="Đóng cửa sổ chi tiết">✕ Đóng</button>
         </div>
       </div>
 
@@ -3094,29 +3100,6 @@
         if (e.target.id === 'studentModalBackdrop') closeStudentModal();
       });
 
-      document.getElementById('btnShareStudent').addEventListener('click', async () => {
-        if (!state.activeStudentId) return;
-        const student = state.profiles.find(p => p.student_id === state.activeStudentId);
-        const shareUrl = window.location.href;
-        const shareTitle = student
-          ? `Bảng vàng thành tích: ${student.full_name} — COMPETITIVE PROGRAMMING NTOJ`
-          : 'Bảng vàng thành tích học viên NTOJ';
-
-        if (navigator.share) {
-          try {
-            await navigator.share({ title: shareTitle, text: shareTitle, url: shareUrl });
-            return;
-          } catch (_) {}
-        }
-
-        try {
-          await navigator.clipboard.writeText(shareUrl);
-          showToast('📋 Đã sao chép liên kết hồ sơ học viên vào bộ nhớ tạm!');
-        } catch (_) {
-          showToast('Liên kết hồ sơ: ' + shareUrl);
-        }
-      });
-
       
       // 6. Sự kiện phím Escape đóng Modal
       document.addEventListener('keydown', (e) => {
@@ -3154,6 +3137,8 @@
         }
       });
     });
+
+
   </script>
 </body>
 </html>
