@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-	<!-- Các thẻ định dạng hiển thị Thumbnail lớn giống YouTube -->
-  <meta property="og:image" content="https://raw.githubusercontent.com/MNTT2903/ntoj-student-images/main/mvu%20fifai.jpg?raw=true" />
-  <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/MNTT2903/ntoj-student-images/main/mvu%20fifai.jpg?raw=true" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Bảng Vàng Thành Tích NTOJ — Hall of Fame" />
-  <meta name="twitter:description" content="Nơi vinh danh những học sinh đạt giải thưởng xuất sắc trong lập trình thi đấu (Competitive Programming)." />
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/MNTT2903/ntoj-student-images/main/mvu%20fifai.jpg?raw=true" />	
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BẢNG VÀNG THÀNH TÍCH HỌC VIÊN | COMPETITIVE PROGRAMMING — NTOJ</title>
   <meta name="description" content="Bảng vàng vinh danh các học viên xuất sắc đạt thành tích trong lĩnh vực Tin học, lập trình thi đấu, Tin học trẻ và Học sinh giỏi các cấp tại NTOJ." />
+  
   <meta property="og:title" content="BẢNG VÀNG THÀNH TÍCH HỌC VIÊN — COMPETITIVE PROGRAMMING NTOJ" />
   <meta property="og:description" content="Mỗi thành tích là một cột mốc trên hành trình chinh phục thuật toán." />
   <meta property="og:image" content="https://raw.githubusercontent.com/MNTT2903/ntoj-student-images/main/mvu%20fifai.jpg?raw=true" />
-  <meta property="og:url" content="https://peternguyen-danzo.github.io/" />
+  <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/MNTT2903/ntoj-student-images/main/mvu%20fifai.jpg?raw=true" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://peternguyen-danzo.github.io/" />
 
   <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,9 +35,6 @@
   </script>
 
   <style>
-    /* ==========================================================================
-       1. DESIGN TOKENS & CSS VARIABLES (LAVENDER & MIDNIGHT PURPLE)
-       ========================================================================== */
     :root,
     [data-theme="light"] {
       --bg-primary: #F5F3FF;       
@@ -68,7 +59,6 @@
       --border-tech: rgba(124, 58, 237, 0.22);
       --border-focus: #7C3AED;
 
-      /* Hệ màu cấp độ giải thưởng */
       --gold-bg: linear-gradient(135deg, #FEF9C3 0%, #FDE68A 100%);
       --gold-surface: rgba(245, 158, 11, 0.09);
       --gold-border: #F59E0B;
@@ -171,1407 +161,330 @@
       --grid-line: rgba(192, 132, 252, 0.045);
     }
 
-    /* ==========================================================================
-       2. RESET & BASE LAYOUT
-       ========================================================================== */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: var(--font-sans);
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-      transition: background-color 0.28s ease, color 0.28s ease;
-      background-image:
-        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      font-family: var(--font-sans); background-color: var(--bg-primary); color: var(--text-primary);
+      line-height: 1.6; min-height: 100vh; overflow-x: hidden; transition: background-color 0.28s ease, color 0.28s ease;
+      background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
       background-size: 36px 36px;
     }
+    button, input, select { font-family: inherit; color: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--border-focus); outline-offset: 2px; }
+    .container { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 1.25rem; }
 
-    button, input, select {
-      font-family: inherit;
-      color: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    :focus-visible {
-      outline: 2px solid var(--border-focus);
-      outline-offset: 2px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
-
-    /* ==========================================================================
-       3. TOP UTILITY BAR & HEADER (CP SIGNATURE)
-       ========================================================================== */
     .top-bar {
-      position: relative; /* Không ghim cố định để tránh chiếm không gian khi lướt */
-      z-index: 40;
-      background: var(--bg-glass);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 0.7rem 0;
-      transition: background-color 0.28s ease, border-color 0.28s ease;
+      position: relative; z-index: 40; background: var(--bg-glass); backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border-subtle); padding: 0.7rem 0;
     }
-
-    .top-bar__inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: inherit;
-    }
-
+    .top-bar__inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
     .brand__logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 11px;
-      background: var(--brand-gradient);
-      color: #FFFFFF;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      font-size: 1rem;
-      box-shadow: 0 4px 14px rgba(29, 78, 216, 0.28);
-      position: relative;
-      overflow: hidden;
+      width: 42px; height: 42px; border-radius: 11px; background: var(--brand-gradient); color: #FFFFFF;
+      display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: 1rem; box-shadow: 0 4px 14px rgba(29, 78, 216, 0.28); position: relative; overflow: hidden;
     }
+    .brand__logo::after { content: ""; position: absolute; inset: 2px; border-radius: 9px; border: 1px solid rgba(255, 255, 255, 0.32); pointer-events: none; }
+    .brand__text { display: flex; flex-direction: column; }
+    .brand__code { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-primary); }
+    .brand__name { font-weight: 800; font-size: 1rem; letter-spacing: -0.01em; }
 
-    .brand__logo::after {
-      content: "";
-      position: absolute;
-      inset: 2px;
-      border-radius: 9px;
-      border: 1px solid rgba(255, 255, 255, 0.32);
-      pointer-events: none;
-    }
-
-    .brand__text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand__code {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--brand-primary);
-    }
-
-    .brand__name {
-      font-weight: 800;
-      font-size: 1rem;
-      letter-spacing: -0.01em;
-    }
-
-    .top-bar__controls {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-
+    .top-bar__controls { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
     .sync-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.38rem 0.75rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-secondary);
-      box-shadow: var(--shadow-sm);
+      display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.38rem 0.75rem; border-radius: 999px;
+      font-size: 0.78rem; font-weight: 600; background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-secondary); box-shadow: var(--shadow-sm);
     }
-
-    .sync-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--brand-secondary);
-      display: inline-block;
-    }
-
-    .sync-pill[data-state="syncing"] .sync-dot {
-      background: #F59E0B;
-      animation: pulseDot 1s infinite ease-in-out;
-    }
-
-    .sync-pill[data-state="error"] .sync-dot {
-      background: #EF4444;
-    }
-
-    @keyframes pulseDot {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.45); opacity: 0.45; }
-    }
+    .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand-secondary); display: inline-block; }
+    .sync-pill[data-state="syncing"] .sync-dot { background: #F59E0B; animation: pulseDot 1s infinite ease-in-out; }
+    .sync-pill[data-state="error"] .sync-dot { background: #EF4444; }
+    @keyframes pulseDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.45); opacity: 0.45; } }
 
     .icon-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      height: 38px;
-      padding: 0 0.8rem;
-      border-radius: 10px;
-      border: 1px solid var(--border-subtle);
-      background: var(--bg-card);
-      color: var(--text-primary);
-      font-size: 0.82rem;
-      font-weight: 600;
-      transition: all 0.2s ease;
-      box-shadow: var(--shadow-sm);
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; height: 38px; padding: 0 0.8rem;
+      border-radius: 10px; border: 1px solid var(--border-subtle); background: var(--bg-card); color: var(--text-primary); font-size: 0.82rem; font-weight: 600; transition: all 0.2s ease; box-shadow: var(--shadow-sm);
     }
+    .icon-btn:hover { border-color: var(--brand-primary); color: var(--brand-primary); transform: translateY(-1px); }
+    .theme-btn { width: 38px; padding: 0; }
 
-    .icon-btn:hover {
-      border-color: var(--brand-primary);
-      color: var(--brand-primary);
-      transform: translateY(-1px);
-    }
-
-    .theme-btn {
-      width: 38px;
-      padding: 0;
-    }
-
-    /* Hero Header Section */
-    .hero {
-      position: relative;
-      padding: 2.75rem 0 2rem;
-      overflow: hidden;
-    }
-
-    .hero__bg-decor {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 2rem;
-      opacity: 0.85;
-    }
-
-    .cp-graphic {
-      width: 250px;
-      height: 220px;
-      color: var(--brand-primary);
-      opacity: 0.16;
-    }
-
-    .hero__content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      max-width: 920px;
-      margin: 0 auto;
-    }
-
+    .hero { position: relative; padding: 2.75rem 0 2rem; overflow: hidden; }
+    .hero__bg-decor { position: absolute; inset: 0; pointer-events: none; z-index: 0; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; opacity: 0.85; }
+    .cp-graphic { width: 250px; height: 220px; color: var(--brand-primary); opacity: 0.16; }
+    .hero__content { position: relative; z-index: 1; text-align: center; max-width: 920px; margin: 0 auto; }
     .cp-code-ribbon {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 0.35rem 0.9rem;
-      border-radius: 999px;
-      background: var(--brand-soft-bg);
-      border: 1px solid var(--border-tech);
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--brand-primary);
-      margin-bottom: 1rem;
+      display: inline-flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; justify-content: center; padding: 0.35rem 0.9rem;
+      border-radius: 999px; background: var(--brand-soft-bg); border: 1px solid var(--border-tech); font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; color: var(--brand-primary); margin-bottom: 1rem;
     }
-
-    .cp-code-ribbon span.sep {
-      opacity: 0.45;
-    }
-
+    .cp-code-ribbon span.sep { opacity: 0.45; }
     .hero__title {
-      font-size: clamp(1.4rem, 2.8vw, 2.75rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.025em;
-      white-space: nowrap;
-      background: var(--brand-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 0.75rem;
+      font-size: clamp(1.4rem, 2.8vw, 2.75rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; white-space: nowrap;
+      background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 0.75rem;
     }
+    .hero__subtitle { font-size: clamp(0.98rem, 1.8vw, 1.18rem); color: var(--text-secondary); font-weight: 500; max-width: 680px; margin: 0 auto; }
 
-    .hero__subtitle {
-      font-size: clamp(0.98rem, 1.8vw, 1.18rem);
-      color: var(--text-secondary);
-      font-weight: 500;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    /* ==========================================================================
-       4. STATS BAR (THỐNG KÊ TỔNG QUAN)
-       ========================================================================== */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-      margin: 1.5rem 0 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.5rem 0 2rem; position: relative; z-index: 1; }
     .stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 1.1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.1rem 1.25rem;
+      display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
     }
-
-    .stat-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: var(--brand-gradient);
-    }
-
-    .stat-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-tech);
-    }
-
+    .stat-card::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--brand-gradient); }
     .stat-card__icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      background: var(--brand-soft-bg);
-      color: var(--brand-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      font-size: 0.9rem;
+      width: 46px; height: 46px; border-radius: 12px; background: var(--brand-soft-bg); color: var(--brand-primary);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem;
     }
+    .stat-card__value { font-size: 1.55rem; font-weight: 800; line-height: 1.15; font-family: var(--font-mono); color: var(--text-primary); }
+    .stat-card__label { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; }
 
-    .stat-card__value {
-      font-size: 1.55rem;
-      font-weight: 800;
-      line-height: 1.15;
-      font-family: var(--font-mono);
-      color: var(--text-primary);
-    }
-
-    .stat-card__label {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    /* ==========================================================================
-       5. CATEGORY PILLS (HỆ THỐNG DANH MỤC THÀNH TÍCH)
-       ========================================================================== */
-    .categories-section {
-      margin-bottom: 1.6rem;
-    }
-
-    .categories-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.65rem;
-    }
-
+    .categories-section { margin-bottom: 1.6rem; }
+    .categories-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.65rem; }
     .category-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.58rem 1.1rem;
-      border-radius: 999px;
-      font-size: 0.88rem;
-      font-weight: 700;
-      background: var(--bg-card);
-      color: var(--text-secondary);
-      border: 1.5px solid var(--border-subtle);
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      user-select: none;
+      display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.58rem 1.1rem; border-radius: 999px;
+      font-size: 0.88rem; font-weight: 700; background: var(--bg-card); color: var(--text-secondary); border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm); transition: all 0.2s ease; user-select: none;
     }
-
-    .category-pill[data-color="gold"] { border-color: rgba(245, 158, 11, 0.45); }
-    .category-pill[data-color="blue"] { border-color: rgba(29, 78, 216, 0.4); }
-    .category-pill[data-color="emerald"] { border-color: rgba(5, 150, 105, 0.4); }
-    .category-pill[data-color="purple"] { border-color: rgba(124, 58, 237, 0.4); }
-    .category-pill[data-color="cyan"] { border-color: rgba(2, 132, 199, 0.4); }
-    .category-pill[data-color="rose"] { border-color: rgba(225, 29, 72, 0.4); }
-    .category-pill[data-color="indigo"] { border-color: rgba(79, 70, 229, 0.4); }
-    .category-pill[data-color="teal"] { border-color: rgba(20, 184, 166, 0.4); }
-
-    .category-pill:hover {
-      transform: translateY(-2px);
-      border-color: var(--brand-primary);
-      color: var(--text-primary);
-      box-shadow: var(--shadow-md);
-    }
-
-    .category-pill.is-active {
-      background: var(--brand-gradient);
-      color: #FFFFFF;
-      border-color: transparent;
-      box-shadow: 0 8px 20px -4px rgba(29, 78, 216, 0.42);
-    }
-
+    .category-pill:hover { transform: translateY(-2px); border-color: var(--brand-primary); color: var(--text-primary); }
+    .category-pill.is-active { background: var(--brand-gradient); color: #FFFFFF; border-color: transparent; }
     .category-pill__count {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 24px;
-      height: 22px;
-      padding: 0 0.45rem;
-      border-radius: 999px;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 700;
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      transition: all 0.2s ease;
+      display: inline-flex; align-items: center; justify-content: center; min-width: 24px; height: 22px; padding: 0 0.45rem;
+      border-radius: 999px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; background: var(--bg-secondary); color: var(--text-primary);
     }
+    .category-pill.is-active .category-pill__count { background: rgba(255, 255, 255, 0.22); color: #FFFFFF; }
 
-    .category-pill.is-active .category-pill__count {
-      background: rgba(255, 255, 255, 0.22);
-      color: #FFFFFF;
-    }
-
-    /* ==========================================================================
-       6. TOOLBAR: SEARCH BAR & SORTING
-       ========================================================================== */
-    .toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 1.25rem;
-      flex-wrap: wrap;
-    }
-
-    .search-box {
-      position: relative;
-      flex: 1 1 380px;
-      max-width: 680px;
-    }
-
-    .search-box__icon {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      pointer-events: none;
-    }
-
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .search-box { position: relative; flex: 1 1 380px; max-width: 680px; }
+    .search-box__icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
     .search-box__input {
-      width: 100%;
-      height: 48px;
-      padding: 0 2.8rem 0 2.85rem;
-      border-radius: 14px;
-      border: 1.5px solid var(--border-subtle);
-      background: var(--bg-card);
-      font-size: 0.94rem;
-      font-weight: 500;
-      box-shadow: var(--shadow-sm);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      width: 100%; height: 48px; padding: 0 2.8rem 0 2.85rem; border-radius: 14px; border: 1.5px solid var(--border-subtle);
+      background: var(--bg-card); font-size: 0.94rem; font-weight: 500; box-shadow: var(--shadow-sm);
     }
-
-    .search-box__input::placeholder {
-      color: var(--text-muted);
-    }
-
-    .search-box__input:focus {
-      outline: none;
-      border-color: var(--brand-primary);
-      box-shadow: 0 0 0 4px var(--brand-soft-bg);
-    }
-
+    .search-box__input:focus { outline: none; border-color: var(--brand-primary); box-shadow: 0 0 0 4px var(--brand-soft-bg); }
     .search-box__clear {
-      position: absolute;
-      right: 0.65rem;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: none;
-      background: var(--bg-secondary);
-      color: var(--text-secondary);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
+      position: absolute; right: 0.65rem; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 50%; border: none;
+      background: var(--bg-secondary); color: var(--text-secondary); display: none; align-items: center; justify-content: center; font-size: 0.85rem;
     }
+    .search-box__clear.is-visible { display: inline-flex; }
 
-    .search-box__clear.is-visible {
-      display: inline-flex;
-    }
-
-    .search-box__clear:hover {
-      background: var(--brand-primary);
-      color: #FFFFFF;
-    }
-
-    .toolbar__right {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      flex-wrap: wrap;
-    }
-
-    .result-meta {
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
-
-    .result-meta strong {
-      font-family: var(--font-mono);
-      color: var(--brand-primary);
-    }
+    .toolbar__right { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; }
+    .result-meta { font-size: 0.86rem; font-weight: 600; color: var(--text-secondary); }
+    .result-meta strong { font-family: var(--font-mono); color: var(--brand-primary); }
 
     .sort-select-wrap {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--bg-card);
-      border: 1.5px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 0 0.75rem;
-      height: 46px;
-      box-shadow: var(--shadow-sm);
+      display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg-card); border: 1.5px solid var(--border-subtle);
+      border-radius: 12px; padding: 0 0.75rem; height: 46px; box-shadow: var(--shadow-sm);
     }
+    .sort-select-wrap label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); white-space: nowrap; }
+    .sort-select { border: none; background: transparent; font-size: 0.86rem; font-weight: 700; color: var(--text-primary); cursor: pointer; }
+    .sort-select:focus { outline: none; }
 
-    .sort-select-wrap label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    .sort-select {
-      border: none;
-      background: transparent;
-      font-size: 0.86rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      padding-right: 0.25rem;
-      cursor: pointer;
-    }
-
-    .sort-select:focus {
-      outline: none;
-    }
-
-    .sort-select option {
-      background-color: var(--bg-card);
-      color: var(--text-primary);
-      padding: 0.5rem;
-    }
-
-    /* ==========================================================================
-       7. STUDENT CARDS GRID (THẺ HỌC VIÊN)
-       ========================================================================== */
-    .students-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.35rem;
-      margin-bottom: 3.5rem;
-    }
-
+    /* Students Grid & Card Border System */
+    .students-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.35rem; margin-bottom: 3.5rem; }
     .student-card {
-      position: relative;
-      background: var(--bg-card);
-      border-radius: 20px;
-      border: 1.5px solid var(--border-subtle);
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.26s cubic-bezier(0.16, 1, 0.3, 1),
-                  border-color 0.26s ease;
-      cursor: pointer;
+      position: relative; background: var(--bg-card); border-radius: 20px; border: 1.5px solid var(--border-subtle);
+      box-shadow: var(--shadow-sm); display: flex; flex-direction: column; overflow: hidden; transition: transform 0.26s ease, box-shadow 0.26s ease; cursor: pointer;
     }
 
-    .student-card[data-tier="gold"] { border-top: 3px solid var(--gold-border); }
-    .student-card[data-tier="silver"] { border-top: 3px solid var(--silver-border); }
-    .student-card[data-tier="bronze"] { border-top: 3px solid var(--bronze-border); }
-    .student-card[data-tier="special"] { border-top: 3px solid var(--special-border); }
+    .student-card[data-rank="cp-legend"] { border-color: #F59E0B !important; border-width: 3px !important; box-shadow: 0 10px 30px -6px rgba(245, 158, 11, 0.35) !important; }
+    .student-card[data-rank="top-coder"] { border-color: #059669 !important; border-width: 3px !important; box-shadow: 0 10px 30px -6px rgba(5, 150, 105, 0.3) !important; }
+    .student-card[data-rank="achiever"] { border-color: transparent !important; border-width: 1.5px !important; box-shadow: var(--shadow-sm) !important; }
 
-    .student-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--brand-primary);
-    }
+    .student-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
 
     .student-card__top {
-      position: relative;
-      padding: 1.25rem 1.25rem 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      position: relative; padding: 1.25rem 1.25rem 0.95rem; display: flex; align-items: center; gap: 1rem;
       background: linear-gradient(180deg, var(--brand-soft-bg) 0%, transparent 100%);
     }
-
     .student-card__avatar-frame {
-      position: relative;
-      width: 76px;
-      height: 76px;
-      border-radius: 16px;
-      padding: 3px;
-      background: var(--metallic-outer);
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.14);
-      flex-shrink: 0;
+      position: relative; width: 76px; height: 76px; border-radius: 16px; padding: 3px;
+      background: var(--metallic-outer); box-shadow: 0 6px 14px rgba(15, 23, 42, 0.14); flex-shrink: 0;
     }
-
-    .student-card[data-tier="gold"] .student-card__avatar-frame {
-      background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #B45309 100%);
-    }
-
-    .student-card__avatar {
-      width: 100%;
-      height: 100%;
-      border-radius: 13px;
-      object-fit: cover;
-      object-position: center top;
-      background: var(--bg-secondary);
-      display: block;
-    }
-
+    .student-card[data-rank="cp-legend"] .student-card__avatar-frame { background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #B45309 100%); }
+    .student-card__avatar { width: 100%; height: 100%; border-radius: 13px; object-fit: cover; object-position: center top; background: var(--bg-secondary); display: block; }
     .student-card__year-tag {
-      position: absolute;
-      bottom: -6px;
-      right: -6px;
-      background: var(--bg-card);
-      border: 1.5px solid var(--brand-primary);
-      color: var(--brand-primary);
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 0.1rem 0.42rem;
-      border-radius: 999px;
-      box-shadow: var(--shadow-sm);
+      position: absolute; bottom: -6px; right: -6px; background: var(--bg-card); border: 1.5px solid var(--brand-primary);
+      color: var(--brand-primary); font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; padding: 0.1rem 0.42rem; border-radius: 999px;
     }
-
-    .student-card__identity {
-      min-width: 0;
-      flex: 1;
-    }
-
+    .student-card__identity { min-width: 0; flex: 1; }
+    
     .student-card__rank-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-family: var(--font-mono);
-      font-size: 0.66rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      padding: 0.15rem 0.5rem;
-      border-radius: 6px;
-      background: var(--bg-secondary);
-      color: var(--text-secondary);
-      margin-bottom: 0.3rem;
+      display: inline-flex; align-items: center; gap: 0.3rem; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 800;
+      padding: 0.18rem 0.55rem; border-radius: 6px; background: var(--brand-soft-bg); color: var(--brand-primary); border: 1px solid var(--border-tech); margin-bottom: 0.3rem;
     }
+    .student-card__name { font-size: 1.12rem; font-weight: 800; color: var(--text-primary); line-height: 1.25; margin-bottom: 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .student-card__class { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    .student-card__name {
-      font-size: 1.12rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      line-height: 1.25;
-      margin-bottom: 0.2rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    .student-card__body { padding: 0.4rem 1.25rem 1.15rem; flex: 1; display: flex; flex-direction: column; gap: 0.7rem; }
+    .featured-award { border-radius: 13px; padding: 0.75rem 0.85rem; border: 1px solid var(--border-subtle); background: var(--bg-card-subtle); position: relative; }
+    .featured-award[data-tier="gold"] { background: var(--gold-surface); border-color: var(--gold-border); }
+    .featured-award[data-tier="silver"] { background: var(--silver-surface); border-color: var(--silver-border); }
+    .featured-award[data-tier="bronze"] { background: var(--bronze-surface); border-color: var(--bronze-border); }
+    .featured-award[data-tier="special"] { background: var(--special-surface); border-color: var(--special-border); }
+    .featured-award[data-tier="consolation"] { background: rgba(148, 163, 184, 0.12); border-color: #94A3B8; }
 
-    .student-card__class {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    .featured-award__head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.35rem; }
+    .award-badge { display: inline-flex; align-items: center; gap: 0.32rem; padding: 0.18rem 0.58rem; border-radius: 999px; font-size: 0.72rem; font-weight: 800; }
+    .award-badge[data-tier="gold"] { background: var(--gold-bg); color: var(--gold-text); border: 1px solid var(--gold-border); }
+    .award-badge[data-tier="silver"] { background: var(--silver-bg); color: var(--silver-text); border: 1px solid var(--silver-border); }
+    .award-badge[data-tier="bronze"] { background: var(--bronze-bg); color: var(--bronze-text); border: 1px solid var(--bronze-border); }
+    .award-badge[data-tier="special"] { background: var(--special-bg); color: var(--special-text); border: 1px solid var(--special-border); }
+    .award-badge[data-tier="consolation"] { background: rgba(148, 163, 184, 0.12); color: var(--text-secondary); border: 1px solid #94A3B8; }
 
-    .student-card__body {
-      padding: 0.4rem 1.25rem 1.15rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-    }
+    .featured-award__year { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--text-muted); }
+    .featured-award__title { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); line-height: 1.38; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-    .featured-award {
-      border-radius: 13px;
-      padding: 0.75rem 0.85rem;
-      border: 1px solid var(--border-subtle);
-      background: var(--bg-card-subtle);
-      position: relative;
-    }
-
-    .featured-award[data-tier="gold"] {
-      background: var(--gold-surface);
-      border-color: var(--gold-border);
-    }
-    .featured-award[data-tier="silver"] {
-      background: var(--silver-surface);
-      border-color: var(--silver-border);
-    }
-    .featured-award[data-tier="bronze"] {
-      background: var(--bronze-surface);
-      border-color: var(--bronze-border);
-    }
-    .featured-award[data-tier="special"] {
-      background: var(--special-surface);
-      border-color: var(--special-border);
-    }
-
-    .featured-award__head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 0.35rem;
-    }
-
-    .award-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.32rem;
-      padding: 0.18rem 0.58rem;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.01em;
-    }
-
-    .award-badge[data-tier="gold"] {
-      background: var(--gold-bg);
-      color: var(--gold-text);
-      border: 1px solid var(--gold-border);
-    }
-    .award-badge[data-tier="silver"] {
-      background: var(--silver-bg);
-      color: var(--silver-text);
-      border: 1px solid var(--silver-border);
-    }
-    .award-badge[data-tier="bronze"] {
-      background: var(--bronze-bg);
-      color: var(--bronze-text);
-      border: 1px solid var(--bronze-border);
-    }
-    .award-badge[data-tier="special"] {
-      background: var(--special-bg);
-      color: var(--special-text);
-      border: 1px solid var(--special-border);
-    }
-
-    .featured-award__year {
-      font-family: var(--font-mono);
-      font-size: 0.74rem;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
-    .featured-award__title {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.38;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .student-card__categories {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: auto;
-    }
-
-    .mini-cat-tag {
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 0.2rem 0.55rem;
-      border-radius: 7px;
-      background: var(--bg-secondary);
-      color: var(--text-secondary);
-      border: 1px solid var(--border-subtle);
-    }
+    .student-card__categories { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
+    .mini-cat-tag { font-size: 0.72rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 7px; background: var(--bg-secondary); color: var(--text-secondary); border: 1px solid var(--border-subtle); }
 
     .student-card__footer {
-      padding: 0.75rem 1.25rem;
-      border-top: 1px solid var(--border-subtle);
-      background: var(--bg-card-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      font-weight: 700;
+      padding: 0.75rem 1.25rem; border-top: 1px solid var(--border-subtle); background: var(--bg-card-subtle);
+      display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; font-weight: 700;
     }
+    .student-card__total { font-family: var(--font-mono); color: var(--text-secondary); }
+    .student-card__cta { color: var(--brand-primary); display: inline-flex; align-items: center; gap: 0.3rem; transition: transform 0.2s ease; }
+    .student-card:hover .student-card__cta { transform: translateX(3px); }
 
-    .student-card__total {
-      font-family: var(--font-mono);
-      color: var(--text-secondary);
-    }
-
-    .student-card__cta {
-      color: var(--brand-primary);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: transform 0.2s ease;
-    }
-
-    .student-card:hover .student-card__cta {
-      transform: translateX(3px);
-    }
-
-    /* ==========================================================================
-       8. MODAL CHI TIẾT HỌC VIÊN
-       ========================================================================== */
+    /* Modal & Popup Styling */
     .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: var(--bg-modal-backdrop);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1.25rem;
-      overflow-y: auto;
+      position: fixed; inset: 0; z-index: 100; background: var(--bg-modal-backdrop); backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 1.25rem; overflow-y: auto;
     }
-
-    .modal-backdrop.is-open {
-      display: flex;
-      animation: fadeIn 0.22s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    .modal-backdrop.is-open { display: flex; animation: fadeIn 0.22s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     .modal-dialog {
-      width: 100%;
-      max-width: 1040px;
-      /* Dùng max-height linh hoạt hơn và cho phép tự co giãn */
-      max-height: 92vh;
-      margin: auto;
-      background: var(--bg-card);
-      border: 1.5px solid var(--metallic-border);
-      border-radius: 24px;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      position: relative;
+      width: 100%; max-width: 1040px; max-height: 92vh; margin: auto; background: var(--bg-card);
+      border: 1.5px solid var(--metallic-border); border-radius: 24px; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45); display: flex; flex-direction: column; overflow: hidden; position: relative;
     }
-
-    .modal-body {
-      padding: 1.25rem 1.75rem;
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 1.75rem;
-      align-items: start;
-      overflow-y: auto;
-      max-height: calc(92vh - 65px);
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(18px) scale(0.98); opacity: 0; }
-      to { transform: translateY(0) scale(1); opacity: 1; }
-    }
-
     .modal-header {
-      padding: 1rem 1.5rem;
-      background: var(--bg-card-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+      padding: 1rem 1.5rem; background: var(--bg-card-subtle); border-bottom: 1px solid var(--border-subtle);
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     }
-
-    .modal-header__terminal {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .terminal-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .terminal-dots span {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      display: inline-block;
-    }
+    .modal-header__terminal { display: flex; align-items: center; gap: 0.65rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); }
+    .terminal-dots { display: flex; gap: 6px; }
+    .terminal-dots span { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
     .terminal-dots span:nth-child(1) { background: #EF4444; }
     .terminal-dots span:nth-child(2) { background: #F59E0B; }
     .terminal-dots span:nth-child(3) { background: #10B981; }
 
-    .modal-header__actions {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
+    .modal-body {
+      padding: 1.25rem 1.75rem; display: grid; grid-template-columns: 300px 1fr; gap: 1.75rem;
+      align-items: start; overflow-y: auto; max-height: calc(92vh - 65px);
     }
 
-    .history-panel {
-      max-height: calc(90vh - 110px);
-      overflow-y: auto;
-      padding-right: 0.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.1rem;
-    }
+    .history-panel { max-height: calc(90vh - 110px); overflow-y: auto; padding-right: 0.5rem; display: flex; flex-direction: column; gap: 1.1rem; }
+    .history-panel::-webkit-scrollbar { width: 6px; }
+    .history-panel::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 999px; }
 
-    .history-panel::-webkit-scrollbar {
-      width: 6px;
-    }
-    .history-panel::-webkit-scrollbar-thumb {
-      background: var(--border-subtle);
-      border-radius: 999px;
-    }
-
+    /* Quy chuẩn viền Popup Frame */
     .cp-metallic-frame {
-      position: relative;
-      border-radius: 20px;
-      padding: 10px;
-      background: var(--metallic-outer);
-      border: 1.5px solid var(--metallic-border);
+      position: relative; border-radius: 20px; padding: 10px; background: var(--metallic-outer); border: 1.5px solid var(--metallic-border);
       box-shadow: inset 0 2px 4px var(--metallic-shine), 0 16px 36px -8px rgba(15, 23, 42, 0.28);
-    }
-
-    .cp-metallic-frame[data-tier="gold"] {
-      background: linear-gradient(145deg, #FEF08A 0%, #F59E0B 35%, #FEF9C3 70%, #B45309 100%);
-      border-color: #F59E0B;
-      box-shadow: 0 16px 38px -8px var(--gold-glow);
-    }
-
-    .pcb-corner {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--bg-primary);
-      border: 1.5px solid var(--text-muted);
-      z-index: 3;
-    }
-    .pcb-corner.tl { top: 8px; left: 8px; }
-    .pcb-corner.tr { top: 8px; right: 8px; }
-    .pcb-corner.bl { bottom: 8px; left: 8px; }
-    .pcb-corner.br { bottom: 8px; right: 8px; }
-
-    .cp-metallic-frame__inner {
-      background: var(--metallic-inner);
-      border-radius: 14px;
-      padding: 0.85rem;
-      color: #F8FAFC;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cp-metallic-frame__pcb-svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.14;
-      pointer-events: none;
-    }
-
-    .cp-metallic-frame__photo-wrap {
-      position: relative;
-      width: 100%;
-      max-height: 210px;
-      aspect-ratio: 1 / 1;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1.5px solid rgba(255, 255, 255, 0.22);
-      background: #1E293B;
-      margin-bottom: 0.65rem;
-    }
-
-    .cp-metallic-frame__photo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-
-    .cp-metallic-frame__badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      padding: 0.25rem 0.65rem;
-      border-radius: 999px;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      background: rgba(15, 23, 42, 0.86);
-      color: #38BDF8;
-      border: 1px solid rgba(56, 189, 248, 0.5);
-      backdrop-filter: blur(6px);
-    }
-
-    .cp-metallic-frame__info {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-    }
-
-    .cp-metallic-frame__name {
-      font-size: 1.18rem;
-      font-weight: 800;
-      color: #FFFFFF;
-      margin-bottom: 0.15rem;
-    }
-
-    .cp-metallic-frame__class {
-      font-size: 0.8rem;
-      color: #93C5FD;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .cp-metallic-frame__bio {
-      font-size: 0.78rem;
-      color: #CBD5E1;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 9px;
-      padding: 0.5rem 0.65rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      text-align: left;
-      margin-bottom: 0.6rem;
-    }
-
-    .cp-metallic-frame__code-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: #64748B;
-      border-top: 1px dashed rgba(255, 255, 255, 0.15);
-      padding-top: 0.55rem;
-    }
-
-    .history-panel__header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1.5px solid var(--border-subtle);
-    }
-
-    .history-panel__title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .history-panel__order-note {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--brand-primary);
-      background: var(--brand-soft-bg);
-      padding: 0.25rem 0.65rem;
-      border-radius: 999px;
-      border: 1px solid var(--border-tech);
-    }
-
-    .timeline-list {
-      position: relative;
-      padding-left: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .timeline-list::before {
-      content: "";
-      position: absolute;
-      left: 6px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: var(--border-tech);
-    }
-
-    .timeline-item {
-      position: relative;
-      border-radius: 16px;
-      padding: 1rem 1.15rem;
-      background: var(--bg-card-subtle);
-      border: 1.5px solid var(--border-subtle);
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.2s ease;
-    }
-
-    .timeline-item:hover {
-      transform: translateX(3px);
-    }
-
-    .timeline-item__dot {
-      position: absolute;
-      left: -1.5rem;
-      top: 1.25rem;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--bg-card);
-      border: 3px solid var(--brand-primary);
-      transform: translateX(-0.5px);
-    }
-
-    .timeline-item[data-tier="gold"] {
-      background: var(--gold-surface);
-      border-color: var(--gold-border);
-      box-shadow: 0 6px 20px -6px var(--gold-glow);
-    }
-    .timeline-item[data-tier="gold"] .timeline-item__dot {
-      border-color: var(--gold-border);
-      background: var(--gold-accent);
-    }
-
-    .timeline-item[data-tier="silver"] {
-      background: var(--silver-surface);
-      border-color: var(--silver-border);
-    }
-    .timeline-item[data-tier="silver"] .timeline-item__dot {
-      border-color: var(--silver-border);
-      background: var(--silver-accent);
-    }
-
-    .timeline-item[data-tier="bronze"] {
-      background: var(--bronze-surface);
-      border-color: var(--bronze-border);
-    }
-    .timeline-item[data-tier="bronze"] .timeline-item__dot {
-      border-color: var(--bronze-border);
-      background: var(--bronze-accent);
-    }
-
-    .timeline-item[data-tier="special"] {
-      background: var(--special-surface);
-      border-color: var(--special-border);
-    }
-    .timeline-item[data-tier="special"] .timeline-item__dot {
-      border-color: var(--special-border);
-      background: var(--special-accent);
-    }
-
-    .timeline-item__top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.45rem;
-    }
-
-    .timeline-item__year {
-      font-family: var(--font-mono);
-      font-size: 0.84rem;
-      font-weight: 800;
-      padding: 0.18rem 0.6rem;
-      border-radius: 7px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-primary);
-    }
-
-    .timeline-item__name {
-      font-size: 1.02rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      margin-bottom: 0.25rem;
-    }
-
-    .timeline-item__competition {
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: 0.35rem;
-    }
-
-    .timeline-item__desc {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-top: 0.35rem;
-      padding-top: 0.35rem;
-      border-top: 1px dashed var(--border-subtle);
-    }
-
-    .skeleton-card {
-      height: 290px;
-      border-radius: 20px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .skeleton-line {
-      background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--border-subtle) 50%, var(--bg-secondary) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.4s infinite;
-      border-radius: 8px;
-    }
-
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-
-    .state-box {
-      grid-column: 1 / -1;
-      background: var(--bg-card);
-      border: 1.5px dashed var(--border-subtle);
-      border-radius: 20px;
-      padding: 3rem 1.5rem;
-      text-align: center;
-      max-width: 580px;
-      margin: 1rem auto;
-    }
-
-    .state-box__icon {
-      font-family: var(--font-mono);
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--brand-primary);
-      margin-bottom: 0.75rem;
-    }
-
-    .state-box__title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      margin-bottom: 0.4rem;
-    }
-
-    .state-box__desc {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 1.25rem;
-    }
-
-    .primary-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.65rem 1.25rem;
-      border-radius: 11px;
-      border: none;
-      background: var(--brand-gradient);
-      color: #FFFFFF;
-      font-weight: 700;
-      font-size: 0.88rem;
-      box-shadow: 0 6px 16px rgba(29, 78, 216, 0.3);
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 200;
-      background: var(--bg-card);
-      color: var(--text-primary);
-      border: 1.5px solid var(--brand-primary);
-      border-radius: 12px;
-      padding: 0.75rem 1.1rem;
-      box-shadow: var(--shadow-lg);
-      font-size: 0.85rem;
-      font-weight: 700;
-      display: none;
-      align-items: center;
-      gap: 0.55rem;
-    }
-
-    .toast.is-visible {
-      display: inline-flex;
-      animation: slideUp 0.2s ease-out;
-    }
-
-    .footer {
-      border-top: 1px solid var(--border-subtle);
-      background: var(--bg-card-subtle);
-      padding: 2rem 0;
-      margin-top: 3rem;
-      font-size: 0.84rem;
-      color: var(--text-muted);
-    }
-
-    .footer__inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    @media (max-width: 960px) {
-      .modal-body {
-        grid-template-columns: 1fr;
-        align-items: stretch;
-        overflow-y: auto;
-      }
-      .history-panel {
-        max-height: none;
-        overflow-y: visible;
-        padding-right: 0;
-      }
-      .cp-metallic-frame {
-        max-width: 360px;
-        width: 100%;
-        margin: 0 auto;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-      .categories-list {
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding-bottom: 0.5rem;
-        -webkit-overflow-scrolling: touch;
-      }
-      .category-pill {
-        white-space: nowrap;
-        flex-shrink: 0;
-      }
-      .toolbar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .search-box {
-        max-width: 100%;
-        flex: 1 1 auto;
-      }
-      .toolbar__right {
-        justify-content: space-between;
-      }
-    }
-
-    #particleCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 3;
-    }
-	/* ==========================================================================
-       HỆ THỐNG QUY CHUẨN VIỀN CP RANK BADGE
-       ========================================================================== */
-    
-    /* 1. CP LEGEND: Viền màu vàng Gold rực rỡ */
-    .student-card[data-rank="cp-legend"],
-    .cp-metallic-frame[data-rank="cp-legend"] {
-      border-color: #F59E0B !important;
-      border-width: 3px !important;
-      box-shadow: 0 10px 30px -6px rgba(245, 158, 11, 0.35) !important;
     }
     .cp-metallic-frame[data-rank="cp-legend"] {
       background: linear-gradient(145deg, #FEF08A 0%, #F59E0B 35%, #FEF9C3 70%, #B45309 100%) !important;
-    }
-
-    /* 2. TOP CODER: Viền màu xanh ngọc Emerald */
-    .student-card[data-rank="top-coder"],
-    .cp-metallic-frame[data-rank="top-coder"] {
-      border-color: #059669 !important;
-      border-width: 3px !important;
-      box-shadow: 0 10px 30px -6px rgba(5, 150, 105, 0.3) !important;
+      border-color: #F59E0B !important;
+      box-shadow: 0 16px 38px -8px var(--gold-glow) !important;
     }
     .cp-metallic-frame[data-rank="top-coder"] {
       background: linear-gradient(145deg, #A7F3D0 0%, #059669 35%, #ECFDF5 70%, #065F46 100%) !important;
-    }
-
-    /* 3. ACHIEVER: Viền trong suốt (Transparent / mờ tinh tế) */
-    .student-card[data-rank="achiever"],
-    .cp-metallic-frame[data-rank="achiever"] {
-      border-color: transparent !important;
-      border-width: 1.5px !important;
-      box-shadow: var(--shadow-sm) !important;
+      border-color: #059669 !important;
+      box-shadow: 0 16px 38px -8px rgba(5, 150, 105, 0.3) !important;
     }
     .cp-metallic-frame[data-rank="achiever"] {
       background: var(--metallic-outer) !important;
+      border-color: transparent !important;
+      box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.25) !important;
     }
+
+    .pcb-corner { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--bg-primary); border: 1.5px solid var(--text-muted); z-index: 3; }
+    .pcb-corner.tl { top: 8px; left: 8px; } .pcb-corner.tr { top: 8px; right: 8px; }
+    .pcb-corner.bl { bottom: 8px; left: 8px; } .pcb-corner.br { bottom: 8px; right: 8px; }
+
+    .cp-metallic-frame__inner { background: var(--metallic-inner); border-radius: 14px; padding: 0.85rem; color: #F8FAFC; position: relative; overflow: hidden; }
+    .cp-metallic-frame__pcb-svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.14; pointer-events: none; }
+
+    .cp-metallic-frame__photo-wrap {
+      position: relative; width: 100%; max-height: 210px; aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden;
+      border: 1.5px solid rgba(255, 255, 255, 0.22); background: #1E293B; margin-bottom: 0.65rem;
+    }
+    .cp-metallic-frame__photo { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .cp-metallic-frame__badge {
+      position: absolute; top: 10px; left: 10px; padding: 0.25rem 0.65rem; border-radius: 999px;
+      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em;
+      background: rgba(15, 23, 42, 0.86); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.5); backdrop-filter: blur(6px);
+    }
+
+    .cp-metallic-frame__info { position: relative; z-index: 1; text-align: center; }
+    .cp-metallic-frame__name { font-size: 1.18rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.15rem; }
+    .cp-metallic-frame__class { font-size: 0.8rem; color: #93C5FD; font-weight: 600; margin-bottom: 0.5rem; }
+    .cp-metallic-frame__bio {
+      font-size: 0.78rem; color: #CBD5E1; background: rgba(255, 255, 255, 0.06); border-radius: 9px;
+      padding: 0.5rem 0.65rem; border: 1px solid rgba(255, 255, 255, 0.1); text-align: left; margin-bottom: 0.6rem;
+    }
+    .cp-metallic-frame__code-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--font-mono); font-size: 0.7rem; color: #64748B; border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 0.55rem;
+    }
+
+    .history-panel__header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.75rem; border-bottom: 1.5px solid var(--border-subtle); }
+    .history-panel__title { font-size: 1.2rem; font-weight: 800; }
+    .history-panel__order-note {
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--brand-primary);
+      background: var(--brand-soft-bg); padding: 0.25rem 0.65rem; border-radius: 999px; border: 1px solid var(--border-tech);
+    }
+
+    .timeline-list { position: relative; padding-left: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .timeline-list::before { content: ""; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: var(--border-tech); }
+    .timeline-item { position: relative; border-radius: 16px; padding: 1rem 1.15rem; background: var(--bg-card-subtle); border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm); }
+    .timeline-item__dot { position: absolute; left: -1.5rem; top: 1.25rem; width: 14px; height: 14px; border-radius: 50%; background: var(--bg-card); border: 3px solid var(--brand-primary); transform: translateX(-0.5px); }
+
+    .timeline-item[data-tier="gold"] { background: var(--gold-surface); border-color: var(--gold-border); box-shadow: 0 6px 20px -6px var(--gold-glow); }
+    .timeline-item[data-tier="gold"] .timeline-item__dot { border-color: var(--gold-border); background: var(--gold-accent); }
+    .timeline-item[data-tier="silver"] { background: var(--silver-surface); border-color: var(--silver-border); }
+    .timeline-item[data-tier="silver"] .timeline-item__dot { border-color: var(--silver-border); background: var(--silver-accent); }
+    .timeline-item[data-tier="bronze"] { background: var(--bronze-surface); border-color: var(--bronze-border); }
+    .timeline-item[data-tier="bronze"] .timeline-item__dot { border-color: var(--bronze-border); background: var(--bronze-accent); }
+    .timeline-item[data-tier="special"] { background: var(--special-surface); border-color: var(--special-border); }
+    .timeline-item[data-tier="special"] .timeline-item__dot { border-color: var(--special-border); background: var(--special-accent); }
+    .timeline-item[data-tier="consolation"] { background: rgba(148, 163, 184, 0.12); border-color: #94A3B8; }
+    .timeline-item[data-tier="consolation"] .timeline-item__dot { border-color: #94A3B8; background: #64748B; }
+
+    .timeline-item__top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-bottom: 0.45rem; }
+    .timeline-item__year { font-family: var(--font-mono); font-size: 0.84rem; font-weight: 800; padding: 0.18rem 0.6rem; border-radius: 7px; background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); }
+    .timeline-item__name { font-size: 1.02rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.25rem; }
+    .timeline-item__competition { font-size: 0.86rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.35rem; }
+    .timeline-item__desc { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px dashed var(--border-subtle); }
+
+    .skeleton-card { height: 290px; border-radius: 20px; background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; overflow: hidden; position: relative; }
+    .skeleton-line { background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--border-subtle) 50%, var(--bg-secondary) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 8px; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    .state-box { grid-column: 1 / -1; background: var(--bg-card); border: 1.5px dashed var(--border-subtle); border-radius: 20px; padding: 3rem 1.5rem; text-align: center; max-width: 580px; margin: 1rem auto; }
+    .state-box__icon { font-family: var(--font-mono); font-size: 2rem; font-weight: 800; color: var(--brand-primary); margin-bottom: 0.75rem; }
+    .state-box__title { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .state-box__desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+    .primary-btn { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.65rem 1.25rem; border-radius: 11px; border: none; background: var(--brand-gradient); color: #FFFFFF; font-weight: 700; font-size: 0.88rem; box-shadow: 0 6px 16px rgba(29, 78, 216, 0.3); }
+
+    .toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200; background: var(--bg-card); color: var(--text-primary);
+      border: 1.5px solid var(--brand-primary); border-radius: 12px; padding: 0.75rem 1.1rem; box-shadow: var(--shadow-lg);
+      font-size: 0.85rem; font-weight: 700; display: none; align-items: center; gap: 0.55rem;
+    }
+    .toast.is-visible { display: inline-flex; animation: slideUp 0.2s ease-out; }
+
+    .footer { border-top: 1px solid var(--border-subtle); background: var(--bg-card-subtle); padding: 2rem 0; margin-top: 3rem; font-size: 0.84rem; color: var(--text-muted); }
+    .footer__inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+    @media (max-width: 960px) {
+      .modal-body { grid-template-columns: 1fr; align-items: stretch; overflow-y: auto; }
+      .cp-metallic-frame { max-width: 360px; width: 100%; margin: 0 auto; }
+    }
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .categories-list { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 0.5rem; }
+      .category-pill { white-space: nowrap; flex-shrink: 0; }
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .search-box { max-width: 100%; flex: 1 1 auto; }
+      .toolbar__right { justify-content: space-between; }
+    }
+    #particleCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 3; }
   </style>
 </head>
 <body>
@@ -1585,18 +498,15 @@
           <span class="brand__name">NTOJ — HALL OF FAME</span>
         </div>
       </a>
-
       <div class="top-bar__controls">
         <div id="syncStatusPill" class="sync-pill" data-state="idle" role="status" aria-live="polite">
           <span class="sync-dot"></span>
           <span id="syncStatusText">Đã đồng bộ</span>
         </div>
-
         <button type="button" id="btnManualSync" class="icon-btn" title="Đồng bộ dữ liệu từ Google Sheets ngay">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
           <span>Làm mới</span>
         </button>
-
         <button type="button" id="btnThemeToggle" class="icon-btn theme-btn" aria-label="Chuyển đổi giao diện Sáng / Tối" title="Chuyển chế độ Sáng / Tối">
           <span id="themeIconWrap"></span>
         </button>
@@ -1605,80 +515,19 @@
   </header>
 
   <section class="hero">
-    <div class="hero__bg-decor" aria-hidden="true">
-      <svg class="cp-graphic" viewBox="0 0 240 200" fill="none" stroke="currentColor" stroke-width="1.8">
-        <line x1="120" y1="30" x2="65" y2="90" stroke-dasharray="4 3" />
-        <line x1="120" y1="30" x2="175" y2="90" />
-        <line x1="65" y1="90" x2="35" y2="155" />
-        <line x1="65" y1="90" x2="95" y2="155" />
-        <line x1="175" y1="90" x2="145" y2="155" stroke-dasharray="4 3" />
-        <line x1="175" y1="90" x2="205" y2="155" />
-        <circle cx="120" cy="30" r="16" fill="currentColor" fill-opacity="0.12" />
-        <text x="108" y="34" font-family="monospace" font-size="10" fill="currentColor">[1..N]</text>
-        <circle cx="65" cy="90" r="14" fill="currentColor" fill-opacity="0.12" />
-        <circle cx="175" cy="90" r="14" fill="currentColor" fill-opacity="0.12" />
-        <circle cx="35" cy="155" r="11" />
-        <circle cx="95" cy="155" r="11" />
-        <circle cx="145" cy="155" r="11" />
-        <circle cx="205" cy="155" r="11" />
-      </svg>
-      <svg class="cp-graphic" viewBox="0 0 240 200" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M20 40 H90 L115 65 H210" />
-        <path d="M40 100 H130 L155 125 H220" stroke-dasharray="5 4" />
-        <path d="M15 160 H85 L110 135 H185" />
-        <rect x="82" y="32" width="16" height="16" rx="3" />
-        <circle cx="210" cy="65" r="6" fill="currentColor" />
-        <circle cx="130" cy="100" r="6" fill="currentColor" />
-        <text x="45" y="88" font-family="monospace" font-size="11" fill="currentColor">O(N log N)</text>
-        <text x="115" y="178" font-family="monospace" font-size="11" fill="currentColor">MOD = 1e9+7</text>
-      </svg>
-    </div>
-
     <div class="container hero__content">
-      <div class="cp-code-ribbon">
-        <span>#include &lt;bits/stdc++.h&gt;</span>
-        <span class="sep">|</span>
-        <span>O(log N)</span>
-        <span class="sep">|</span>
-        <span>Segment Tree &bull; DP &bull; Graph</span>
-      </div>
+      <div class="cp-code-ribbon"><span>#include &lt;bits/stdc++.h&gt;</span><span class="sep">|</span><span>O(log N)</span></div>
       <h1 class="hero__title">VINH DANH THÀNH TÍCH HỌC SINH</h1>
-      <p class="hero__subtitle">
-        Mỗi thành tích là một cột mốc trên hành trình chinh phục thuật toán
-      </p>
+      <p class="hero__subtitle">Mỗi thành tích là một cột mốc trên hành trình chinh phục thuật toán</p>
     </div>
   </section>
 
   <main class="container">
     <section class="stats-grid" aria-label="Thống kê tổng quan">
-      <article class="stat-card">
-        <div class="stat-card__icon">{S}</div>
-        <div>
-          <div id="statStudents" class="stat-card__value">0</div>
-          <div class="stat-card__label">Học viên vinh danh</div>
-        </div>
-      </article>
-      <article class="stat-card">
-        <div class="stat-card__icon">++A</div>
-        <div>
-          <div id="statAchievements" class="stat-card__value">0</div>
-          <div class="stat-card__label">Tổng số giải thưởng</div>
-        </div>
-      </article>
-      <article class="stat-card">
-        <div class="stat-card__icon">[C]</div>
-        <div>
-          <div id="statCategories" class="stat-card__value">0</div>
-          <div class="stat-card__label">Danh mục kỳ thi</div>
-        </div>
-      </article>
-      <article class="stat-card">
-        <div class="stat-card__icon">T(n)</div>
-        <div>
-          <div id="statYears" class="stat-card__value">—</div>
-          <div class="stat-card__label">Giai đoạn ghi nhận</div>
-        </div>
-      </article>
+      <article class="stat-card"><div class="stat-card__icon">{S}</div><div><div id="statStudents" class="stat-card__value">0</div><div class="stat-card__label">Học viên vinh danh</div></div></article>
+      <article class="stat-card"><div class="stat-card__icon">++A</div><div><div id="statAchievements" class="stat-card__value">0</div><div class="stat-card__label">Tổng số giải thưởng</div></div></article>
+      <article class="stat-card"><div class="stat-card__icon">[C]</div><div><div id="statCategories" class="stat-card__value">0</div><div class="stat-card__label">Danh mục kỳ thi</div></div></article>
+      <article class="stat-card"><div class="stat-card__icon">T(n)</div><div><div id="statYears" class="stat-card__value">—</div><div class="stat-card__label">Giai đoạn ghi nhận</div></div></article>
     </section>
 
     <section class="categories-section" aria-label="Danh mục thành tích">
@@ -1688,19 +537,21 @@
     <section class="toolbar" aria-label="Công cụ tìm kiếm và sắp xếp">
       <div class="search-box">
         <svg class="search-box__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input
-          type="search"
-          id="searchInput"
-          class="search-box__input"
-          placeholder="Tìm kiếm học viên, thành tích hoặc kỳ thi..."
-          autocomplete="off"
-          aria-label="Tìm kiếm học viên, thành tích hoặc kỳ thi"
-        />
-        <button type="button" id="btnClearSearch" class="search-box__clear" aria-label="Xóa nội dung tìm kiếm" title="Xóa tìm kiếm">✕</button>
+        <input type="search" id="searchInput" class="search-box__input" placeholder="Tìm kiếm học viên, thành tích hoặc kỳ thi..." autocomplete="off" />
+        <button type="button" id="btnClearSearch" class="search-box__clear" title="Xóa tìm kiếm">✕</button>
       </div>
 
       <div class="toolbar__right">
         <div id="resultCounter" class="result-meta">Hiển thị <strong>0</strong> học viên</div>
+        
+        <!-- Thanh chọn lọc Hashtag -->
+        <div class="sort-select-wrap">
+          <label for="hashtagSelect">Hashtag:</label>
+          <select id="hashtagSelect" class="sort-select" aria-label="Lọc học viên theo Hashtag">
+            <option value="Tất cả">Tất cả</option>
+          </select>
+        </div>
+
         <div class="sort-select-wrap">
           <label for="sortSelect">Sắp xếp:</label>
           <select id="sortSelect" class="sort-select" aria-label="Tiêu chí sắp xếp học viên">
@@ -1717,7 +568,7 @@
     <section id="studentsGrid" class="students-grid" aria-live="polite"></section>
   </main>
 
-  <div id="studentModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalStudentName">
+  <div id="studentModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true">
     <div class="modal-dialog">
       <div class="modal-header">
         <div class="modal-header__terminal">
@@ -1725,32 +576,10 @@
           <span id="modalTerminalPath">ntoj://hall-of-fame/student/profile.cpp</span>
         </div>
         <div class="modal-header__actions">
-          <button type="button" id="btnCloseStudentModal" class="icon-btn" aria-label="Đóng cửa sổ chi tiết">✕ Đóng</button>
+          <button type="button" id="btnCloseStudentModal" class="icon-btn">✕ Đóng</button>
         </div>
       </div>
       <div id="studentModalContent" class="modal-body"></div>
-    </div>
-  </div>
-
-  <div id="configModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="configModalTitle">
-    <div class="modal-dialog" style="max-width: 640px;">
-      <div class="modal-header">
-        <div class="modal-header__terminal">
-          <div class="terminal-dots"><span></span><span></span><span></span></div>
-          <strong id="configModalTitle" style="color: var(--text-primary);">Cấu hình Đồng bộ Google Sheets</strong>
-        </div>
-        <button type="button" id="btnCloseConfigModal" class="icon-btn" aria-label="Đóng cấu hình">✕</button>
-      </div>
-      <form id="configForm" class="config-form">
-        <div class="form-group">
-          <label for="inputGasUrl">Cách 1: Google Apps Script Web App URL (Khuyên dùng)</label>
-          <input type="url" id="inputGasUrl" placeholder="https://script.google.com/macros/s/.../exec" />
-        </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
-          <button type="button" id="btnResetDemoData" class="icon-btn">Khôi phục dữ liệu mẫu NTOJ</button>
-          <button type="submit" class="primary-btn">Lưu &amp; Đồng bộ ngay</button>
-        </div>
-      </form>
     </div>
   </div>
 
@@ -1758,12 +587,8 @@
 
   <footer class="footer">
     <div class="container footer__inner">
-      <div>
-        <strong>COMPETITIVE PROGRAMMING — NTOJ</strong> &bull; Hệ thống Bảng vàng Vinh danh Học viên Tin học.
-      </div>
-      <div style="font-family: var(--font-mono); font-size: 0.78rem;">
-        Auto-Polling: 20s | Database: Google Sheets
-      </div>
+      <div><strong>COMPETITIVE PROGRAMMING — NTOJ</strong> &bull; Hệ thống Bảng vàng Vinh danh Học viên Tin học.</div>
+      <div style="font-family: var(--font-mono); font-size: 0.78rem;">Auto-Polling: 20s | Database: Google Sheets</div>
     </div>
   </footer>
 
@@ -1814,11 +639,9 @@
         .replace(/'/g, '&#39;');
     }
 
-    // HOÁN ĐỔI MÃ MÀU: Đội tuyển quốc gia (special) <-> Khuyến khích (consolation)
     function resolveAwardTier(awardLevel, category = '') {
       const norm = normalizeVietnamese(awardLevel);
       const normCat = normalizeVietnamese(category);
-      
       if (normCat.includes('doi tuyen quoc gia') || normCat.includes('dtqg')) {
         return { tier: 'special', priority: 5, icon: '✦' };
       }
@@ -1855,9 +678,11 @@
     const state = {
       profiles: [],
       categories: [],
+      hashtags: [],
       totalAchievementsCount: 0,
       yearRangeText: '—',
       selectedCategory: 'Tất cả',
+      selectedHashtag: 'Tất cả',
       searchQuery: '',
       sortBy: 'custom_order',
       activeStudentId: null,
@@ -1919,7 +744,6 @@
           const normAch = normalizeVietnamese(achName);
           let catName = parts[2] || achName;
           if (!parts[2]) {
-            // SỬA THỨ TỰ ƯU TIÊN: Kiểm tra TST và Đội tuyển quốc gia TRƯỚC khi kiểm tra chữ "quoc gia" chung chung
             if (normAch.includes('tst')) {
               catName = 'TST';
             } else if (normAch.includes('dtqg') || normAch.includes('doi tuyen quoc gia') || normAch.includes('chon doi tuyen')) {
@@ -1945,12 +769,8 @@
             }
           }
 
-          const parsedYear = (a.award_year !== null && a.award_year !== undefined && String(a.award_year).trim() !== '')
-            ? Number(a.award_year)
-            : null;
-          const validYear = (parsedYear && !Number.isNaN(parsedYear) && parsedYear > 1990 && parsedYear < 2100)
-            ? parsedYear
-            : null;
+          const parsedYear = (a.award_year !== null && a.award_year !== undefined && String(a.award_year).trim() !== '') ? Number(a.award_year) : null;
+          const validYear = (parsedYear && !Number.isNaN(parsedYear) && parsedYear > 1990 && parsedYear < 2100) ? parsedYear : null;
           const tierInfo = resolveAwardTier(a.award_level || '', catName);
 
           return {
@@ -1971,17 +791,27 @@
 
       const achByStudent = new Map();
       visibleAchievements.forEach(ach => {
-        if (!achByStudent.has(ach.student_id)) {
-          achByStudent.set(ach.student_id, []);
-        }
+        if (!achByStudent.has(ach.student_id)) achByStudent.set(ach.student_id, []);
         achByStudent.get(ach.student_id).push(ach);
       });
+
+      const allUniqueHashtags = new Set();
+      visibleStudents.forEach(s => {
+        const tagStr = String(s.hastag || s.hashtag || '').trim();
+        if (tagStr) {
+          tagStr.split(',').map(t => t.trim()).filter(Boolean).forEach(tag => {
+            allUniqueHashtags.add(tag);
+          });
+        }
+      });
+      state.hashtags = Array.from(allUniqueHashtags);
 
       const profiles = visibleStudents.map(student => {
         const sid = String(student.student_id).trim();
         const studentAchs = achByStudent.get(sid) || [];
+        const rawTag = String(student.hastag || student.hashtag || '').trim();
+        const studentHashtags = rawTag ? rawTag.split(',').map(t => t.trim()).filter(Boolean) : [];
 
-        // Sắp xếp thành tích trong Popup: Giải cao nhất đến thấp nhất
         const sortedChronological = [...studentAchs].sort((a, b) => {
           function getAchSortScore(ach) {
             const cat = normalizeVietnamese(ach.category || '');
@@ -2002,13 +832,10 @@
             if (isDTQG) return 20;
             return 30 + (ach.tierPriority || 5);
           }
-
-          const scoreA = getAchSortScore(a);
-          const scoreB = getAchSortScore(b);
+          const scoreA = getAchSortScore(a); const scoreB = getAchSortScore(b);
           if (scoreA !== scoreB) return scoreA - scoreB;
           if (a.tierPriority !== b.tierPriority) return a.tierPriority - b.tierPriority;
-          const yA = a.award_year || 0;
-          const yB = b.award_year || 0;
+          const yA = a.award_year || 0; const yB = b.award_year || 0;
           if (yB !== yA) return yB - yA;
           return a.display_order - b.display_order;
         });
@@ -2033,13 +860,10 @@
             if (isDTQG) return 20;
             return 30 + (ach.tierPriority || 5);
           }
-
-          const scoreA = getAchScore(a);
-          const scoreB = getAchScore(b);
+          const scoreA = getAchScore(a); const scoreB = getAchScore(b);
           if (scoreA !== scoreB) return scoreA - scoreB;
           if (a.tierPriority !== b.tierPriority) return a.tierPriority - b.tierPriority;
-          const yA = a.award_year || 0;
-          const yB = b.award_year || 0;
+          const yA = a.award_year || 0; const yB = b.award_year || 0;
           if (yB !== yA) return yB - yA;
           return a.display_order - b.display_order;
         });
@@ -2049,47 +873,25 @@
         const latestYear = years.length > 0 ? Math.max(...years) : null;
         const highestTier = topAchievement ? topAchievement.tier : 'special';
 
-        // Tính tổng điểm tích lũy (Total Score) từ tất cả giải thưởng của học viên
-        let totalScore = 0;
-        studentAchs.forEach(ach => {
-          const cat = normalizeVietnamese(ach.category || '');
-          const lvl = normalizeVietnamese(ach.award_level || '');
-          
-          const isHSGQG = cat.includes('hoc sinh gioi quoc gia') || cat.includes('hsgqg');
-          const isTst = cat.includes('tst');
-          const isDTQG = cat.includes('doi tuyen quoc gia') || cat.includes('dtqg');
-          
-          const isGold = lvl.includes('nhat') || lvl.includes('vang') || lvl.includes('hcv') || lvl.includes('gold') || lvl.includes('thu khoa');
-          const isSilver = lvl.includes('nhi') || lvl.includes('bac') || lvl.includes('hcb') || lvl.includes('silver') || lvl.includes('a khoa');
-          const isBronze = lvl.includes('ba') || lvl.includes('dong') || lvl.includes('hcd') || lvl.includes('bronze');
-          const isKK = lvl.includes('khuyen khich') || lvl.includes('kk');
-
-          // Quy định điểm số cho từng loại giải thưởng
-          if (isHSGQG && isGold) totalScore += 10;      // Nhất quốc gia: 10 điểm
-          else if (isTst) totalScore += 9;              // TST: 9 điểm
-          else if (isHSGQG && isSilver) totalScore += 7;  // Nhì quốc gia: 7 điểm
-          else if (isHSGQG && isBronze) totalScore += 5;  // Ba quốc gia: 5 điểm
-          else if (isHSGQG && isKK) totalScore += 3;      // Khuyến khích quốc gia: 3 điểm
-          else if (isDTQG) totalScore += 4;              // Đội tuyển quốc gia: 4 điểm
-          else if (ach.tier === 'gold') totalScore += 3;   // HCV các giải khác: 3 điểm
-          else if (ach.tier === 'silver') totalScore += 2; // HCB các giải khác: 2 điểm
-          else totalScore += 1;                          // Các giải khác / HCĐ: 1 điểm
+        let cpRankBadge = 'achiever';
+        const hasNationalOrTst = studentAchs.some(x => {
+          const c = normalizeVietnamese(x.category || '');
+          const n = normalizeVietnamese(x.achievement_name || '');
+          return c.includes('quoc gia') || n.includes('quoc gia') || c.includes('tst');
         });
-
-        // Phân chia hạng dựa trên tổng điểm score tích lũy
-        let cpRankBadge = 'ACHIEVER';
-        if (totalScore >= 8 || studentAchs.length >= 4) {
-          cpRankBadge = 'CP LEGEND';  // Tổng điểm từ 8 trở lên hoặc có từ 4 giải trở lên -> Viền Vàng Gold
-        } else if (totalScore >= 3 || studentAchs.length >= 2) {
-          cpRankBadge = 'TOP CODER';  // Tổng điểm từ 3 đến 7 hoặc có từ 2 giải trở lên -> Viền Xanh ngọc Emerald
+        
+        if (highestTier === 'gold' && (hasNationalOrTst || studentAchs.length >= 3)) {
+          cpRankBadge = 'cp-legend';
+        } else if (hasNationalOrTst || highestTier === 'gold' || highestTier === 'silver' || studentAchs.length >= 2) {
+          cpRankBadge = 'top-coder';
         } else {
-          cpRankBadge = 'ACHIEVER';   // Còn lại -> Viền Trong suốt (Transparent)
+          cpRankBadge = 'achiever';
         }
 
         const uniqueCategories = Array.from(new Set(studentAchs.map(x => x.category).filter(Boolean)));
         const searchIndex = normalizeVietnamese([
           student.full_name,
-          student.class_name,
+          ...studentHashtags,
           ...studentAchs.map(a => `${a.achievement_name} ${a.competition_name} ${a.category} ${a.award_level} ${a.award_year || ''}`)
         ].join(' '));
 
@@ -2097,7 +899,6 @@
           student_id: sid,
           full_name: String(student.full_name || 'Học viên NTOJ').trim(),
           avatar_url: String(student.avatar_url || '').trim(),
-          class_name: String(student.class_name || 'Học viên NTOJ').trim(),
           school: String(student.school || '').trim(),
           introduction: String(student.introduction || '').trim(),
           display_order: Number(student.display_order) || 999,
@@ -2106,6 +907,7 @@
           latestYear,
           highestTier,
           cpRankBadge,
+          hashtags: studentHashtags,
           categories: uniqueCategories,
           searchIndex
         };
@@ -2119,12 +921,7 @@
       visibleAchievements.forEach(a => {
         if (a.category && !knownCatNames.has(a.category)) {
           knownCatNames.add(a.category);
-          configuredCats.push({
-            category_id: 'DYN_' + configuredCats.length,
-            category_name: a.category,
-            color_token: 'blue',
-            display_order: 99
-          });
+          configuredCats.push({ category_id: 'DYN_' + configuredCats.length, category_name: a.category, color_token: 'blue', display_order: 99 });
         }
       });
 
@@ -2137,8 +934,7 @@
       const allYears = visibleAchievements.map(a => a.award_year).filter(y => y !== null);
       let yearRangeText = '—';
       if (allYears.length > 0) {
-        const minY = Math.min(...allYears);
-        const maxY = Math.max(...allYears);
+        const minY = Math.min(...allYears); const maxY = Math.max(...allYears);
         yearRangeText = minY === maxY ? `${minY}` : `${minY} – ${maxY}`;
       }
 
@@ -2151,14 +947,13 @@
     async function fetchPublicGoogleSheetTab(sheetId, sheetName) {
       const url = `https://docs.google.com/spreadsheets/d/${encodeURIComponent(sheetId)}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}&headers=1&_ts=${Date.now()}`;
       const res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) throw new Error(`HTTP ${res.status} khi tải sheet ${sheetName}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
       const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]+)\);?/);
-      if (!match) throw new Error(`Định dạng phản hồi từ sheet "${sheetName}" không hợp lệ.`);
+      if (!match) throw new Error(`Định dạng phản hồi không hợp lệ.`);
       const json = JSON.parse(match[1]);
       const cols = (json.table.cols || []).map(c => String(c.label || '').trim());
       const rows = json.table.rows || [];
-
       return rows.map(r => {
         const obj = {};
         cols.forEach((colName, idx) => {
@@ -2173,14 +968,7 @@
     async function fetchWithRetry(fn, retries = 2, delayMs = 900) {
       let lastErr;
       for (let i = 0; i <= retries; i++) {
-        try {
-          return await fn();
-        } catch (err) {
-          lastErr = err;
-          if (i < retries) {
-            await new Promise(r => setTimeout(r, delayMs * Math.pow(2, i)));
-          }
-        }
+        try { return await fn(); } catch (err) { lastErr = err; if (i < retries) await new Promise(r => setTimeout(r, delayMs)); }
       }
       throw lastErr;
     }
@@ -2192,16 +980,9 @@
         if (state.config.GAS_API_URL) {
           payload = await fetchWithRetry(async () => {
             const sep = state.config.GAS_API_URL.includes('?') ? '&' : '?';
-            const res = await fetch(`${state.config.GAS_API_URL}${sep}_ts=${Date.now()}`, {
-              method: 'GET',
-              headers: { 'Accept': 'application/json' }
-            });
-            if (!res.ok) throw new Error(`API trả về mã lỗi ${res.status}`);
-            const data = await res.json();
-            if (data.status && data.status !== 'ok') {
-              throw new Error(data.message || 'Lỗi từ Google Apps Script');
-            }
-            return data;
+            const res = await fetch(`${state.config.GAS_API_URL}${sep}_ts=${Date.now()}`);
+            if (!res.ok) throw new Error(`API lỗi ${res.status}`);
+            return await res.json();
           });
         } else if (state.config.PUBLIC_SHEET_ID) {
           payload = await fetchWithRetry(async () => {
@@ -2223,7 +1004,6 @@
         const newHash = JSON.stringify({ s: payload.students, a: payload.achievements, c: payload.categories });
         const hasChanged = state.dataHash !== '' && state.dataHash !== newHash;
         state.dataHash = newHash;
-        state.errorMessage = null;
         state.isLoading = false;
 
         try { localStorage.setItem(STORAGE_KEYS.CACHE, JSON.stringify(payload)); } catch (_) {}
@@ -2235,33 +1015,26 @@
         const nowStr = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
         updateSyncBadge('updated', isLiveSource ? `Đã cập nhật (${nowStr})` : `Dữ liệu mẫu NTOJ (${nowStr})`);
 
-        if (hasChanged && isSilentPolling) {
-          showToast('✨ Dữ liệu mới từ Google Sheets vừa được cập nhật tự động!');
-        }
+        if (hasChanged && isSilentPolling) showToast('✨ Dữ liệu mới từ Google Sheets vừa được cập nhật!');
       } catch (err) {
-        console.error('[NTOJ Sync Error]:', err);
+        console.error('[Sync Error]:', err);
         state.isLoading = false;
         if (state.profiles.length === 0) {
           try {
             const cached = localStorage.getItem(STORAGE_KEYS.CACHE);
-            if (cached) { buildRelationalData(JSON.parse(cached)); } else { buildRelationalData(INITIAL_NTOJ_DATA); }
+            if (cached) buildRelationalData(JSON.parse(cached)); else buildRelationalData(INITIAL_NTOJ_DATA);
           } catch (_) { buildRelationalData(INITIAL_NTOJ_DATA); }
           renderAll();
         }
-        updateSyncBadge('error', 'Lỗi đồng bộ Sheet (Đang dùng bản lưu)');
-        if (!isSilentPolling) {
-          showToast('⚠️ Không thể kết nối Google Sheets. Vui lòng kiểm tra lại URL hoặc quyền chia sẻ.');
-        }
+        updateSyncBadge('error', 'Lỗi đồng bộ Sheet');
+        if (!isSilentPolling) showToast('⚠️ Không thể kết nối Google Sheets.');
       }
     }
 
     function updateSyncBadge(statusState, text) {
       const pill = document.getElementById('syncStatusPill');
       const label = document.getElementById('syncStatusText');
-      if (pill && label) {
-        pill.setAttribute('data-state', statusState);
-        label.textContent = text;
-      }
+      if (pill && label) { pill.setAttribute('data-state', statusState); label.textContent = text; }
     }
 
     function renderStats() {
@@ -2274,13 +1047,12 @@
     function renderCategoryPills() {
       const container = document.getElementById('categoryPillsContainer');
       if (!container) return;
-
       const allItem = { name: 'Tất cả', color: 'all', count: state.profiles.length };
-      const catItems = state.categories.map(cat => {
-        const count = state.profiles.filter(p => p.categories.includes(cat.category_name)).length;
-        return { name: cat.category_name, color: cat.color_token || 'blue', count };
-      });
-
+      const catItems = state.categories.map(cat => ({
+        name: cat.category_name,
+        color: cat.color_token || 'blue',
+        count: state.profiles.filter(p => p.categories.includes(cat.category_name)).length
+      }));
       const items = [allItem, ...catItems];
 
       container.innerHTML = items.map(item => {
@@ -2288,7 +1060,7 @@
         return `
           <button type="button" role="tab" aria-selected="${isActive}" class="category-pill ${isActive ? 'is-active' : ''}" data-category="${escapeHtml(item.name)}" data-color="${escapeHtml(item.color)}">
             <span>${escapeHtml(item.name)}</span>
-            <span class="category-pill__count" title="${item.count} học viên">${item.count}</span>
+            <span class="category-pill__count">${item.count}</span>
           </button>
         `;
       }).join('');
@@ -2302,12 +1074,26 @@
       });
     }
 
+    function renderHashtagSelect() {
+      const select = document.getElementById('hashtagSelect');
+      if (!select) return;
+      if (state.selectedHashtag !== 'Tất cả' && !state.hashtags.includes(state.selectedHashtag)) {
+        state.selectedHashtag = 'Tất cả';
+      }
+      const options = ['Tất cả', ...state.hashtags];
+      select.innerHTML = options.map(tag => {
+        const count = tag === 'Tất cả' ? state.profiles.length : state.profiles.filter(p => p.hashtags && p.hashtags.includes(tag)).length;
+        const label = tag === 'Tất cả' ? `Tất cả (${count})` : `${tag} (${count})`;
+        const selected = state.selectedHashtag === tag ? 'selected' : '';
+        return `<option value="${escapeHtml(tag)}" ${selected}>${escapeHtml(label)}</option>`;
+      }).join('');
+    }
+
     function getStudentTopScore(student) {
       let bestScore = 99;
       for (const ach of (student.achievements || [])) {
         const cat = normalizeVietnamese(ach.category || '');
         const lvl = normalizeVietnamese(ach.award_level || '');
-        
         let score = 50; 
         const isHSGQG = cat.includes('hoc sinh gioi quoc gia') || cat.includes('hsgqg');
         const isDTQG = cat.includes('doi tuyen quoc gia') || cat.includes('dtqg');
@@ -2317,25 +1103,15 @@
         const isBronze = lvl.includes('ba') || lvl.includes('dong') || lvl.includes('hcd') || lvl.includes('bronze');
         const isKK = lvl.includes('khuyen khich') || lvl.includes('kk');
 
-        if (isHSGQG && isGold) {
-          score = 1;
-        } else if (isTst) {
-          score = 2;
-        } else if (isHSGQG && isSilver) {
-          score = 3;
-        } else if (isHSGQG && isBronze) {
-          score = 4;
-        } else if (isHSGQG && isKK) {
-          score = 5;
-        } else if (isDTQG) {
-          score = 20;
-        } else {
-          score = 50; 
-        }
+        if (isHSGQG && isGold) score = 1;
+        else if (isTst) score = 2;
+        else if (isHSGQG && isSilver) score = 3;
+        else if (isHSGQG && isBronze) score = 4;
+        else if (isHSGQG && isKK) score = 5;
+        else if (isDTQG) score = 20;
+        else score = 50;
 
-        if (score < bestScore) {
-          bestScore = score;
-        }
+        if (score < bestScore) bestScore = score;
       }
       return bestScore;
     }
@@ -2344,7 +1120,8 @@
       const normQuery = normalizeVietnamese(state.searchQuery);
       const filtered = state.profiles.filter(profile => {
         const matchCategory = state.selectedCategory === 'Tất cả' || profile.categories.includes(state.selectedCategory);
-        if (!matchCategory) return false;
+        const matchHashtag = state.selectedHashtag === 'Tất cả' || (profile.hashtags && profile.hashtags.includes(state.selectedHashtag));
+        if (!matchCategory || !matchHashtag) return false;
         if (!normQuery) return true;
         return profile.searchIndex.includes(normQuery);
       });
@@ -2352,8 +1129,7 @@
       return filtered.sort((a, b) => {
         const activeCat = state.selectedCategory;
         if (!activeCat || activeCat === 'Tất cả') {
-          const scoreA = getStudentTopScore(a);
-          const scoreB = getStudentTopScore(b);
+          const scoreA = getStudentTopScore(a); const scoreB = getStudentTopScore(b);
           if (scoreA !== scoreB) return scoreA - scoreB;
           const priA = a.topAchievement ? a.topAchievement.tierPriority : 99;
           const priB = b.topAchievement ? b.topAchievement.tierPriority : 99;
@@ -2371,15 +1147,12 @@
           case 'name_asc': return a.full_name.localeCompare(b.full_name, 'vi');
           case 'name_desc': return b.full_name.localeCompare(a.full_name, 'vi');
           case 'year_desc': {
-            const yA = a.latestYear || 0;
-            const yB = b.latestYear || 0;
+            const yA = a.latestYear || 0; const yB = b.latestYear || 0;
             if (yB !== yA) return yB - yA;
             return a.display_order - b.display_order;
           }
           case 'achievement_count_desc': {
-            if (b.achievements.length !== a.achievements.length) {
-              return b.achievements.length - a.achievements.length;
-            }
+            if (b.achievements.length !== a.achievements.length) return b.achievements.length - a.achievements.length;
             return a.display_order - b.display_order;
           }
           case 'custom_order':
@@ -2403,50 +1176,43 @@
               <div style="flex:1;display:flex;flex-direction:column;gap:0.5rem;">
                 <div class="skeleton-line" style="width:45%;height:14px;"></div>
                 <div class="skeleton-line" style="width:80%;height:20px;"></div>
-                <div class="skeleton-line" style="width:60%;height:14px;"></div>
               </div>
             </div>
             <div class="skeleton-line" style="width:100%;height:78px;border-radius:12px;"></div>
-            <div class="skeleton-line" style="width:65%;height:22px;margin-top:auto;"></div>
           </div>
         `).join('');
         return;
       }
 
       const list = getFilteredAndSortedStudents();
-      if (counter) {
-        counter.innerHTML = `Hiển thị <strong>${list.length}</strong> / ${state.profiles.length} học viên`;
-      }
+      if (counter) counter.innerHTML = `Hiển thị <strong>${list.length}</strong> / ${state.profiles.length} học viên`;
 
       if (list.length === 0) {
         grid.innerHTML = `
           <div class="state-box">
             <div class="state-box__icon">return 0;</div>
             <h3 class="state-box__title">Không tìm thấy học viên phù hợp</h3>
-            <p class="state-box__desc">Không có bản ghi nào khớp với từ khóa <strong>"${escapeHtml(state.searchQuery)}"</strong>.</p>
+            <p class="state-box__desc">Không có bản ghi nào khớp với điều kiện lọc.</p>
             <button type="button" id="btnResetFilters" class="primary-btn">Đặt lại bộ lọc</button>
           </div>
         `;
-        const resetBtn = document.getElementById('btnResetFilters');
-        if (resetBtn) {
-          resetBtn.addEventListener('click', () => {
-            state.selectedCategory = 'Tất cả';
-            state.searchQuery = '';
-            document.getElementById('searchInput').value = '';
-            document.getElementById('btnClearSearch').classList.remove('is-visible');
-            renderCategoryPills();
-            renderStudentCards();
-          });
-        }
+        document.getElementById('btnResetFilters')?.addEventListener('click', () => {
+          state.selectedCategory = 'Tất cả';
+          state.selectedHashtag = 'Tất cả';
+          state.searchQuery = '';
+          document.getElementById('searchInput').value = '';
+          document.getElementById('btnClearSearch').classList.remove('is-visible');
+          renderCategoryPills();
+          renderHashtagSelect();
+          renderStudentCards();
+        });
         return;
       }
 
       grid.innerHTML = list.map(student => {
         let featured = student.topAchievement;
         if (state.selectedCategory !== 'Tất cả') {
-          const matchCatAch = student.achievements
-            .filter(a => a.category === state.selectedCategory)
-            .sort((a, b) => a.tierPriority - b.tierPriority)[0];
+          const matchCatAch = student.achievements.filter(a => a.category === state.selectedCategory).sort((a, b) => a.tierPriority - b.tierPriority)[0];
           if (matchCatAch) featured = matchCatAch;
         }
 
@@ -2455,22 +1221,14 @@
         const yearBadge = featured && featured.award_year ? featured.award_year : (student.latestYear || 'NTOJ');
 
         return `
-          <article
-            class="student-card"
-            data-tier="${escapeHtml(student.highestTier)}"
-            data-rank="${student.cpRankBadge === 'CP LEGEND' ? 'cp-legend' : student.cpRankBadge === 'TOP CODER' ? 'top-coder' : 'achiever'}"
-            data-student-id="${escapeHtml(student.student_id)}"
-            tabindex="0"
-            role="button"
-            aria-label="Xem chi tiết thành tích của học viên ${escapeHtml(student.full_name)}"
-          >
+          <article class="student-card" data-rank="${escapeHtml(student.cpRankBadge)}" data-student-id="${escapeHtml(student.student_id)}" tabindex="0" role="button">
             <div class="student-card__top">
               <div class="student-card__avatar-frame">
                 <img src="${escapeHtml(avatarSrc)}" alt="${escapeHtml(student.full_name)}" class="student-card__avatar" loading="lazy" onerror="this.onerror=null;this.src='${fallbackAvatar}';" />
                 <span class="student-card__year-tag">${escapeHtml(yearBadge)}</span>
               </div>
               <div class="student-card__identity">
-                <span class="student-card__rank-chip">${escapeHtml(student.cpRankBadge)}</span>
+                ${student.hashtags && student.hashtags.length > 0 ? `<div style="display:flex;gap:0.3rem;flex-wrap:wrap;margin-bottom:0.3rem;">${student.hashtags.map(t => `<span class="student-card__rank-chip" style="margin-bottom:0;">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
                 <h2 class="student-card__name" title="${escapeHtml(student.full_name)}">${escapeHtml(student.full_name)}</h2>
                 <p class="student-card__class" title="${escapeHtml(student.school)}">${escapeHtml(student.school)}</p>
               </div>
@@ -2512,10 +1270,7 @@
         const sid = card.getAttribute('data-student-id');
         card.addEventListener('click', () => openStudentModal(sid));
         card.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            openStudentModal(sid);
-          }
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openStudentModal(sid); }
         });
       });
     }
@@ -2533,7 +1288,7 @@
       const avatarSrc = student.avatar_url || fallbackAvatar;
 
       content.innerHTML = `
-        <aside class="cp-metallic-frame" data-tier="${escapeHtml(student.highestTier)}">
+        <aside class="cp-metallic-frame" data-rank="${escapeHtml(student.cpRankBadge)}">
           <span class="pcb-corner tl"></span><span class="pcb-corner tr"></span><span class="pcb-corner bl"></span><span class="pcb-corner br"></span>
           <div class="cp-metallic-frame__inner">
             <svg class="cp-metallic-frame__pcb-svg" viewBox="0 0 300 400" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -2543,11 +1298,11 @@
             </svg>
             <div class="cp-metallic-frame__photo-wrap">
               <img src="${escapeHtml(avatarSrc)}" alt="${escapeHtml(student.full_name)}" class="cp-metallic-frame__photo" onerror="this.onerror=null;this.src='${fallbackAvatar}';" />
-              <span class="cp-metallic-frame__badge">${escapeHtml(student.cpRankBadge)}</span>
+              ${student.hashtags && student.hashtags.length > 0 ? `<span class="cp-metallic-frame__badge">${escapeHtml(student.hashtags.join(' • '))}</span>` : ''}
             </div>
             <div class="cp-metallic-frame__info">
               <h2 id="modalStudentName" class="cp-metallic-frame__name">${escapeHtml(student.full_name)}</h2>
-             <div class="cp-metallic-frame__class">${escapeHtml(student.school)}</div>
+              <div class="cp-metallic-frame__class">${escapeHtml(student.school)}</div>
               ${student.introduction ? `<p class="cp-metallic-frame__bio">${escapeHtml(student.introduction)}</p>` : ''}
               <div class="cp-metallic-frame__code-footer">
                 <span>ID: ${escapeHtml(student.student_id)}</span>
@@ -2642,6 +1397,7 @@
     function renderAll() {
       renderStats();
       renderCategoryPills();
+      renderHashtagSelect();
       renderStudentCards();
       if (state.activeStudentId) { openStudentModal(state.activeStudentId, false); }
     }
@@ -2668,6 +1424,14 @@
         renderStudentCards();
         searchInput.focus();
       });
+
+      const hashtagSelect = document.getElementById('hashtagSelect');
+      if (hashtagSelect) {
+        hashtagSelect.addEventListener('change', (e) => {
+          state.selectedHashtag = e.target.value || 'Tất cả';
+          renderStudentCards();
+        });
+      }
 
       document.getElementById('sortSelect').addEventListener('change', (e) => {
         state.sortBy = e.target.value;
