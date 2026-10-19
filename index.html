@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
+  
+ <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BẢNG VÀNG THÀNH TÍCH HỌC VIÊN | COMPETITIVE PROGRAMMING — NTOJ</title>
-  <meta name="description" content="Bảng vàng vinh danh các học viên xuất sắc đạt thành tích trong lĩnh vực Tin học, lập trình thi đấu, Tin học trẻ và Học sinh giỏi các cấp tại NTOJ." />
-  <meta property="og:title" content="BẢNG VÀNG THÀNH TÍCH HỌC VIÊN — COMPETITIVE PROGRAMMING NTOJ" />
-  <meta property="og:description" content="Mỗi thành tích là một cột mốc trên hành trình chinh phục thuật toán." />
-  <meta property="og:type" content="website" />
+  <title>BẢNG VÀNG THÀNH TÍCH HỌC VIÊN | COMPETITIVE PROGRAMMING – NTOJ</title>
+  <meta name="description" content="Bảng vàng vinh danh các học viên xuất sắc đạt thành tích trong lĩnh vực Tin học, lập trình thi đấu, Tin học trẻ và Học sinh giỏi." />
 
+  <!-- Open Graph Meta Tags (Hiển thị thumbnail khi chia sẻ link mạng xã hội) -->
+  <meta property="og:title" content="Bảng Vàng Thành Tích NTOJ — Hall of Fame" />
+  <meta property="og:description" content="Nơi vinh danh những học sinh đạt giải thưởng xuất sắc trong lập trình thi đấu (Competitive Programming)." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/MNTT2903/ntoj-student-images/main/mvu%20fifai.jpg?raw=true" />
+  <meta property="og:url" content="https://peternguyen-danzo.github.io/" />
+  <meta property="og:type" content="website" />
+</head>
   <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1975,8 +1980,10 @@
               catName = 'Học sinh giỏi quốc gia';
             } else if (normAch.includes('dtqg') || normAch.includes('doi tuyen quoc gia') || normAch.includes('chon doi tuyen')) {
               catName = 'Đội tuyển quốc gia';
-            } else if (normAch.includes('tin hoc tre') || normAch.includes('tht')) {
-              catName = 'Tin học trẻ';
+            } else if (normAch.includes('tin hoc tre toan quoc') || normAch.includes('tht toan quoc')) {
+              catName = 'Tin học trẻ toàn quốc';
+            } else if (normAch.includes('tin hoc tre khu vuc') || normAch.includes("tht khu vuc')) {
+              catName = 'Tin học trẻ khu vực';                                                                      
             } else if (normAch.includes('hoc sinh gioi') || normAch.includes('hsg')) {
               catName = 'Học sinh giỏi tỉnh';
             } else if (normAch.includes('tuyen sinh 10') || normAch.includes('vao 10')) {
@@ -1985,6 +1992,8 @@
               catName = 'Olympic 30/4';
             } else if (normAch.includes('duyen hai') || normAch.includes('bac bo')) {
               catName = 'Duyên hải Bắc Bộ';
+            } else if (normAch.includes('tst')) {
+              catName = 'TST';
             }
           }
 
