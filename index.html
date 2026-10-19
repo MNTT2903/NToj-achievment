@@ -1555,6 +1555,42 @@
       pointer-events: none;
       z-index: 3;
     }
+	/* ==========================================================================
+       HỆ THỐNG QUY CHUẨN VIỀN CP RANK BADGE
+       ========================================================================== */
+    
+    /* 1. CP LEGEND: Viền màu vàng Gold rực rỡ */
+    .student-card[data-rank="cp-legend"],
+    .cp-metallic-frame[data-rank="cp-legend"] {
+      border-color: #F59E0B !important;
+      border-width: 3px !important;
+      box-shadow: 0 10px 30px -6px rgba(245, 158, 11, 0.35) !important;
+    }
+    .cp-metallic-frame[data-rank="cp-legend"] {
+      background: linear-gradient(145deg, #FEF08A 0%, #F59E0B 35%, #FEF9C3 70%, #B45309 100%) !important;
+    }
+
+    /* 2. TOP CODER: Viền màu xanh ngọc Emerald */
+    .student-card[data-rank="top-coder"],
+    .cp-metallic-frame[data-rank="top-coder"] {
+      border-color: #059669 !important;
+      border-width: 3px !important;
+      box-shadow: 0 10px 30px -6px rgba(5, 150, 105, 0.3) !important;
+    }
+    .cp-metallic-frame[data-rank="top-coder"] {
+      background: linear-gradient(145deg, #A7F3D0 0%, #059669 35%, #ECFDF5 70%, #065F46 100%) !important;
+    }
+
+    /* 3. ACHIEVER: Viền trong suốt (Transparent / mờ tinh tế) */
+    .student-card[data-rank="achiever"],
+    .cp-metallic-frame[data-rank="achiever"] {
+      border-color: transparent !important;
+      border-width: 1.5px !important;
+      box-shadow: var(--shadow-sm) !important;
+    }
+    .cp-metallic-frame[data-rank="achiever"] {
+      background: var(--metallic-outer) !important;
+    }
   </style>
 </head>
 <body>
@@ -2032,21 +2068,41 @@
         const latestYear = years.length > 0 ? Math.max(...years) : null;
         const highestTier = topAchievement ? topAchievement.tier : 'special';
 
-        let cpRankBadge = 'ACHIEVER';
-        const hasNational = studentAchs.some(x => {
-          const c = normalizeVietnamese(x.category || '');
-          const n = normalizeVietnamese(x.achievement_name || '');
-          return c.includes('quoc gia') || n.includes('quoc gia');
+        // Tính tổng điểm tích lũy (Total Score) từ tất cả giải thưởng của học viên
+        let totalScore = 0;
+        studentAchs.forEach(ach => {
+          const cat = normalizeVietnamese(ach.category || '');
+          const lvl = normalizeVietnamese(ach.award_level || '');
+          
+          const isHSGQG = cat.includes('hoc sinh gioi quoc gia') || cat.includes('hsgqg');
+          const isTst = cat.includes('tst');
+          const isDTQG = cat.includes('doi tuyen quoc gia') || cat.includes('dtqg');
+          
+          const isGold = lvl.includes('nhat') || lvl.includes('vang') || lvl.includes('hcv') || lvl.includes('gold') || lvl.includes('thu khoa');
+          const isSilver = lvl.includes('nhi') || lvl.includes('bac') || lvl.includes('hcb') || lvl.includes('silver') || lvl.includes('a khoa');
+          const isBronze = lvl.includes('ba') || lvl.includes('dong') || lvl.includes('hcd') || lvl.includes('bronze');
+          const isKK = lvl.includes('khuyen khich') || lvl.includes('kk');
+
+          // Quy định điểm số cho từng loại giải thưởng
+          if (isHSGQG && isGold) totalScore += 10;      // Nhất quốc gia: 10 điểm
+          else if (isTst) totalScore += 9;              // TST: 9 điểm
+          else if (isHSGQG && isSilver) totalScore += 7;  // Nhì quốc gia: 7 điểm
+          else if (isHSGQG && isBronze) totalScore += 5;  // Ba quốc gia: 5 điểm
+          else if (isHSGQG && isKK) totalScore += 3;      // Khuyến khích quốc gia: 3 điểm
+          else if (isDTQG) totalScore += 4;              // Đội tuyển quốc gia: 4 điểm
+          else if (ach.tier === 'gold') totalScore += 3;   // HCV các giải khác: 3 điểm
+          else if (ach.tier === 'silver') totalScore += 2; // HCB các giải khác: 2 điểm
+          else totalScore += 1;                          // Các giải khác / HCĐ: 1 điểm
         });
-        
-        if (hasNational) {
-          cpRankBadge = 'TOP CODER';
-        } else if (highestTier === 'gold' && studentAchs.length >= 3) {
-          cpRankBadge = 'CP LEGEND';
-        } else if (highestTier === 'gold' || highestTier === 'silver' || studentAchs.length >= 2) {
-          cpRankBadge = 'TOP CODER';
+
+        // Phân chia hạng dựa trên tổng điểm score tích lũy
+        let cpRankBadge = 'ACHIEVER';
+        if (totalScore >= 8 || studentAchs.length >= 4) {
+          cpRankBadge = 'CP LEGEND';  // Tổng điểm từ 8 trở lên hoặc có từ 4 giải trở lên -> Viền Vàng Gold
+        } else if (totalScore >= 3 || studentAchs.length >= 2) {
+          cpRankBadge = 'TOP CODER';  // Tổng điểm từ 3 đến 7 hoặc có từ 2 giải trở lên -> Viền Xanh ngọc Emerald
         } else {
-          cpRankBadge = 'ACHIEVER';
+          cpRankBadge = 'ACHIEVER';   // Còn lại -> Viền Trong suốt (Transparent)
         }
 
         const uniqueCategories = Array.from(new Set(studentAchs.map(x => x.category).filter(Boolean)));
@@ -2418,7 +2474,15 @@
         const yearBadge = featured && featured.award_year ? featured.award_year : (student.latestYear || 'NTOJ');
 
         return `
-          <article class="student-card" data-tier="${escapeHtml(student.highestTier)}" data-student-id="${escapeHtml(student.student_id)}" tabindex="0" role="button">
+          <article
+            class="student-card"
+            data-tier="${escapeHtml(student.highestTier)}"
+            data-rank="${student.cpRankBadge === 'CP LEGEND' ? 'cp-legend' : student.cpRankBadge === 'TOP CODER' ? 'top-coder' : 'achiever'}"
+            data-student-id="${escapeHtml(student.student_id)}"
+            tabindex="0"
+            role="button"
+            aria-label="Xem chi tiết thành tích của học viên ${escapeHtml(student.full_name)}"
+          >
             <div class="student-card__top">
               <div class="student-card__avatar-frame">
                 <img src="${escapeHtml(avatarSrc)}" alt="${escapeHtml(student.full_name)}" class="student-card__avatar" loading="lazy" onerror="this.onerror=null;this.src='${fallbackAvatar}';" />
