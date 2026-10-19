@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+	<!-- Các thẻ định dạng hiển thị Thumbnail lớn giống YouTube -->
+  <meta property="og:image" content="https://raw.githubusercontent.com/MNTT2903/ntoj-student-images/main/mvu%20fifai.jpg?raw=true" />
+  <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/MNTT2903/ntoj-student-images/main/mvu%20fifai.jpg?raw=true" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Bảng Vàng Thành Tích NTOJ — Hall of Fame" />
+  <meta name="twitter:description" content="Nơi vinh danh những học sinh đạt giải thưởng xuất sắc trong lập trình thi đấu (Competitive Programming)." />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/MNTT2903/ntoj-student-images/main/mvu%20fifai.jpg?raw=true" />	
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BẢNG VÀNG THÀNH TÍCH HỌC VIÊN | COMPETITIVE PROGRAMMING — NTOJ</title>
   <meta name="description" content="Bảng vàng vinh danh các học viên xuất sắc đạt thành tích trong lĩnh vực Tin học, lập trình thi đấu, Tin học trẻ và Học sinh giỏi các cấp tại NTOJ." />
   <meta property="og:title" content="BẢNG VÀNG THÀNH TÍCH HỌC VIÊN — COMPETITIVE PROGRAMMING NTOJ" />
   <meta property="og:description" content="Mỗi thành tích là một cột mốc trên hành trình chinh phục thuật toán." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/MNTT2903/ntoj-student-images/main/mvu%20fifai.jpg?raw=true" />
+  <meta property="og:url" content="https://peternguyen-danzo.github.io/" />
   <meta property="og:type" content="website" />
 
   <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
@@ -30,10 +42,6 @@
 
   <style>
     /* ==========================================================================
-       1. DESIGN TOKENS & CSS VARIABLES (LIGHT MODE & DARK MODE)
-       ========================================================================== */
-    :root,
-    /* ==========================================================================
        1. DESIGN TOKENS & CSS VARIABLES (LAVENDER & MIDNIGHT PURPLE)
        ========================================================================== */
     :root,
@@ -45,18 +53,18 @@
       --bg-glass: rgba(245, 243, 255, 0.86);
       --bg-modal-backdrop: rgba(46, 16, 101, 0.55);
 
-      --text-primary: #2E1065;     /* Chữ tím đậm sang trọng */
+      --text-primary: #2E1065;     
       --text-secondary: #4C1D95;
       --text-muted: #6D28D9;
       --text-on-brand: #FFFFFF;
 
-      --brand-primary: #7C3AED;    /* Màu nhấn tím Violet nổi bật */
+      --brand-primary: #7C3AED;    
       --brand-primary-hover: #6D28D9;
       --brand-secondary: #059669;
       --brand-gradient: linear-gradient(135deg, #7C3AED 0%, #A855F7 50%, #C084FC 100%);
       --brand-soft-bg: rgba(124, 58, 237, 0.08);
 
-      --border-subtle: #DDD6FE;    /* Viền tím nhạt pastel */
+      --border-subtle: #DDD6FE;    
       --border-tech: rgba(124, 58, 237, 0.22);
       --border-focus: #7C3AED;
 
@@ -103,25 +111,25 @@
     }
 
     [data-theme="dark"] {
-      --bg-primary: #0F0A1A;       /* Nền tím đêm tối sâu thẳm */
-      --bg-secondary: #181124;     /* Nền phụ tím than */
-      --bg-card: #221835;          /* Thẻ card tím đậm */
+      --bg-primary: #0F0A1A;       
+      --bg-secondary: #181124;     
+      --bg-card: #221835;          
       --bg-card-subtle: #2A1F40;
       --bg-glass: rgba(15, 10, 26, 0.86);
       --bg-modal-backdrop: rgba(5, 3, 10, 0.82);
 
-      --text-primary: #F3E8FF;     /* Chữ sáng ngả tím nhạt dễ chịu */
+      --text-primary: #F3E8FF;     
       --text-secondary: #D8B4FE;
       --text-muted: #C084FC;
       --text-on-brand: #0F0A1A;
 
-      --brand-primary: #C084FC;    /* Màu nhấn tím sáng cho dark mode */
+      --brand-primary: #C084FC;    
       --brand-primary-hover: #E879F9;
       --brand-secondary: #34D399;
       --brand-gradient: linear-gradient(135deg, #C084FC 0%, #E879F9 52%, #F472B6 100%);
       --brand-soft-bg: rgba(192, 132, 252, 0.12);
 
-      --border-subtle: #3B2E56;    /* Viền tím tối */
+      --border-subtle: #3B2E56;    
       --border-tech: rgba(192, 132, 252, 0.28);
       --border-focus: #C084FC;
 
@@ -215,8 +223,7 @@
        3. TOP UTILITY BAR & HEADER (CP SIGNATURE)
        ========================================================================== */
     .top-bar {
-      position: sticky;
-      top: 0;
+      position: relative; /* Không ghim cố định để tránh chiếm không gian khi lướt */
       z-index: 40;
       background: var(--bg-glass);
       backdrop-filter: blur(14px);
@@ -415,11 +422,11 @@
     }
 
     .hero__title {
-      font-size: clamp(1.4rem, 2.8vw, 2.75rem); /* Đã tinh chỉnh nhỏ lại một chút để vừa vặn hơn */
+      font-size: clamp(1.4rem, 2.8vw, 2.75rem);
       font-weight: 800;
       line-height: 1.15;
       letter-spacing: -0.025em;
-      white-space: nowrap; /* Ép buộc giữ nguyên trên một hàng duy nhất */
+      white-space: nowrap;
       background: var(--brand-gradient);
       -webkit-background-clip: text;
       background-clip: text;
@@ -535,7 +542,6 @@
       user-select: none;
     }
 
-    /* Sắc thái viền riêng cho từng danh mục khi chưa active */
     .category-pill[data-color="gold"] { border-color: rgba(245, 158, 11, 0.45); }
     .category-pill[data-color="blue"] { border-color: rgba(29, 78, 216, 0.4); }
     .category-pill[data-color="emerald"] { border-color: rgba(5, 150, 105, 0.4); }
@@ -846,7 +852,6 @@
       gap: 0.7rem;
     }
 
-    /* Highlighted Achievement Box inside Card */
     .featured-award {
       border-radius: 13px;
       padding: 0.75rem 0.85rem;
@@ -976,7 +981,7 @@
     }
 
     /* ==========================================================================
-       8. MODAL CHI TIẾT HỌC VIÊN (METALLIC CP FRAME & TIMELINE)
+       8. MODAL CHI TIẾT HỌC VIÊN
        ========================================================================== */
     .modal-backdrop {
       position: fixed;
@@ -1067,19 +1072,20 @@
       display: grid;
       grid-template-columns: 340px 1fr;
       gap: 2rem;
-      align-items: center; /* Giữ khung ảnh cố định ở chính giữa theo chiều dọc */
-      overflow: hidden;    /* Khóa thanh cuộn tổng của modal */
+      align-items: center;
+      overflow: hidden;
       max-height: calc(90vh - 70px);
     }
 
-    /* Đưa thanh cuộn riêng biệt cho phần lịch sử thành tích */
     .history-panel {
       max-height: calc(90vh - 120px);
-      overflow-y: auto;    /* Chỉ xuất hiện thanh lướt ở cột thành tích */
+      overflow-y: auto;
       padding-right: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
     }
 
-    /* Tùy chỉnh thanh cuộn nhỏ gọn, đẹp mắt */
     .history-panel::-webkit-scrollbar {
       width: 6px;
     }
@@ -1088,16 +1094,13 @@
       border-radius: 999px;
     }
 
-    /* 7.1. KHUNG ẢNH METALLIC COMPETITIVE PROGRAMMING */
     .cp-metallic-frame {
       position: relative;
       border-radius: 22px;
       padding: 12px;
       background: var(--metallic-outer);
       border: 1.5px solid var(--metallic-border);
-      box-shadow:
-        inset 0 2px 4px var(--metallic-shine),
-        0 16px 36px -8px rgba(15, 23, 42, 0.28);
+      box-shadow: inset 0 2px 4px var(--metallic-shine), 0 16px 36px -8px rgba(15, 23, 42, 0.28);
     }
 
     .cp-metallic-frame[data-tier="gold"] {
@@ -1106,7 +1109,6 @@
       box-shadow: 0 16px 38px -8px var(--gold-glow);
     }
 
-    /* Ốc vít góc PCB */
     .pcb-corner {
       position: absolute;
       width: 8px;
@@ -1174,11 +1176,6 @@
       backdrop-filter: blur(6px);
     }
 
-    .cp-metallic-frame[data-tier="gold"] .cp-metallic-frame__badge {
-      color: #FDE047;
-      border-color: #FACC15;
-    }
-
     .cp-metallic-frame__info {
       position: relative;
       z-index: 1;
@@ -1219,13 +1216,6 @@
       color: #64748B;
       border-top: 1px dashed rgba(255, 255, 255, 0.15);
       padding-top: 0.55rem;
-    }
-
-    /* 7.2. KHUNG LỊCH SỬ THÀNH TÍCH METALLIC */
-    .history-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 1.1rem;
     }
 
     .history-panel__header {
@@ -1300,7 +1290,6 @@
       transform: translateX(-0.5px);
     }
 
-    /* 7.3. MÀU SẮC THEO CẤP ĐỘ GIẢI TRONG TIMELINE */
     .timeline-item[data-tier="gold"] {
       background: var(--gold-surface);
       border-color: var(--gold-border);
@@ -1380,9 +1369,6 @@
       border-top: 1px dashed var(--border-subtle);
     }
 
-    /* ==========================================================================
-       9. SKELETON LOADING, EMPTY STATE & ERROR STATE
-       ========================================================================== */
     .skeleton-card {
       height: 290px;
       border-radius: 20px;
@@ -1453,43 +1439,6 @@
       box-shadow: 0 6px 16px rgba(29, 78, 216, 0.3);
     }
 
-    /* ==========================================================================
-       10. CONFIG MODAL & TOAST NOTIFICATION
-       ========================================================================== */
-    .config-form {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .form-group label {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .form-group input {
-      height: 44px;
-      padding: 0 0.9rem;
-      border-radius: 10px;
-      border: 1.5px solid var(--border-subtle);
-      background: var(--bg-primary);
-      font-family: var(--font-mono);
-      font-size: 0.83rem;
-    }
-
-    .form-help {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
     .toast {
       position: fixed;
       bottom: 1.5rem;
@@ -1513,7 +1462,6 @@
       animation: slideUp 0.2s ease-out;
     }
 
-    /* Footer */
     .footer {
       border-top: 1px solid var(--border-subtle);
       background: var(--bg-card-subtle);
@@ -1531,9 +1479,6 @@
       gap: 1rem;
     }
 
-    /* ==========================================================================
-       11. RESPONSIVE BREAKPOINTS & ACCESSIBILITY
-       ========================================================================== */
     @media (max-width: 960px) {
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1541,12 +1486,12 @@
       .modal-body {
         grid-template-columns: 1fr;
         align-items: stretch;
-        overflow-y: auto; /* Cho phép cuộn toàn bộ nội dung pop-up (cả avatar lẫn thành tích) */
-        -webkit-overflow-scrolling: touch; /* Giúp lướt mượt hơn trên iOS/Android */
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
       }
       .history-panel {
-        max-height: none; /* Bỏ giới hạn chiều cao riêng của cột thành tích */
-        overflow-y: visible; /* Tắt thanh cuộn riêng của thành tích để cuộn chung với avatar */
+        max-height: none;
+        overflow-y: visible;
         padding-right: 0;
       }
       .cp-metallic-frame {
@@ -1587,28 +1532,19 @@
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
+    #particleCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 3;
     }
-#particleCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 3;
-}
   </style>
 </head>
 <body>
-<!-- Hiệu ứng Particle theo chuột -->
   <canvas id="particleCanvas"></canvas>
-  <!-- ==================== 1. TOP UTILITY BAR ==================== -->
   <header class="top-bar">
     <div class="container top-bar__inner">
       <a href="#" class="brand" aria-label="Trang chủ NTOJ Hall of Fame">
@@ -1620,20 +1556,16 @@
       </a>
 
       <div class="top-bar__controls">
-        <!-- Trạng thái đồng bộ Google Sheets -->
         <div id="syncStatusPill" class="sync-pill" data-state="idle" role="status" aria-live="polite">
           <span class="sync-dot"></span>
           <span id="syncStatusText">Đã đồng bộ</span>
         </div>
 
-        <!-- Nút làm mới dữ liệu ngay -->
         <button type="button" id="btnManualSync" class="icon-btn" title="Đồng bộ dữ liệu từ Google Sheets ngay">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
           <span>Làm mới</span>
         </button>
 
-
-        <!-- Nút chuyển đổi Light / Dark Mode -->
         <button type="button" id="btnThemeToggle" class="icon-btn theme-btn" aria-label="Chuyển đổi giao diện Sáng / Tối" title="Chuyển chế độ Sáng / Tối">
           <span id="themeIconWrap"></span>
         </button>
@@ -1641,9 +1573,7 @@
     </div>
   </header>
 
-  <!-- ==================== 2. HERO HEADER (CP SIGNATURE) ==================== -->
   <section class="hero">
-    <!-- Họa tiết đồ thị thuật toán Segment Tree & Binary Tree hai bên -->
     <div class="hero__bg-decor" aria-hidden="true">
       <svg class="cp-graphic" viewBox="0 0 240 200" fill="none" stroke="currentColor" stroke-width="1.8">
         <line x1="120" y1="30" x2="65" y2="90" stroke-dasharray="4 3" />
@@ -1661,7 +1591,6 @@
         <circle cx="145" cy="155" r="11" />
         <circle cx="205" cy="155" r="11" />
       </svg>
-
       <svg class="cp-graphic" viewBox="0 0 240 200" fill="none" stroke="currentColor" stroke-width="1.8">
         <path d="M20 40 H90 L115 65 H210" />
         <path d="M40 100 H130 L155 125 H220" stroke-dasharray="5 4" />
@@ -1689,9 +1618,7 @@
     </div>
   </section>
 
-  <!-- ==================== 3. MAIN CONTENT ==================== -->
   <main class="container">
-    <!-- 3.1. Khu vực Thống kê tổng quan (Tính động 100% từ dữ liệu thực tế) -->
     <section class="stats-grid" aria-label="Thống kê tổng quan">
       <article class="stat-card">
         <div class="stat-card__icon">{S}</div>
@@ -1723,12 +1650,10 @@
       </article>
     </section>
 
-    <!-- 3.2. Hệ thống Danh mục dạng Pill -->
     <section class="categories-section" aria-label="Danh mục thành tích">
       <div id="categoryPillsContainer" class="categories-list" role="tablist"></div>
     </section>
 
-    <!-- 3.3. Thanh tìm kiếm & Bộ sắp xếp -->
     <section class="toolbar" aria-label="Công cụ tìm kiếm và sắp xếp">
       <div class="search-box">
         <svg class="search-box__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -1758,11 +1683,9 @@
       </div>
     </section>
 
-    <!-- 3.4. Lưới Thẻ học viên -->
     <section id="studentsGrid" class="students-grid" aria-live="polite"></section>
   </main>
 
-  <!-- ==================== 4. MODAL HỒ SƠ CHI TIẾT HỌC VIÊN ==================== -->
   <div id="studentModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalStudentName">
     <div class="modal-dialog">
       <div class="modal-header">
@@ -1771,15 +1694,13 @@
           <span id="modalTerminalPath">ntoj://hall-of-fame/student/profile.cpp</span>
         </div>
         <div class="modal-header__actions">
-                    <button type="button" id="btnCloseStudentModal" class="icon-btn" aria-label="Đóng cửa sổ chi tiết">✕ Đóng</button>
+          <button type="button" id="btnCloseStudentModal" class="icon-btn" aria-label="Đóng cửa sổ chi tiết">✕ Đóng</button>
         </div>
       </div>
-
       <div id="studentModalContent" class="modal-body"></div>
     </div>
   </div>
 
-  <!-- ==================== 5. MODAL CẤU HÌNH GOOGLE SHEETS ==================== -->
   <div id="configModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="configModalTitle">
     <div class="modal-dialog" style="max-width: 640px;">
       <div class="modal-header">
@@ -1789,20 +1710,11 @@
         </div>
         <button type="button" id="btnCloseConfigModal" class="icon-btn" aria-label="Đóng cấu hình">✕</button>
       </div>
-
       <form id="configForm" class="config-form">
         <div class="form-group">
           <label for="inputGasUrl">Cách 1: Google Apps Script Web App URL (Khuyên dùng)</label>
           <input type="url" id="inputGasUrl" placeholder="https://script.google.com/macros/s/.../exec" />
-          <span class="form-help">Dán URL Web App sau khi Deploy file <code>Code.gs</code> trên Google Sheets của bạn.</span>
         </div>
-
-        <div class="form-group">
-          <label for="inputSheetId">Cách 2: Google Spreadsheet ID công khai (Kết nối trực tiếp)</label>
-          <input type="text" id="inputSheetId" placeholder="Ví dụ: 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms" />
-          <span class="form-help">Nếu chưa tạo Apps Script, bạn chỉ cần bật chia sẻ "Anyone with the link can view" cho Google Sheet có 2 tab <code>Students</code> &amp; <code>Achievements</code> và dán ID vào đây.</span>
-        </div>
-
         <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
           <button type="button" id="btnResetDemoData" class="icon-btn">Khôi phục dữ liệu mẫu NTOJ</button>
           <button type="submit" class="primary-btn">Lưu &amp; Đồng bộ ngay</button>
@@ -1811,10 +1723,8 @@
     </div>
   </div>
 
-  <!-- Thông báo Toast -->
   <div id="toastNotification" class="toast" role="status" aria-live="polite"></div>
 
-  <!-- ==================== 6. FOOTER ==================== -->
   <footer class="footer">
     <div class="container footer__inner">
       <div>
@@ -1826,19 +1736,10 @@
     </div>
   </footer>
 
-  <!-- ==================== 7. APPLICATION JAVASCRIPT ==================== -->
   <script>
-    /**
-     * ============================================================================
-     * CẤU HÌNH MẶC ĐỊNH (QUẢN TRỊ VIÊN CÓ THỂ ĐIỀN TRỰC TIẾP TẠI ĐÂY)
-     * ============================================================================
-     */
     const DEFAULT_CONFIG = {
-      // Điền URL Google Apps Script Web App của bạn vào đây (nếu có):
       GAS_API_URL: 'https://script.google.com/macros/s/AKfycbwOXbCeIwOkVuAgJ16H7XILqNy1U6b9aEPXyqQd2ugxASHvWK4HCm_20bwC67UTzkAshA/exec',
-      // Hoặc điền trực tiếp ID của Google Spreadsheet công khai vào đây:
       PUBLIC_SHEET_ID: '',
-      // Chu kỳ tự động đồng bộ ngầm (20.000ms = 20 giây)
       POLL_INTERVAL_MS: 20000
     };
 
@@ -1848,342 +1749,18 @@
       CACHE: 'ntoj_cp_data_cache_v1'
     };
 
-    /**
-     * Danh mục chuẩn theo đúng hình tham chiếu & Master Prompt
-     */
     const DEFAULT_CATEGORIES = [
-      { category_id: 'CAT01', category_name: 'Tin Học Trẻ Quốc Gia', color_token: 'gold', display_order: 1, is_visible: true },
-      { category_id: 'CAT02', category_name: 'Chọn Đội Tuyển Tỉnh Dự Thi Quốc Gia', color_token: 'blue', display_order: 2, is_visible: true },
-      { category_id: 'CAT03', category_name: 'Tin Học Trẻ Khu Vực', color_token: 'emerald', display_order: 3, is_visible: true },
-      { category_id: 'CAT04', category_name: 'Học Sinh Giỏi cấp Miền', color_token: 'purple', display_order: 4, is_visible: true },
-      { category_id: 'CAT05', category_name: 'Học Sinh Giỏi Tỉnh', color_token: 'cyan', display_order: 5, is_visible: true }
+      { category_id: 'CAT01', category_name: 'Học sinh giỏi quốc gia', color_token: 'gold', display_order: 1, is_visible: true },
+      { category_id: 'CAT09', category_name: 'TST', color_token: 'purple', display_order: 2, is_visible: true },
+      { category_id: 'CAT02', category_name: 'Đội tuyển quốc gia', color_token: 'blue', display_order: 3, is_visible: true },
+      { category_id: 'CAT03', category_name: 'Duyên hải Bắc Bộ', color_token: 'indigo', display_order: 4, is_visible: true },
+      { category_id: 'CAT04', category_name: 'Olympic 30/4', color_token: 'rose', display_order: 5, is_visible: true },
+      { category_id: 'CAT07', category_name: 'Học sinh giỏi tỉnh', color_token: 'emerald', display_order: 6, is_visible: true },
+      { category_id: 'CAT05', category_name: 'Tuyển sinh 10', color_token: 'cyan', display_order: 7, is_visible: true }
     ];
 
-    /**
-     * Bộ dữ liệu thực tế mẫu (Sử dụng khi chưa cấu hình URL Google Sheets
-     * để kiểm thử đầy đủ mọi tính năng lọc, tìm kiếm, sắp xếp và modal)
-     */
-    const INITIAL_NTOJ_DATA = {
-      students: [
-        {
-          student_id: 'STU001',
-          full_name: 'Nguyễn Minh Quân',
-          avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
-          class_name: 'Chuyên Tin K34 — Đội tuyển Quốc gia',
-          introduction: 'Đam mê Quy hoạch động (Dynamic Programming), Cây phân đoạn (Segment Tree) và Lý thuyết đồ thị nâng cao.',
-          display_order: 1,
-          is_visible: true
-        },
-        {
-          student_id: 'STU002',
-          full_name: 'Trần Hoàng Bảo Ngọc',
-          avatar_url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80',
-          class_name: 'Chuyên Tin K35 — NTOJ Elite',
-          introduction: 'Nữ chiến binh thuật toán xuất sắc với thế mạnh Cấu trúc dữ liệu Fenwick Tree, Heavy-Light Decomposition và Toán tổ hợp.',
-          display_order: 2,
-          is_visible: true
-        },
-        {
-          student_id: 'STU003',
-          full_name: 'Lê Đăng Khoa',
-          avatar_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80',
-          class_name: 'Lớp Thuật Toán Nâng Cao — NTOJ Pro',
-          introduction: 'Tốc độ cài đặt C++ chuẩn xác, chuyên sâu thuật toán Luồng cực đại (Max Flow) và Hình học tính toán.',
-          display_order: 3,
-          is_visible: true
-        },
-        {
-          student_id: 'STU004',
-          full_name: 'Phạm Gia Hưng',
-          avatar_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80',
-          class_name: 'Chuyên Tin K35 — NTOJ Elite',
-          introduction: 'Kiên trì chinh phục các bài toán Tối ưu hóa trên đồ thị, Dijkstra biến thể và Quy hoạch động trạng thái (Bitmask DP).',
-          display_order: 4,
-          is_visible: true
-        },
-        {
-          student_id: 'STU005',
-          full_name: 'Võ Thị Thanh Trúc',
-          avatar_url: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80',
-          class_name: 'Khóa Lập Trình Thi Đấu Trẻ — NTOJ Junior',
-          introduction: 'Tư duy thuật toán sắc bén từ bậc THCS, nổi bật ở các bài toán Số học đồng dư và Tìm kiếm nhị phân trên kết quả.',
-          display_order: 5,
-          is_visible: true
-        },
-        {
-          student_id: 'STU006',
-          full_name: 'Đặng Quốc Khánh',
-          avatar_url: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80',
-          class_name: 'Chuyên Tin K34 — Đội tuyển Tỉnh',
-          introduction: 'Chuyên gia xử lý chuỗi KMP, Z-Algorithm, Suffix Automaton và cấu trúc dữ liệu Trie.',
-          display_order: 6,
-          is_visible: true
-        },
-        {
-          student_id: 'STU007',
-          full_name: 'Hoàng Nhật Nam',
-          avatar_url: '', // Kiểm thử trường hợp học viên thiếu ảnh đại diện
-          class_name: 'Lớp Luyện Thi HSG Tỉnh — NTOJ Core',
-          introduction: 'Nền tảng vững chắc về Duyệt phân đôi tập hợp (Meet in the middle), Tham lam và Đồ thị hai phía.',
-          display_order: 7,
-          is_visible: true
-        },
-        {
-          student_id: 'STU008',
-          full_name: 'Bùi Phương Thảo',
-          avatar_url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80',
-          class_name: 'Chuyên Tin K36 — NTOJ Talent',
-          introduction: 'Gương mặt trẻ triển vọng đạt điểm tuyệt đối phần Quy hoạch động trên cây trong kỳ thi cấp Tỉnh.',
-          display_order: 8,
-          is_visible: true
-        }
-      ],
-      achievements: [
-        // Học viên STU001 (Sắp xếp năm cố tình đảo lộn để kiểm chứng hàm sort tăng dần trong Modal)
-        {
-          achievement_id: 'ACH001',
-          student_id: 'STU001',
-          achievement_name: 'Huy chương Vàng Tin Học Trẻ Toàn Quốc',
-          category: 'Tin Học Trẻ Quốc Gia',
-          competition_name: 'Hội thi Tin học trẻ Toàn quốc lần thứ XXX (Bảng C1)',
-          award_level: 'Huy chương Vàng',
-          award_year: 2025,
-          description: 'Đạt 300/300 điểm tuyệt đối vòng Chung kết Quốc gia.',
-          display_order: 1,
-          is_visible: true
-        },
-        {
-          achievement_id: 'ACH002',
-          student_id: 'STU001',
-          achievement_name: 'Giải Nhất Chọn Đội Tuyển Dự Thi HSG Quốc Gia (VOI)',
-          category: 'Chọn Đội Tuyển Tỉnh Dự Thi Quốc Gia',
-          competition_name: 'Kỳ thi Chọn đội tuyển chính thức dự thi HSG Quốc gia THPT',
-          award_level: 'Giải Nhất',
-          award_year: 2024,
-          description: 'Thủ khoa toàn tỉnh sau 2 ngày thi lập trình thuật toán.',
-          display_order: 2,
-          is_visible: true
-        },
-        {
-          achievement_id: 'ACH003',
-          student_id: 'STU001',
-          achievement_name: 'Huy chương Bạc Olympic Tin học Duyên hải & ĐBBB',
-          category: 'Học Sinh Giỏi cấp Miền',
-          competition_name: 'Kỳ thi Học sinh giỏi các trường THPT Chuyên khu vực Duyên hải',
-          award_level: 'Huy chương Bạc',
-          award_year: 2023,
-          description: 'Khối lớp 10 chuyên Tin.',
-          display_order: 3,
-          is_visible: true
-        },
-        {
-          achievement_id: 'ACH004',
-          student_id: 'STU001',
-          achievement_name: 'Giải Nhất Học Sinh Giỏi Tỉnh môn Tin học',
-          category: 'Học Sinh Giỏi Tỉnh',
-          competition_name: 'Kỳ thi Chọn Học sinh giỏi cấp Tỉnh lớp 9 THCS',
-          award_level: 'Giải Nhất',
-          award_year: 2022,
-          description: 'Giải Nhất vượt cấp từ năm lớp 8.',
-          display_order: 4,
-          is_visible: true
-        },
+    const INITIAL_NTOJ_DATA = { students: [], achievements: [], categories: DEFAULT_CATEGORIES };
 
-        // Học viên STU002
-        {
-          achievement_id: 'ACH005',
-          student_id: 'STU002',
-          achievement_name: 'Giải Nhất Tin Học Trẻ Khu Vực Miền Trung',
-          category: 'Tin Học Trẻ Khu Vực',
-          competition_name: 'Vòng Khu vực Hội thi Tin học trẻ Toàn quốc',
-          award_level: 'Giải Nhất',
-          award_year: 2025,
-          description: 'Lọt vào vòng Chung kết Quốc gia với số điểm cao nhất bảng B.',
-          display_order: 1,
-          is_visible: true
-        },
-        {
-          achievement_id: 'ACH006',
-          student_id: 'STU002',
-          achievement_name: 'Huy chương Vàng Olympic Truyền thống 30/4',
-          category: 'Học Sinh Giỏi cấp Miền',
-          competition_name: 'Kỳ thi Olympic Truyền thống 30/4 môn Tin học',
-          award_level: 'Huy chương Vàng',
-          award_year: 2024,
-          description: 'Huy chương Vàng khối 10 chuyên Tin.',
-          display_order: 2,
-          is_visible: true
-        },
-        {
-          achievement_id: 'ACH007',
-          student_id: 'STU002',
-          achievement_name: 'Giải Nhì Tin Học Trẻ Quốc Gia',
-          category: 'Tin Học Trẻ Quốc Gia',
-          competition_name: 'Vòng Chung kết Hội thi Tin học trẻ Toàn quốc',
-          award_level: 'Giải Nhì',
-          award_year: 2025,
-          description: 'Bảng C1 dành cho học sinh THPT chuyên.',
-          display_order: 2,
-          is_visible: true
-        },
-
-        // Học viên STU003
-        {
-          achievement_id: 'ACH008',
-          student_id: 'STU003',
-          achievement_name: 'Chính thức vào Đội Tuyển Tỉnh dự thi HSG Quốc Gia',
-          category: 'Chọn Đội Tuyển Tỉnh Dự Thi Quốc Gia',
-          competition_name: 'Kỳ thi Chọn đội tuyển HSG Quốc gia môn Tin học',
-          award_level: 'Giải Nhì',
-          award_year: 2025,
-          description: 'Xếp hạng 2/12 thành viên đội tuyển chính thức của Tỉnh.',
-          display_order: 1,
-          is_visible: true
-        },
-        {
-          achievement_id: 'ACH009',
-          student_id: 'STU003',
-          achievement_name: 'Giải Nhất Học Sinh Giỏi Tỉnh THPT',
-          category: 'Học Sinh Giỏi Tỉnh',
-          competition_name: 'Kỳ thi Chọn Học sinh giỏi cấp Tỉnh THPT',
-          award_level: 'Giải Nhất',
-          award_year: 2024,
-          description: 'Đạt 19.5/20 điểm.',
-          display_order: 2,
-          is_visible: true
-        },
-
-        // Học viên STU004
-        {
-          achievement_id: 'ACH010',
-          student_id: 'STU004',
-          achievement_name: 'Huy chương Đồng Trại Hè Tin Học Miền Trung - Tây Nguyên',
-          category: 'Học Sinh Giỏi cấp Miền',
-          competition_name: 'Kỳ thi Olympic Tin học Miền Trung - Tây Nguyên',
-          award_level: 'Huy chương Đồng',
-          award_year: 2024,
-          description: 'Bảng Chuyên Tin.',
-          display_order: 1,
-          is_visible: true
-        },
-        {
-          achievement_id: 'ACH011',
-          student_id: 'STU004',
-          achievement_name: 'Giải Nhì Tin Học Trẻ Khu Vực',
-          category: 'Tin Học Trẻ Khu Vực',
-          competition_name: 'Vòng Khu vực Hội thi Tin học trẻ Toàn quốc',
-          award_level: 'Giải Nhì',
-          award_year: 2025,
-          description: 'Bảng C2 THPT.',
-          display_order: 2,
-          is_visible: true
-        },
-
-        // Học viên STU005
-        {
-          achievement_id: 'ACH012',
-          student_id: 'STU005',
-          achievement_name: 'Giải Ba Tin Học Trẻ Toàn Quốc Bảng B',
-          category: 'Tin Học Trẻ Quốc Gia',
-          competition_name: 'Vòng Chung kết Hội thi Tin học trẻ Toàn quốc',
-          award_level: 'Giải Ba',
-          award_year: 2025,
-          description: 'Khối THCS toàn quốc.',
-          display_order: 1,
-          is_visible: true
-        },
-        {
-          achievement_id: 'ACH013',
-          student_id: 'STU005',
-          achievement_name: 'Giải Nhất Tin Học Trẻ Khu Vực Bảng B',
-          category: 'Tin Học Trẻ Khu Vực',
-          competition_name: 'Vòng Khu vực Hội thi Tin học trẻ Toàn quốc',
-          award_level: 'Giải Nhất',
-          award_year: 2024,
-          description: 'Điểm cao nhất khối THCS.',
-          display_order: 2,
-          is_visible: true
-        },
-
-        // Học viên STU006
-        {
-          achievement_id: 'ACH014',
-          student_id: 'STU006',
-          achievement_name: 'Giải Ba Chọn Đội Tuyển Dự Thi Quốc Gia',
-          category: 'Chọn Đội Tuyển Tỉnh Dự Thi Quốc Gia',
-          competition_name: 'Kỳ thi Chọn đội tuyển dự thi HSG Quốc gia THPT',
-          award_level: 'Giải Ba',
-          award_year: 2024,
-          description: 'Thành viên chính thức đội tuyển VOI của Tỉnh.',
-          display_order: 1,
-          is_visible: true
-        },
-        {
-          achievement_id: 'ACH015',
-          student_id: 'STU006',
-          achievement_name: 'Huy chương Bạc Olympic Tin học cấp Miền',
-          category: 'Học Sinh Giỏi cấp Miền',
-          competition_name: 'Kỳ thi Olympic các trường THPT Chuyên',
-          award_level: 'Huy chương Bạc',
-          award_year: 2025,
-          description: 'Đạt 260/300 điểm.',
-          display_order: 2,
-          is_visible: true
-        },
-
-        // Học viên STU007 (Kiểm thử cả thành tích khuyết năm đạt giải)
-        {
-          achievement_id: 'ACH016',
-          student_id: 'STU007',
-          achievement_name: 'Giải Nhì Học Sinh Giỏi Tỉnh môn Tin học',
-          category: 'Học Sinh Giỏi Tỉnh',
-          competition_name: 'Kỳ thi Chọn Học sinh giỏi cấp Tỉnh THPT',
-          award_level: 'Giải Nhì',
-          award_year: 2024,
-          description: 'Bảng THPT toàn tỉnh.',
-          display_order: 1,
-          is_visible: true
-        },
-        {
-          achievement_id: 'ACH017',
-          student_id: 'STU007',
-          achievement_name: 'Giải Khuyến Khích Tin Học Trẻ Khu Vực',
-          category: 'Tin Học Trẻ Khu Vực',
-          competition_name: 'Hội thi Tin học trẻ Vòng Khu vực',
-          award_level: 'Giải Khuyến Khích',
-          award_year: null, // Thành tích thiếu năm để kiểm thử quy tắc dự phòng
-          description: 'Bản ghi kiểm thử trường hợp dữ liệu trên Sheet chưa nhập năm đạt giải.',
-          display_order: 2,
-          is_visible: true
-        },
-
-        // Học viên STU008
-        {
-          achievement_id: 'ACH018',
-          student_id: 'STU008',
-          achievement_name: 'Giải Nhất Học Sinh Giỏi Tỉnh môn Tin học',
-          category: 'Học Sinh Giỏi Tỉnh',
-          competition_name: 'Kỳ thi Chọn Học sinh giỏi cấp Tỉnh năm học 2025–2026',
-          award_level: 'Giải Nhất',
-          award_year: 2026,
-          description: 'Đạt điểm tuyệt đối bài Quy hoạch động trên cây.',
-          display_order: 1,
-          is_visible: true
-        }
-      ],
-      categories: DEFAULT_CATEGORIES
-    };
-
-    /**
-     * ============================================================================
-     * CÁC HÀM TIỆN ÍCH XỬ LÝ NGÔN NGỮ, MÀU GIẢI THƯỞNG VÀ FALLBACK ẢNH
-     * ============================================================================
-     */
-
-    /**
-     * Chuẩn hóa chuỗi tiếng Việt: chuyển chữ thường, lược bỏ dấu, đ -> d,
-     * xóa khoảng trắng dư thừa để tìm kiếm cả có dấu lẫn không dấu.
-     */
     function normalizeVietnamese(str) {
       if (!str) return '';
       return String(str)
@@ -2196,9 +1773,6 @@
         .trim();
     }
 
-    /**
-     * Escape HTML để chống XSS khi render dữ liệu từ Google Sheets
-     */
     function escapeHtml(value) {
       if (value === null || value === undefined) return '';
       return String(value)
@@ -2209,62 +1783,29 @@
         .replace(/'/g, '&#39;');
     }
 
-    /**
-     * Phân loại cấp độ màu sắc (gold / silver / bronze / special) dựa trên award_level
-     * nhưng vẫn bảo toàn nguyên vẹn tên giải gốc khi hiển thị.
-     */
-    function resolveAwardTier(awardLevel) {
+    // HOÁN ĐỔI MÃ MÀU: Đội tuyển quốc gia (special) <-> Khuyến khích (consolation)
+    function resolveAwardTier(awardLevel, category = '') {
       const norm = normalizeVietnamese(awardLevel);
+      const normCat = normalizeVietnamese(category);
       
-      // Nhóm Vàng / Giải Nhất / Thủ khoa / Tam khoa
-      if (
-        norm.includes('nhat') ||
-        norm.includes('vang') ||
-        norm.includes('hcv') ||
-        norm.includes('gold') ||
-        norm.includes('thu khoa') ||
-        norm.includes('tam khoa') ||
-        norm.includes('vo dich')
-      ) {
-        return { tier: 'gold', priority: 1, icon: '★' };
+      if (normCat.includes('doi tuyen quoc gia') || normCat.includes('dtqg')) {
+        return { tier: 'special', priority: 5, icon: '✦' };
       }
-      
-      // Nhóm Bạc / Giải Nhì / Á khoa
-      if (
-        norm.includes('nhi') ||
-        norm.includes('bac') ||
-        norm.includes('hcb') ||
-        norm.includes('silver') ||
-        norm.includes('a khoa')
-      ) {
-        return { tier: 'silver', priority: 2, icon: '◆' };
-      }
-      
-      // Nhóm Đồng / Giải Ba
-      if (
-        norm.includes('ba') ||
-        norm.includes('dong') ||
-        norm.includes('hcd') ||
-        norm.includes('bronze')
-      ) {
-        return { tier: 'bronze', priority: 3, icon: '▲' };
-      }
-
-      // Nhóm Giải Khuyến Khích
-      if (
-        norm.includes('khuyen khich') ||
-        norm.includes('kk')
-      ) {
+      if (norm.includes('khuyen khich') || norm.includes('kk')) {
         return { tier: 'consolation', priority: 4, icon: '●' };
       }
-
-      // Các giải khác
+      if (norm.includes('nhat') || norm.includes('vang') || norm.includes('hcv') || norm.includes('gold') || norm.includes('thu khoa') || norm.includes('tam khoa') || norm.includes('vo dich')) {
+        return { tier: 'gold', priority: 1, icon: '★' };
+      }
+      if (norm.includes('nhi') || norm.includes('bac') || norm.includes('hcb') || norm.includes('silver') || norm.includes('a khoa')) {
+        return { tier: 'silver', priority: 2, icon: '◆' };
+      }
+      if (norm.includes('ba') || norm.includes('dong') || norm.includes('hcd') || norm.includes('bronze')) {
+        return { tier: 'bronze', priority: 3, icon: '▲' };
+      }
       return { tier: 'special', priority: 5, icon: '✦' };
     }
 
-    /**
-     * Tạo SVG Avatar chữ cái đầu (Fallback khi học viên không có ảnh hoặc URL ảnh bị lỗi)
-     */
     function createFallbackAvatarDataUri(fullName) {
       const parts = String(fullName || 'NTOJ').trim().split(/\s+/);
       const initials = parts.length >= 2
@@ -2272,12 +1813,7 @@
         : String(fullName || 'CP').slice(0, 2).toUpperCase();
 
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-        <defs>
-          <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1D4ED8"/>
-            <stop offset="100%" stop-color="#059669"/>
-          </linearGradient>
-        </defs>
+        <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1D4ED8"/><stop offset="100%" stop-color="#059669"/></linearGradient></defs>
         <rect width="200" height="200" fill="url(#g)"/>
         <circle cx="100" cy="100" r="86" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-dasharray="6 4"/>
         <text x="50%" y="53%" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-weight="700" font-size="64">${escapeHtml(initials)}</text>
@@ -2285,11 +1821,6 @@
       return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
     }
 
-    /**
-     * ============================================================================
-     * TRẠNG THÁI ỨNG DỤNG (APPLICATION STATE)
-     * ============================================================================
-     */
     const state = {
       profiles: [],
       categories: [],
@@ -2320,11 +1851,6 @@
       return { ...DEFAULT_CONFIG };
     }
 
-    /**
-     * ============================================================================
-     * XỬ LÝ & LIÊN KẾT DỮ LIỆU TỪ SHEETS (RELATIONAL BUILDER)
-     * ============================================================================
-     */
     function buildRelationalData(payload) {
       const rawStudents = Array.isArray(payload.students) ? payload.students : [];
       const rawAchievements = Array.isArray(payload.achievements) ? payload.achievements : [];
@@ -2332,10 +1858,8 @@
         ? payload.categories
         : DEFAULT_CATEGORIES;
 
-      // 1. Lọc học viên đang hiển thị
       const visibleStudents = rawStudents.filter(s => s && s.student_id && s.is_visible !== false && String(s.is_visible).toUpperCase() !== 'FALSE');
 
-      // --- TẠO BẢNG TRA CỨU (MAP) ĐỂ TỰ ĐỘNG ĐỔI TÊN SANG STUDENT_ID ---
       const studentMap = new Map();
       visibleStudents.forEach(s => {
         const sid = String(s.student_id).trim();
@@ -2346,46 +1870,49 @@
           studentMap.set(normalizeVietnamese(cleanName), sid);
         }
       });
-      // -----------------------------------------------------------------
 
-      // 2. Lọc và làm giàu thông tin thành tích
       const visibleAchievements = rawAchievements
         .filter(a => a && (a.student_id || a.student_name || a.full_name) && a.is_visible !== false && String(a.is_visible).toUpperCase() !== 'FALSE')
         .map(a => {
-          // Tự động quy đổi Tên học viên (hoặc ID) nhập trong sheet sang student_id chuẩn
           const rawStudentKey = String(a.student_id || a.student_name || a.full_name || '').trim();
           const resolvedStudentId = studentMap.get(rawStudentKey.toLowerCase()) || 
                                     studentMap.get(normalizeVietnamese(rawStudentKey)) || 
                                     rawStudentKey;
 
-          // Xử lý gộp 3 thông tin từ cột achievement_info hoặc achievement_name
           const rawInfo = String(a.achievement_info || a.achievement_name || '').trim();
           const parts = rawInfo.split('|').map(p => p.trim());
           
           const achName = parts[0] || 'Thành tích Tin học';
           const compName = parts[1] || achName;
           
-          // Tự động chuẩn hóa category theo từ khóa
           const normAch = normalizeVietnamese(achName);
-        let catName = parts[2] || achName;
-        if (!parts[2]) {
-          if (normAch.includes('tin hoc tre')) {
-            catName = 'Tin học trẻ';
-          } 
-          // Đặt kiểm tra "quoc gia" lên trước để bắt chính xác
-          else if (normAch.includes('quoc gia') || normAch.includes('hsg quoc gia')) {
-            catName = 'Học sinh giỏi quốc gia';
-          } 
-          else if (normAch.includes('hoc sinh gioi') || normAch.includes('hsg')) {
-            catName = 'Học sinh giỏi tỉnh';
-          } 
-          else if (normAch.includes('olympic')) {
-            catName = 'Olympic 30/4';
-          } 
-          else if (normAch.includes('duyen hai') || normAch.includes('bac bo')) {
-            catName = 'Duyên hải Bắc Bộ';
+          let catName = parts[2] || achName;
+          if (!parts[2]) {
+            // SỬA THỨ TỰ ƯU TIÊN: Kiểm tra TST và Đội tuyển quốc gia TRƯỚC khi kiểm tra chữ "quoc gia" chung chung
+            if (normAch.includes('tst')) {
+              catName = 'TST';
+            } else if (normAch.includes('dtqg') || normAch.includes('doi tuyen quoc gia') || normAch.includes('chon doi tuyen')) {
+              catName = 'Đội tuyển quốc gia';
+            } else if ((normAch.includes('khuyen khich') || normAch.includes('kk')) && normAch.includes('quoc gia')) {
+              catName = 'Khuyến khích quốc gia';
+            } else if (normAch.includes('hsgqg') || normAch.includes('hsg quoc gia') || (normAch.includes('hoc sinh gioi') && normAch.includes('quoc gia'))) {
+              catName = 'Học sinh giỏi quốc gia';
+            } else if (normAch.includes('tin hoc tre toan quoc') || normAch.includes('tht toan quoc')) {
+              catName = 'Tin học trẻ toàn quốc';
+            } else if (normAch.includes('tin hoc tre khu vuc') || normAch.includes('tht khu vuc')) {
+              catName = 'Tin học trẻ khu vực';                                                                                                         
+            } else if (normAch.includes('tin hoc tre') || normAch.includes('tht')) {
+              catName = 'Tin học trẻ';
+            } else if (normAch.includes('hoc sinh gioi') || normAch.includes('hsg')) {
+              catName = 'Học sinh giỏi tỉnh';
+            } else if (normAch.includes('tuyen sinh 10') || normAch.includes('vao 10')) {
+              catName = 'Tuyển sinh 10';
+            } else if (normAch.includes('30 4') || normAch.includes('304') || normAch.includes('olympic')) {
+              catName = 'Olympic 30/4';
+            } else if (normAch.includes('duyen hai') || normAch.includes('bac bo')) {
+              catName = 'Duyên hải Bắc Bộ';
+            }
           }
-        }
 
           const parsedYear = (a.award_year !== null && a.award_year !== undefined && String(a.award_year).trim() !== '')
             ? Number(a.award_year)
@@ -2393,11 +1920,11 @@
           const validYear = (parsedYear && !Number.isNaN(parsedYear) && parsedYear > 1990 && parsedYear < 2100)
             ? parsedYear
             : null;
-          const tierInfo = resolveAwardTier(a.award_level || '');
+          const tierInfo = resolveAwardTier(a.award_level || '', catName);
 
           return {
             achievement_id: String(a.achievement_id || ''),
-            student_id: resolvedStudentId, // <--- Đã được tự động quy đổi chuẩn xác
+            student_id: resolvedStudentId,
             achievement_name: achName,
             category: catName,
             competition_name: compName,
@@ -2411,7 +1938,6 @@
           };
         });
 
-      // 3. Gom thành tích theo student_id
       const achByStudent = new Map();
       visibleAchievements.forEach(ach => {
         if (!achByStudent.has(ach.student_id)) {
@@ -2420,23 +1946,66 @@
         achByStudent.get(ach.student_id).push(ach);
       });
 
-      // 4. Xây dựng hồ sơ từng học viên
       const profiles = visibleStudents.map(student => {
         const sid = String(student.student_id).trim();
         const studentAchs = achByStudent.get(sid) || [];
 
+        // Sắp xếp thành tích trong Popup: Giải cao nhất đến thấp nhất
         const sortedChronological = [...studentAchs].sort((a, b) => {
-          if (a.award_year === null && b.award_year === null) {
-            return (a.display_order - b.display_order) || a.competition_name.localeCompare(b.competition_name, 'vi');
+          function getAchSortScore(ach) {
+            const cat = normalizeVietnamese(ach.category || '');
+            const lvl = normalizeVietnamese(ach.award_level || '');
+            const isHSGQG = cat.includes('hoc sinh gioi quoc gia') || cat.includes('hsgqg');
+            const isDTQG = cat.includes('doi tuyen quoc gia') || cat.includes('dtqg');
+            const isTst = cat.includes('tst');
+            const isGold = lvl.includes('nhat') || lvl.includes('vang') || lvl.includes('hcv') || lvl.includes('gold') || lvl.includes('thu khoa');
+            const isSilver = lvl.includes('nhi') || lvl.includes('bac') || lvl.includes('hcb') || lvl.includes('silver') || lvl.includes('a khoa');
+            const isBronze = lvl.includes('ba') || lvl.includes('dong') || lvl.includes('hcd') || lvl.includes('bronze');
+            const isKK = lvl.includes('khuyen khich') || lvl.includes('kk');
+
+            if (isHSGQG && isGold) return 1;
+            if (isTst) return 2;
+            if (isHSGQG && isSilver) return 3;
+            if (isHSGQG && isBronze) return 4;
+            if (isHSGQG && isKK) return 5;
+            if (isDTQG) return 20;
+            return 30 + (ach.tierPriority || 5);
           }
-          if (a.award_year === null) return 1;
-          if (b.award_year === null) return -1;
-          if (a.award_year !== b.award_year) return a.award_year - b.award_year;
-          if (a.display_order !== b.display_order) return a.display_order - b.display_order;
-          return a.competition_name.localeCompare(b.competition_name, 'vi');
+
+          const scoreA = getAchSortScore(a);
+          const scoreB = getAchSortScore(b);
+          if (scoreA !== scoreB) return scoreA - scoreB;
+          if (a.tierPriority !== b.tierPriority) return a.tierPriority - b.tierPriority;
+          const yA = a.award_year || 0;
+          const yB = b.award_year || 0;
+          if (yB !== yA) return yB - yA;
+          return a.display_order - b.display_order;
         });
 
         const bestSorted = [...studentAchs].sort((a, b) => {
+          function getAchScore(ach) {
+            const cat = normalizeVietnamese(ach.category || '');
+            const lvl = normalizeVietnamese(ach.award_level || '');
+            const isHSGQG = cat.includes('hoc sinh gioi quoc gia') || cat.includes('hsgqg');
+            const isDTQG = cat.includes('doi tuyen quoc gia') || cat.includes('dtqg');
+            const isTst = cat.includes('tst');
+            const isGold = lvl.includes('nhat') || lvl.includes('vang') || lvl.includes('hcv') || lvl.includes('gold') || lvl.includes('thu khoa');
+            const isSilver = lvl.includes('nhi') || lvl.includes('bac') || lvl.includes('hcb') || lvl.includes('silver') || lvl.includes('a khoa');
+            const isBronze = lvl.includes('ba') || lvl.includes('dong') || lvl.includes('hcd') || lvl.includes('bronze');
+            const isKK = lvl.includes('khuyen khich') || lvl.includes('kk');
+
+            if (isHSGQG && isGold) return 1;
+            if (isTst) return 2;
+            if (isHSGQG && isSilver) return 3;
+            if (isHSGQG && isBronze) return 4;
+            if (isHSGQG && isKK) return 5;
+            if (isDTQG) return 20;
+            return 30 + (ach.tierPriority || 5);
+          }
+
+          const scoreA = getAchScore(a);
+          const scoreB = getAchScore(b);
+          if (scoreA !== scoreB) return scoreA - scoreB;
           if (a.tierPriority !== b.tierPriority) return a.tierPriority - b.tierPriority;
           const yA = a.award_year || 0;
           const yB = b.award_year || 0;
@@ -2449,14 +2018,17 @@
         const latestYear = years.length > 0 ? Math.max(...years) : null;
         const highestTier = topAchievement ? topAchievement.tier : 'special';
 
-        // Gắn badge CP theo yêu cầu mới
         let cpRankBadge = 'ACHIEVER';
-        const hasNational = studentAchs.some(x => normalizeVietnamese(x.category).includes('quoc gia') || normalizeVietnamese(x.achievement_name).includes('quoc gia'));
+        const hasNational = studentAchs.some(x => {
+          const c = normalizeVietnamese(x.category || '');
+          const n = normalizeVietnamese(x.achievement_name || '');
+          return c.includes('quoc gia') || n.includes('quoc gia');
+        });
         
         if (hasNational) {
-          cpRankBadge = 'TOP CODER'; // Cứ có giải quốc gia là thành TOP CODER hết
+          cpRankBadge = 'TOP CODER';
         } else if (highestTier === 'gold' && studentAchs.length >= 3) {
-          cpRankBadge = 'CP LEGEND';  // Các trường hợp không phải quốc gia giữ nguyên logic cũ
+          cpRankBadge = 'CP LEGEND';
         } else if (highestTier === 'gold' || highestTier === 'silver' || studentAchs.length >= 2) {
           cpRankBadge = 'TOP CODER';
         } else {
@@ -2525,13 +2097,6 @@
       state.yearRangeText = yearRangeText;
     }
 
-    /**
-     * ============================================================================
-     * ĐỒNG BỘ GOOGLE SHEETS (HỖ TRỢ CẢ APPS SCRIPT API & DIRECT PUBLIC SHEET ID)
-     * ============================================================================
-     */
-
-    // Đọc 1 tab bất kỳ từ Google Sheet công khai qua Google Visualization JSON endpoint
     async function fetchPublicGoogleSheetTab(sheetId, sheetName) {
       const url = `https://docs.google.com/spreadsheets/d/${encodeURIComponent(sheetId)}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}&headers=1&_ts=${Date.now()}`;
       const res = await fetch(url, { cache: 'no-store' });
@@ -2571,11 +2136,8 @@
 
     async function syncFromGoogleSheets({ isSilentPolling = false } = {}) {
       updateSyncBadge('syncing', 'Đang đồng bộ...');
-
       try {
         let payload = null;
-
-        // Ưu tiên 1: Google Apps Script Web App API
         if (state.config.GAS_API_URL) {
           payload = await fetchWithRetry(async () => {
             const sep = state.config.GAS_API_URL.includes('?') ? '&' : '?';
@@ -2590,9 +2152,7 @@
             }
             return data;
           });
-        }
-        // Ưu tiên 2: Đọc trực tiếp từ Google Spreadsheet ID công khai
-        else if (state.config.PUBLIC_SHEET_ID) {
+        } else if (state.config.PUBLIC_SHEET_ID) {
           payload = await fetchWithRetry(async () => {
             const [students, achievements] = await Promise.all([
               fetchPublicGoogleSheetTab(state.config.PUBLIC_SHEET_ID, 'Students'),
@@ -2605,37 +2165,24 @@
             } catch (_) {}
             return { students, achievements, categories };
           });
-        }
-        // Ưu tiên 3: Chế độ dữ liệu mẫu tích hợp sẵn khi chưa nhập URL
-        else {
+        } else {
           payload = INITIAL_NTOJ_DATA;
         }
 
-        const newHash = JSON.stringify({
-          s: payload.students,
-          a: payload.achievements,
-          c: payload.categories
-        });
-
+        const newHash = JSON.stringify({ s: payload.students, a: payload.achievements, c: payload.categories });
         const hasChanged = state.dataHash !== '' && state.dataHash !== newHash;
         state.dataHash = newHash;
         state.errorMessage = null;
         state.isLoading = false;
 
-        // Lưu cache vào localStorage để khởi động tức thì ở lần mở tiếp theo
-        try {
-          localStorage.setItem(STORAGE_KEYS.CACHE, JSON.stringify(payload));
-        } catch (_) {}
+        try { localStorage.setItem(STORAGE_KEYS.CACHE, JSON.stringify(payload)); } catch (_) {}
 
         buildRelationalData(payload);
         renderAll();
 
         const isLiveSource = Boolean(state.config.GAS_API_URL || state.config.PUBLIC_SHEET_ID);
         const nowStr = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        updateSyncBadge(
-          'updated',
-          isLiveSource ? `Đã cập nhật (${nowStr})` : `Dữ liệu mẫu NTOJ (${nowStr})`
-        );
+        updateSyncBadge('updated', isLiveSource ? `Đã cập nhật (${nowStr})` : `Dữ liệu mẫu NTOJ (${nowStr})`);
 
         if (hasChanged && isSilentPolling) {
           showToast('✨ Dữ liệu mới từ Google Sheets vừa được cập nhật tự động!');
@@ -2643,22 +2190,13 @@
       } catch (err) {
         console.error('[NTOJ Sync Error]:', err);
         state.isLoading = false;
-
-        // Nếu đã có dữ liệu đang hiển thị thì giữ nguyên giao diện, không làm sập trang
         if (state.profiles.length === 0) {
           try {
             const cached = localStorage.getItem(STORAGE_KEYS.CACHE);
-            if (cached) {
-              buildRelationalData(JSON.parse(cached));
-            } else {
-              buildRelationalData(INITIAL_NTOJ_DATA);
-            }
-          } catch (_) {
-            buildRelationalData(INITIAL_NTOJ_DATA);
-          }
+            if (cached) { buildRelationalData(JSON.parse(cached)); } else { buildRelationalData(INITIAL_NTOJ_DATA); }
+          } catch (_) { buildRelationalData(INITIAL_NTOJ_DATA); }
           renderAll();
         }
-
         updateSyncBadge('error', 'Lỗi đồng bộ Sheet (Đang dùng bản lưu)');
         if (!isSilentPolling) {
           showToast('⚠️ Không thể kết nối Google Sheets. Vui lòng kiểm tra lại URL hoặc quyền chia sẻ.');
@@ -2675,12 +2213,6 @@
       }
     }
 
-    /**
-     * ============================================================================
-     * RENDER GIAO DIỆN (STATS, CATEGORY PILLS, CARDS, MODAL)
-     * ============================================================================
-     */
-
     function renderStats() {
       document.getElementById('statStudents').textContent = state.profiles.length;
       document.getElementById('statAchievements').textContent = state.totalAchievementsCount;
@@ -2692,20 +2224,10 @@
       const container = document.getElementById('categoryPillsContainer');
       if (!container) return;
 
-      // Tính số lượng học viên đạt thành tích trong từng danh mục từ dữ liệu thực tế
-      const allItem = {
-        name: 'Tất cả',
-        color: 'all',
-        count: state.profiles.length
-      };
-
+      const allItem = { name: 'Tất cả', color: 'all', count: state.profiles.length };
       const catItems = state.categories.map(cat => {
         const count = state.profiles.filter(p => p.categories.includes(cat.category_name)).length;
-        return {
-          name: cat.category_name,
-          color: cat.color_token || 'blue',
-          count
-        };
+        return { name: cat.category_name, color: cat.color_token || 'blue', count };
       });
 
       const items = [allItem, ...catItems];
@@ -2713,14 +2235,7 @@
       container.innerHTML = items.map(item => {
         const isActive = state.selectedCategory === item.name;
         return `
-          <button
-            type="button"
-            role="tab"
-            aria-selected="${isActive}"
-            class="category-pill ${isActive ? 'is-active' : ''}"
-            data-category="${escapeHtml(item.name)}"
-            data-color="${escapeHtml(item.color)}"
-          >
+          <button type="button" role="tab" aria-selected="${isActive}" class="category-pill ${isActive ? 'is-active' : ''}" data-category="${escapeHtml(item.name)}" data-color="${escapeHtml(item.color)}">
             <span>${escapeHtml(item.name)}</span>
             <span class="category-pill__count" title="${item.count} học viên">${item.count}</span>
           </button>
@@ -2736,28 +2251,74 @@
       });
     }
 
+    function getStudentTopScore(student) {
+      let bestScore = 99;
+      for (const ach of (student.achievements || [])) {
+        const cat = normalizeVietnamese(ach.category || '');
+        const lvl = normalizeVietnamese(ach.award_level || '');
+        
+        let score = 50; 
+        const isHSGQG = cat.includes('hoc sinh gioi quoc gia') || cat.includes('hsgqg');
+        const isDTQG = cat.includes('doi tuyen quoc gia') || cat.includes('dtqg');
+        const isTst = cat.includes('tst');
+        const isGold = lvl.includes('nhat') || lvl.includes('vang') || lvl.includes('hcv') || lvl.includes('gold') || lvl.includes('thu khoa');
+        const isSilver = lvl.includes('nhi') || lvl.includes('bac') || lvl.includes('hcb') || lvl.includes('silver') || lvl.includes('a khoa');
+        const isBronze = lvl.includes('ba') || lvl.includes('dong') || lvl.includes('hcd') || lvl.includes('bronze');
+        const isKK = lvl.includes('khuyen khich') || lvl.includes('kk');
+
+        if (isHSGQG && isGold) {
+          score = 1;
+        } else if (isTst) {
+          score = 2;
+        } else if (isHSGQG && isSilver) {
+          score = 3;
+        } else if (isHSGQG && isBronze) {
+          score = 4;
+        } else if (isHSGQG && isKK) {
+          score = 5;
+        } else if (isDTQG) {
+          score = 20;
+        } else {
+          score = 50; 
+        }
+
+        if (score < bestScore) {
+          bestScore = score;
+        }
+      }
+      return bestScore;
+    }
+
     function getFilteredAndSortedStudents() {
       const normQuery = normalizeVietnamese(state.searchQuery);
-
-      // 1. Lọc kết hợp theo Danh mục đang chọn + Từ khóa tìm kiếm
       const filtered = state.profiles.filter(profile => {
-        const matchCategory =
-          state.selectedCategory === 'Tất cả' ||
-          profile.categories.includes(state.selectedCategory);
-
+        const matchCategory = state.selectedCategory === 'Tất cả' || profile.categories.includes(state.selectedCategory);
         if (!matchCategory) return false;
         if (!normQuery) return true;
-
         return profile.searchIndex.includes(normQuery);
       });
 
-      // 2. Sắp xếp theo tiêu chí người dùng chọn
       return filtered.sort((a, b) => {
+        const activeCat = state.selectedCategory;
+        if (!activeCat || activeCat === 'Tất cả') {
+          const scoreA = getStudentTopScore(a);
+          const scoreB = getStudentTopScore(b);
+          if (scoreA !== scoreB) return scoreA - scoreB;
+          const priA = a.topAchievement ? a.topAchievement.tierPriority : 99;
+          const priB = b.topAchievement ? b.topAchievement.tierPriority : 99;
+          if (priA !== priB) return priA - priB;
+          return a.display_order - b.display_order;
+        } else {
+          const aAchInCat = a.achievements.filter(x => x.category === activeCat);
+          const bAchInCat = b.achievements.filter(x => x.category === activeCat);
+          const bestA = aAchInCat.length > 0 ? Math.min(...aAchInCat.map(x => x.tierPriority)) : 99;
+          const bestB = bAchInCat.length > 0 ? Math.min(...bAchInCat.map(x => x.tierPriority)) : 99;
+          if (bestA !== bestB) return bestA - bestB;
+        }
+
         switch (state.sortBy) {
-          case 'name_asc':
-            return a.full_name.localeCompare(b.full_name, 'vi');
-          case 'name_desc':
-            return b.full_name.localeCompare(a.full_name, 'vi');
+          case 'name_asc': return a.full_name.localeCompare(b.full_name, 'vi');
+          case 'name_desc': return b.full_name.localeCompare(a.full_name, 'vi');
           case 'year_desc': {
             const yA = a.latestYear || 0;
             const yB = b.latestYear || 0;
@@ -2811,11 +2372,8 @@
           <div class="state-box">
             <div class="state-box__icon">return 0;</div>
             <h3 class="state-box__title">Không tìm thấy học viên phù hợp</h3>
-            <p class="state-box__desc">
-              Không có bản ghi nào khớp với từ khóa <strong>"${escapeHtml(state.searchQuery)}"</strong>
-              trong danh mục <strong>"${escapeHtml(state.selectedCategory)}"</strong>.
-            </p>
-            <button type="button" id="btnResetFilters" class="primary-btn">Đặt lại bộ lọc &amp; Tìm kiếm</button>
+            <p class="state-box__desc">Không có bản ghi nào khớp với từ khóa <strong>"${escapeHtml(state.searchQuery)}"</strong>.</p>
+            <button type="button" id="btnResetFilters" class="primary-btn">Đặt lại bộ lọc</button>
           </div>
         `;
         const resetBtn = document.getElementById('btnResetFilters');
@@ -2823,8 +2381,7 @@
           resetBtn.addEventListener('click', () => {
             state.selectedCategory = 'Tất cả';
             state.searchQuery = '';
-            const input = document.getElementById('searchInput');
-            if (input) input.value = '';
+            document.getElementById('searchInput').value = '';
             document.getElementById('btnClearSearch').classList.remove('is-visible');
             renderCategoryPills();
             renderStudentCards();
@@ -2834,7 +2391,6 @@
       }
 
       grid.innerHTML = list.map(student => {
-        // Nếu người dùng đang chọn 1 danh mục cụ thể, ưu tiên hiển thị thành tích thuộc danh mục đó trên Card
         let featured = student.topAchievement;
         if (state.selectedCategory !== 'Tất cả') {
           const matchCatAch = student.achievements
@@ -2848,23 +2404,10 @@
         const yearBadge = featured && featured.award_year ? featured.award_year : (student.latestYear || 'NTOJ');
 
         return `
-          <article
-            class="student-card"
-            data-tier="${escapeHtml(student.highestTier)}"
-            data-student-id="${escapeHtml(student.student_id)}"
-            tabindex="0"
-            role="button"
-            aria-label="Xem chi tiết thành tích của học viên ${escapeHtml(student.full_name)}"
-          >
+          <article class="student-card" data-tier="${escapeHtml(student.highestTier)}" data-student-id="${escapeHtml(student.student_id)}" tabindex="0" role="button">
             <div class="student-card__top">
               <div class="student-card__avatar-frame">
-                <img
-                  src="${escapeHtml(avatarSrc)}"
-                  alt="Ảnh đại diện ${escapeHtml(student.full_name)}"
-                  class="student-card__avatar"
-                  loading="lazy"
-                  onerror="this.onerror=null;this.src='${fallbackAvatar}';"
-                />
+                <img src="${escapeHtml(avatarSrc)}" alt="${escapeHtml(student.full_name)}" class="student-card__avatar" loading="lazy" onerror="this.onerror=null;this.src='${fallbackAvatar}';" />
                 <span class="student-card__year-tag">${escapeHtml(yearBadge)}</span>
               </div>
               <div class="student-card__identity">
@@ -2882,9 +2425,7 @@
                       <span>${featured.tierIcon}</span>
                       <span>${escapeHtml(featured.award_level)}</span>
                     </span>
-                    <span class="featured-award__year">
-                      ${featured.award_year ? `Năm ${featured.award_year}` : 'Chưa rõ năm'}
-                    </span>
+                    <span class="featured-award__year">${featured.award_year ? `Năm ${featured.award_year}` : 'Chưa rõ năm'}</span>
                   </div>
                   <div class="featured-award__title">${escapeHtml(featured.achievement_name)}</div>
                 </div>
@@ -2895,12 +2436,8 @@
               `}
 
               <div class="student-card__categories">
-                ${student.categories.slice(0, 2).map(cat => `
-                  <span class="mini-cat-tag">${escapeHtml(cat)}</span>
-                `).join('')}
-                ${student.categories.length > 2 ? `
-                  <span class="mini-cat-tag">+${student.categories.length - 2} danh mục</span>
-                ` : ''}
+                ${student.categories.slice(0, 2).map(cat => `<span class="mini-cat-tag">${escapeHtml(cat)}</span>`).join('')}
+                ${student.categories.length > 2 ? `<span class="mini-cat-tag">+${student.categories.length - 2} danh mục</span>` : ''}
               </div>
             </div>
 
@@ -2912,7 +2449,6 @@
         `;
       }).join('');
 
-      // Gắn sự kiện click và bàn phím (Enter / Space) cho từng Card
       grid.querySelectorAll('.student-card').forEach(card => {
         const sid = card.getAttribute('data-student-id');
         card.addEventListener('click', () => openStudentModal(sid));
@@ -2925,63 +2461,35 @@
       });
     }
 
-    /**
-     * ============================================================================
-     * MODAL CHI TIẾT HỌC VIÊN (KHUNG ẢNH METALLIC & LỊCH SỬ THÀNH TÍCH)
-     * ============================================================================
-     */
     function openStudentModal(studentId, updateHistoryUrl = true) {
       const student = state.profiles.find(p => p.student_id === studentId);
       if (!student) return;
 
-      // Ngăn mở chồng nhiều modal
       state.activeStudentId = student.student_id;
-
       const backdrop = document.getElementById('studentModalBackdrop');
       const content = document.getElementById('studentModalContent');
-      const terminalPath = document.getElementById('modalTerminalPath');
-
-      if (terminalPath) {
-        terminalPath.textContent = `ntoj://hall-of-fame/${student.student_id.toLowerCase()}/achievements.cpp`;
-      }
+      document.getElementById('modalTerminalPath').textContent = `ntoj://hall-of-fame/${student.student_id.toLowerCase()}/achievements.cpp`;
 
       const fallbackAvatar = createFallbackAvatarDataUri(student.full_name);
       const avatarSrc = student.avatar_url || fallbackAvatar;
 
       content.innerHTML = `
-        <!-- CỘT TRÁI: KHUNG ẢNH METALLIC COMPETITIVE PROGRAMMING -->
         <aside class="cp-metallic-frame" data-tier="${escapeHtml(student.highestTier)}">
-          <span class="pcb-corner tl"></span>
-          <span class="pcb-corner tr"></span>
-          <span class="pcb-corner bl"></span>
-          <span class="pcb-corner br"></span>
-
+          <span class="pcb-corner tl"></span><span class="pcb-corner tr"></span><span class="pcb-corner bl"></span><span class="pcb-corner br"></span>
           <div class="cp-metallic-frame__inner">
-            <!-- Đường mạch PCB trang trí -->
             <svg class="cp-metallic-frame__pcb-svg" viewBox="0 0 300 400" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M10 30 H80 L105 55 H260" />
-              <path d="M20 360 H110 L135 335 H280" />
-              <circle cx="80" cy="30" r="4" fill="currentColor" />
-              <circle cx="260" cy="55" r="4" fill="currentColor" />
+              <path d="M10 30 H80 L105 55 H260" /><path d="M20 360 H110 L135 335 H280" />
+              <circle cx="80" cy="30" r="4" fill="currentColor" /><circle cx="260" cy="55" r="4" fill="currentColor" />
               <circle cx="110" cy="360" r="4" fill="currentColor" />
             </svg>
-
             <div class="cp-metallic-frame__photo-wrap">
-              <img
-                src="${escapeHtml(avatarSrc)}"
-                alt="Ảnh chân dung học viên ${escapeHtml(student.full_name)}"
-                class="cp-metallic-frame__photo"
-                onerror="this.onerror=null;this.src='${fallbackAvatar}';"
-              />
+              <img src="${escapeHtml(avatarSrc)}" alt="${escapeHtml(student.full_name)}" class="cp-metallic-frame__photo" onerror="this.onerror=null;this.src='${fallbackAvatar}';" />
               <span class="cp-metallic-frame__badge">${escapeHtml(student.cpRankBadge)}</span>
             </div>
-
             <div class="cp-metallic-frame__info">
               <h2 id="modalStudentName" class="cp-metallic-frame__name">${escapeHtml(student.full_name)}</h2>
               <div class="cp-metallic-frame__class">${escapeHtml(student.class_name)} ${student.school ? '• ' + escapeHtml(student.school) : ''}</div>
-              ${student.introduction ? `
-                <p class="cp-metallic-frame__bio">${escapeHtml(student.introduction)}</p>
-              ` : ''}
+              ${student.introduction ? `<p class="cp-metallic-frame__bio">${escapeHtml(student.introduction)}</p>` : ''}
               <div class="cp-metallic-frame__code-footer">
                 <span>ID: ${escapeHtml(student.student_id)}</span>
                 <span>AC: ${student.achievements.length} awards</span>
@@ -2991,13 +2499,10 @@
           </div>
         </aside>
 
-        <!-- CỘT PHẢI: KHUNG LỊCH SỬ THÀNH TÍCH (SẮP XẾP NĂM TĂNG DẦN) -->
         <section class="history-panel" aria-label="Lịch sử thành tích học viên">
           <div class="history-panel__header">
-            <h3 class="history-panel__title">
-              <span>Hành trình Chinh phục Giải thưởng</span>
-            </h3>
-            <span class="history-panel__order-note">Sắp xếp: Năm tăng dần &uarr;</span>
+            <h3 class="history-panel__title"><span>Hành trình Chinh phục Giải thưởng</span></h3>
+            <span class="history-panel__order-note">Sắp xếp: Giải cao đến thấp &uarr;</span>
           </div>
 
           ${student.achievements.length > 0 ? `
@@ -3006,40 +2511,30 @@
                 <article class="timeline-item" data-tier="${escapeHtml(ach.tier)}">
                   <span class="timeline-item__dot" aria-hidden="true"></span>
                   <div class="timeline-item__top">
-                    <span class="timeline-item__year">
-                      ${ach.award_year !== null ? `Năm ${ach.award_year}` : 'Chưa rõ năm'}
-                    </span>
+                    <span class="timeline-item__year">${ach.award_year !== null ? `Năm ${ach.award_year}` : 'Chưa rõ năm'}</span>
                     <span class="award-badge" data-tier="${escapeHtml(ach.tier)}">
                       <span>${ach.tierIcon}</span>
                       <span>${escapeHtml(ach.award_level)}</span>
                     </span>
                   </div>
                   <h4 class="timeline-item__name">${escapeHtml(ach.achievement_name)}</h4>
-                  <div class="timeline-item__competition">
-                    Kỳ thi: <strong>${escapeHtml(ach.competition_name || ach.category)}</strong>
-                  </div>
+                  <div class="timeline-item__competition">Kỳ thi: <strong>${escapeHtml(ach.competition_name || ach.category)}</strong></div>
                   <span class="mini-cat-tag">${escapeHtml(ach.category)}</span>
-                  ${ach.description ? `
-                    <p class="timeline-item__desc">${escapeHtml(ach.description)}</p>
-                  ` : ''}
+                  ${ach.description ? `<p class="timeline-item__desc">${escapeHtml(ach.description)}</p>` : ''}
                 </article>
               `).join('')}
             </div>
-          ` : `
-            <p style="color:var(--text-muted);">Chưa có dữ liệu thành tích chi tiết.</p>
-          `}
+          ` : `<p style="color:var(--text-muted);">Chưa có dữ liệu thành tích chi tiết.</p>`}
         </section>
       `;
 
       backdrop.classList.add('is-open');
       document.body.style.overflow = 'hidden';
-
       if (updateHistoryUrl) {
         const url = new URL(window.location.href);
         url.searchParams.set('student', student.student_id);
         window.history.replaceState({}, '', url.toString());
       }
-
       document.getElementById('btnCloseStudentModal').focus();
     }
 
@@ -3049,7 +2544,6 @@
       backdrop.classList.remove('is-open');
       document.body.style.overflow = '';
       state.activeStudentId = null;
-
       const url = new URL(window.location.href);
       if (url.searchParams.has('student')) {
         url.searchParams.delete('student');
@@ -3057,20 +2551,13 @@
       }
     }
 
-    /**
-     * ============================================================================
-     * LIGHT MODE / DARK MODE & TOAST
-     * ============================================================================
-     */
     function renderThemeIcon() {
       const current = document.documentElement.getAttribute('data-theme') || 'light';
       const wrap = document.getElementById('themeIconWrap');
       if (!wrap) return;
       if (current === 'dark') {
-        // Mặt trời
         wrap.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
       } else {
-        // Mặt trăng
         wrap.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
       }
     }
@@ -3079,9 +2566,7 @@
       const current = document.documentElement.getAttribute('data-theme') || 'light';
       const next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
-      try {
-        localStorage.setItem(STORAGE_KEYS.THEME, next);
-      } catch (_) {}
+      try { localStorage.setItem(STORAGE_KEYS.THEME, next); } catch (_) {}
       renderThemeIcon();
     }
 
@@ -3092,34 +2577,20 @@
       toast.textContent = message;
       toast.classList.add('is-visible');
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        toast.classList.remove('is-visible');
-      }, 3600);
+      toastTimer = setTimeout(() => { toast.classList.remove('is-visible'); }, 3600);
     }
 
     function renderAll() {
       renderStats();
       renderCategoryPills();
       renderStudentCards();
-
-      // Nếu modal của 1 học viên đang mở khi dữ liệu đồng bộ ngầm về, tự động làm mới nội dung modal
-      if (state.activeStudentId) {
-        openStudentModal(state.activeStudentId, false);
-      }
+      if (state.activeStudentId) { openStudentModal(state.activeStudentId, false); }
     }
 
-    /**
-     * ============================================================================
-     * KHỞI TẠO SỰ KIỆN & VÒNG LẶP ĐỒNG BỘ TỰ ĐỘNG (POLLING)
-     * ============================================================================
-     */
     document.addEventListener('DOMContentLoaded', async () => {
       renderThemeIcon();
-
-      // 1. Sự kiện đổi Theme
       document.getElementById('btnThemeToggle').addEventListener('click', toggleTheme);
 
-      // 2. Sự kiện Tìm kiếm có Debounce (180ms)
       const searchInput = document.getElementById('searchInput');
       const clearBtn = document.getElementById('btnClearSearch');
       let searchDebounce = null;
@@ -3128,10 +2599,7 @@
         const val = e.target.value || '';
         clearBtn.classList.toggle('is-visible', val.length > 0);
         clearTimeout(searchDebounce);
-        searchDebounce = setTimeout(() => {
-          state.searchQuery = val;
-          renderStudentCards();
-        }, 180);
+        searchDebounce = setTimeout(() => { state.searchQuery = val; renderStudentCards(); }, 180);
       });
 
       clearBtn.addEventListener('click', () => {
@@ -3142,20 +2610,16 @@
         searchInput.focus();
       });
 
-      // 3. Sự kiện Sắp xếp
       document.getElementById('sortSelect').addEventListener('change', (e) => {
         state.sortBy = e.target.value;
         renderStudentCards();
       });
 
-      // 4. Sự kiện đóng Modal học viên & Chia sẻ hồ sơ
       document.getElementById('btnCloseStudentModal').addEventListener('click', closeStudentModal);
       document.getElementById('studentModalBackdrop').addEventListener('click', (e) => {
         if (e.target.id === 'studentModalBackdrop') closeStudentModal();
       });
 
-      
-      // 6. Sự kiện phím Escape đóng Modal
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           closeStudentModal();
@@ -3164,32 +2628,23 @@
         }
       });
 
-      // 7. Nút làm mới dữ liệu thủ công
       document.getElementById('btnManualSync').addEventListener('click', () => {
         syncFromGoogleSheets({ isSilentPolling: false });
       });
 
-      // 8. Tải dữ liệu lần đầu & Kiểm tra URL chia sẻ trực tiếp (?student=STU001)
-      renderStudentCards(); // Hiển thị skeleton trước
+      renderStudentCards();
       await syncFromGoogleSheets({ isSilentPolling: false });
 
       const params = new URLSearchParams(window.location.search);
       const sharedStudentId = params.get('student');
-      if (sharedStudentId) {
-        openStudentModal(sharedStudentId, false);
-      }
+      if (sharedStudentId) { openStudentModal(sharedStudentId, false); }
 
-      // 9. Cơ chế Polling định kỳ (20 giây) + Tạm dừng thông minh khi tab ẩn
       setInterval(() => {
-        if (document.visibilityState === 'visible') {
-          syncFromGoogleSheets({ isSilentPolling: true });
-        }
+        if (document.visibilityState === 'visible') { syncFromGoogleSheets({ isSilentPolling: true }); }
       }, state.config.POLL_INTERVAL_MS);
 
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') {
-          syncFromGoogleSheets({ isSilentPolling: true });
-        }
+        if (document.visibilityState === 'visible') { syncFromGoogleSheets({ isSilentPolling: true }); }
       });
     });
   </script>
