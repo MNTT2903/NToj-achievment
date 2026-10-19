@@ -1010,7 +1010,9 @@
     .modal-dialog {
       width: 100%;
       max-width: 1040px;
-      max-height: 90vh;
+      /* Dùng max-height linh hoạt hơn và cho phép tự co giãn */
+      max-height: 92vh;
+      margin: auto;
       background: var(--bg-card);
       border: 1.5px solid var(--metallic-border);
       border-radius: 24px;
@@ -1019,7 +1021,26 @@
       flex-direction: column;
       overflow: hidden;
       position: relative;
-      animation: slideUp 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-body {
+      padding: 1.75rem;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 2rem;
+      align-items: start; /* Thay đổi từ center thành start để cân đối theo chiều dọc */
+      overflow-y: auto;   /* Cho phép toàn bộ modal-body cuộn mượt mà khi màn hình thấp */
+      max-height: calc(92vh - 65px);
+    }
+
+    /* Đảm bảo khung lịch sử không bị bóp méo */
+    .history-panel {
+      max-height: none;   /* Bỏ giới hạn cứng để hiển thị toàn bộ và cuộn chung theo modal-body */
+      overflow-y: visible;
+      padding-right: 0.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
     }
 
     @keyframes slideUp {
@@ -1480,14 +1501,10 @@
     }
 
     @media (max-width: 960px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
       .modal-body {
         grid-template-columns: 1fr;
         align-items: stretch;
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
       }
       .history-panel {
         max-height: none;
@@ -1498,9 +1515,6 @@
         max-width: 360px;
         width: 100%;
         margin: 0 auto;
-      }
-      .hero__bg-decor {
-        display: none;
       }
     }
 
