@@ -782,19 +782,36 @@
           const compName = parts[1] || achName;
           
           const normAch = normalizeVietnamese(achName);
-          let catName = parts[2] || achName;
-          if (!parts[2]) {
-            if (normAch.includes('tst')) {
-              catName = 'TST';
-            } else if (normAch.includes('dtqg') || normAch.includes('doi tuyen quoc gia') || normAch.includes('chon doi tuyen')) {
-              catName = 'Đội tuyển quốc gia';
-            } else if (normAch.includes('hsgqg') || normAch.includes('hsg quoc gia')) {
-              catName = 'Học sinh giỏi quốc gia';
-            } else if (normAch.includes('tin hoc tre')) {
-              catName = 'Tin học trẻ';
+          const normRawCat = normalizeVietnamese(parts[2] || a.category || '');
+          
+          // TỰ ĐỘNG NHẬN DIỆN VÀ CHUẨN HÓA TÊN CATEGORY CHÍNH XÁC
+          let catName = parts[2] || a.category || '';
+          const fullCheck = normAch + ' ' + normRawCat;
+
+          if (fullCheck.includes('tst')) {
+            catName = 'TST';
+          } else if (fullCheck.includes('doi tuyen quoc gia') || fullCheck.includes('dtqg') || fullCheck.includes('chon doi tuyen')) {
+            catName = 'Đội tuyển quốc gia';
+          } else if (fullCheck.includes('hoc sinh gioi quoc gia') || fullCheck.includes('hsgqg')) {
+            catName = 'Học sinh giỏi quốc gia';
+          } else if (fullCheck.includes('tin hoc tre')) {
+            if (fullCheck.includes('quoc gia') || fullCheck.includes('toan quoc')) {
+              catName = 'Tin học trẻ quốc gia';
+            } else if (fullCheck.includes('khu vuc') || fullCheck.includes('tinh')) {
+              catName = 'Tin học trẻ khu vực';
             } else {
-              catName = 'Kỳ thi khác';
+              catName = 'Tin học trẻ';
             }
+          } else if (fullCheck.includes('30 4') || fullCheck.includes('304') || fullCheck.includes('olympic 30')) {
+            catName = 'Olympic 30/4';
+          } else if (fullCheck.includes('duyen hai') || fullCheck.includes('bac bo')) {
+            catName = 'Duyên hải Bắc Bộ';
+          } else if (fullCheck.includes('hsg tinh') || fullCheck.includes('hoc sinh gioi tinh') || fullCheck.includes('tinh')) {
+            catName = 'Học sinh giỏi tỉnh cấp 3';
+          } else if (fullCheck.includes('tuyen sinh 10') || fullCheck.includes('vao 10')) {
+            catName = 'Tuyển sinh 10';
+          } else if (!catName || catName.trim() === '') {
+            catName = 'Kỳ thi khác';
           }
 
           const parsedYear = (a.award_year !== null && a.award_year !== undefined && String(a.award_year).trim() !== '') ? Number(a.award_year) : null;
