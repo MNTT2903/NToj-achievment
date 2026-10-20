@@ -377,7 +377,11 @@
     .featured-award[data-tier="cm"] { background: var(--cf-cm-bg); border-color: var(--cf-cm-border); box-shadow: 0 6px 20px -6px var(--cf-cm-glow); }
     
     /* Đội tuyển quốc gia (Xanh biển) */
-    .featured-award[data-tier="blue"] { background: var(--blue-bg); border-color: var(--blue-border); box-shadow: 0 6px 20px -6px var(--blue-glow); }
+    .featured-award[data-tier="blue"] {
+      background: var(--cf-spec-bg);
+      border-color: var(--cf-spec-border);
+      box-shadow: 0 6px 20px -6px var(--cf-spec-glow);
+    }
 
     .featured-award[data-tier="gold"] { background: var(--gold-surface); border-color: var(--gold-border); }
     .featured-award[data-tier="silver"] { background: var(--silver-surface); border-color: var(--silver-border); }
@@ -421,6 +425,12 @@
     /* 8. Bronze (Huy chương đồng: Nâu sáng neon) */
     .award-badge[data-tier="bronze"] { background: #D97706; color: #FEF3C7; border: 1px solid #FBBF24; }
     .award-badge[data-tier="special"] {
+      background: #0284C7;
+      color: #E0F2FE;
+      border: 1px solid #38BDF8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+    }
+    .award-badge[data-tier="blue"] {
       background: #0284C7;
       color: #E0F2FE;
       border: 1px solid #38BDF8;
@@ -568,6 +578,16 @@
       box-shadow: 0 6px 20px -6px var(--cf-spec-glow);
     }
     .timeline-item[data-tier="special"] .timeline-item__dot {
+      border-color: var(--cf-spec-border);
+      background: var(--cf-spec-border);
+    }
+
+	.timeline-item[data-tier="blue"] {
+      background: var(--cf-spec-bg);
+      border-color: var(--cf-spec-border);
+      box-shadow: 0 6px 20px -6px var(--cf-spec-glow);
+    }
+    .timeline-item[data-tier="blue"] .timeline-item__dot {
       border-color: var(--cf-spec-border);
       background: var(--cf-spec-border);
     }
@@ -792,8 +812,8 @@
       if ((isHSGQG || isTHTQG) && isBa) return { tier: 'm', priority: 4, icon: '▲' };
       if ((isHSGQG || isTHTQG) && isKK) return { tier: 'cm', priority: 5, icon: '●' };
 
-      // Đội tuyển quốc gia nhận màu xanh da trời neon chuẩn Specialist (tier 'special')
-      if (isDTQG) return { tier: 'special', priority: 15, icon: '✦' };
+      // Đội tuyển quốc gia ép về tier 'blue' để nhận nhãn "Thành tích trung" (màu xanh da trời neon)
+      if (isDTQG) return { tier: 'blue', priority: 15, icon: '✦' };
 
       if (!isHSGQG && !isTHTQG && (isNhat || isNhi || isBa)) {
         return { tier: 'gold', priority: 10, icon: '◆' };
@@ -1458,6 +1478,8 @@
         
         'special': { label: 'Thành tích nhỏ', color: '#A855F7', bg: 'rgba(168, 85, 247, 0.2)' }      // Transparent / Khác
       };
+
+	
 
       content.innerHTML = `
         <aside class="cp-metallic-frame" data-rank="${escapeHtml(student.cpRankBadge)}">
