@@ -59,58 +59,65 @@
       --border-tech: rgba(124, 58, 237, 0.22);
       --border-focus: #7C3AED;
 
-      /* HỆ MÀU CODEFORCE CHUẨN KHÔNG BỊ CHÌM Ở DARKMODE */
-      /* 1. LGM (Đỏ đen - Giải nhất HSGQG) */
-      --cf-lgm-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.22) 0%, rgba(153, 27, 27, 0.35) 100%);
-      --cf-lgm-border: #EF4444;
+      /* MÃ MÀU THEO YÊU CẦU MỚI */
+      /* 1. Giải nhất quốc gia: Đen đỏ (LGM) */
+      --cf-lgm-bg: linear-gradient(135deg, rgba(75, 0, 0, 0.25) 0%, rgba(30, 0, 0, 0.4) 100%);
+      --cf-lgm-border: #991B1B;
       --cf-lgm-text: #FCA5A5;
-      --cf-lgm-glow: rgba(239, 68, 68, 0.3);
+      --cf-lgm-glow: rgba(153, 27, 27, 0.3);
 
-      /* 2. IGM (Đỏ - TST) */
-      --cf-igm-bg: linear-gradient(135deg, rgba(220, 38, 38, 0.2) 0%, rgba(185, 28, 28, 0.3) 100%);
-      --cf-igm-border: #DC2626;
-      --cf-igm-text: #F87171;
-      --cf-igm-glow: rgba(220, 38, 38, 0.25);
+      /* 2. TST: Vàng neon sáng hơn (IGM) */
+      --cf-igm-bg: linear-gradient(135deg, rgba(254, 240, 138, 0.3) 0%, rgba(250, 204, 21, 0.4) 100%);
+      --cf-igm-border: #FACC15;
+      --cf-igm-text: #FEF08A;
+      --cf-igm-glow: rgba(250, 204, 21, 0.35);
 
-      /* 3. GM (Đỏ nhạt hơn - Giải nhì & TST) */
-      --cf-gm-bg: linear-gradient(135deg, rgba(248, 113, 113, 0.18) 0%, rgba(239, 68, 68, 0.25) 100%);
-      --cf-gm-border: #F87171;
+      /* 3. Giải nhì quốc gia: Đỏ (GM) */
+      --cf-gm-bg: linear-gradient(135deg, rgba(220, 38, 38, 0.22) 0%, rgba(185, 28, 28, 0.35) 100%);
+      --cf-gm-border: #DC2626;
       --cf-gm-text: #FCA5A5;
-      --cf-gm-glow: rgba(248, 113, 113, 0.2);
+      --cf-gm-glow: rgba(220, 38, 38, 0.25);
 
-      /* 4. M (Vàng - Giải ba) */
-      --cf-m-bg: linear-gradient(135deg, rgba(251, 191, 36, 0.22) 0%, rgba(217, 119, 6, 0.32) 100%);
-      --cf-m-border: #FBBF24;
-      --cf-m-text: #FDE68A;
-      --cf-m-glow: rgba(251, 191, 36, 0.25);
+      /* 4. Giải ba quốc gia: Tím neon sáng (M) */
+      --cf-m-bg: linear-gradient(135deg, rgba(188, 19, 254, 0.22) 0%, rgba(147, 10, 219, 0.35) 100%);
+      --cf-m-border: #BC13FE;
+      --cf-m-text: #E9D5FF;
+      --cf-m-glow: rgba(188, 19, 254, 0.3);
 
-      /* 5. Specialist (Xanh ngọc - Khuyến khích) */
-      --cf-spec-bg: linear-gradient(135deg, rgba(20, 184, 166, 0.2) 0%, rgba(13, 148, 136, 0.3) 100%);
-      --cf-spec-border: #14B8A6;
-      --cf-spec-text: #5EEAD4;
-      --cf-spec-glow: rgba(20, 184, 166, 0.25);
+      /* 5. Giải khuyến khích quốc gia: Xanh dương neon sáng (Blue) */
+      --cf-cm-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(37, 99, 235, 0.4) 100%);
+      --cf-cm-border: #3B82F6;
+      --cf-cm-text: #93C5FD;
+      --cf-cm-glow: rgba(59, 130, 246, 0.3);
 
-      /* Huy chương giữ nguyên chuẩn cũ */
+      --cf-spec-bg: linear-gradient(135deg, rgba(3, 168, 245, 0.22) 0%, rgba(2, 132, 199, 0.35) 100%);
+      --cf-spec-border: #03A9F5;
+      --cf-spec-text: #E0F2FE;
+      --cf-spec-glow: rgba(3, 168, 245, 0.3);
+
+      /* 6. Huy chương Vàng: Vàng nhạt */
       --gold-bg: linear-gradient(135deg, #FEF9C3 0%, #FDE68A 100%);
-      --gold-surface: rgba(245, 158, 11, 0.09);
-      --gold-border: #F59E0B;
-      --gold-text: #92400E;
-      --gold-glow: rgba(245, 158, 11, 0.28);
+      --gold-surface: rgba(253, 230, 138, 0.15);
+      --gold-border: #FDE047;
+      --gold-text: #FEF08A;
 
+      /* 7. Huy chương Bạc: Xám nhạt */
       --silver-bg: linear-gradient(135deg, #F1F5F9 0%, #CBD5E1 100%);
-      --silver-surface: rgba(100, 116, 139, 0.1);
-      --silver-border: #94A3B8;
-      --silver-text: #1E293B;
+      --silver-surface: rgba(226, 232, 240, 0.12);
+      --silver-border: #E2E8F0;
+      --silver-text: #F1F5F9;
 
-      --bronze-bg: linear-gradient(135deg, #FFEDD5 0%, #FDBA74 100%);
-      --bronze-surface: rgba(217, 119, 6, 0.09);
-      --bronze-border: #EA580C;
-      --bronze-text: #7C2D12;
+      /* 8. Huy chương Đồng: Nâu sáng neon */
+      --bronze-bg: linear-gradient(135deg, rgba(217, 119, 6, 0.22) 0%, rgba(180, 83, 9, 0.35) 100%);
+      --bronze-surface: rgba(245, 158, 11, 0.12);
+      --bronze-border: #F59E0B;
+      --bronze-text: #FDE68A;
 
-      --special-bg: linear-gradient(135deg, #E0F2FE 0%, #D1FAE5 100%);
-      --special-surface: rgba(5, 150, 105, 0.08);
-      --special-border: #0EA5E9;
-      --special-text: #075985;
+      /* 9. Giải nhất, nhì, ba, KK tỉnh / khác: Transparent (Trong suốt chống tệp màu) */
+      --special-bg: transparent;
+      --special-surface: rgba(124, 58, 237, 0.04);
+      --special-border: rgba(192, 132, 252, 0.3);
+      --special-text: var(--text-primary);
 
       --metallic-outer: linear-gradient(145deg, #EDE9FE 0%, #FFFFFF 35%, #DDD6FE 68%, #A855F7 100%);
       --metallic-inner: linear-gradient(160deg, #2E1065 0%, #1E1B4B 100%);
@@ -149,45 +156,55 @@
       --border-tech: rgba(192, 132, 252, 0.28);
       --border-focus: #C084FC;
 
-      --cf-lgm-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.28) 0%, rgba(127, 29, 29, 0.45) 100%);
-      --cf-lgm-border: #F87171;
+      --cf-lgm-bg: linear-gradient(135deg, rgba(75, 0, 0, 0.35) 0%, rgba(30, 0, 0, 0.55) 100%);
+      --cf-lgm-border: #EF4444;
       --cf-lgm-text: #FCA5A5;
-      --cf-lgm-glow: rgba(248, 113, 113, 0.35);
+      --cf-lgm-glow: rgba(239, 68, 68, 0.35);
 
-      --cf-igm-bg: linear-gradient(135deg, rgba(220, 38, 38, 0.25) 0%, rgba(153, 27, 27, 0.4) 100%);
-      --cf-igm-border: #EF4444;
-      --cf-igm-text: #FCA5A5;
-      --cf-igm-glow: rgba(239, 68, 68, 0.3);
+      --cf-igm-bg: linear-gradient(135deg, rgba(250, 204, 21, 0.28) 0%, rgba(202, 138, 4, 0.4) 100%);
+      --cf-igm-border: #FDE047;
+      --cf-igm-text: #FEF08A;
+      --cf-igm-glow: rgba(253, 224, 71, 0.35);
 
-      --cf-gm-bg: linear-gradient(135deg, rgba(248, 113, 113, 0.22) 0%, rgba(185, 28, 28, 0.35) 100%);
-      --cf-gm-border: #FCA5A5;
-      --cf-gm-text: #FED7D7;
-      --cf-gm-glow: rgba(252, 165, 165, 0.25);
+      --cf-gm-bg: linear-gradient(135deg, rgba(220, 38, 38, 0.28) 0%, rgba(153, 27, 27, 0.45) 100%);
+      --cf-gm-border: #F87171;
+      --cf-gm-text: #FCA5A5;
+      --cf-gm-glow: rgba(248, 113, 113, 0.3);
 
-      --cf-m-bg: linear-gradient(135deg, rgba(251, 191, 36, 0.28) 0%, rgba(180, 83, 9, 0.4) 100%);
-      --cf-m-border: #FCD34D;
-      --cf-m-text: #FEF3C7;
-      --cf-m-glow: rgba(252, 211, 77, 0.3);
+      --cf-m-bg: linear-gradient(135deg, rgba(188, 19, 254, 0.32) 0%, rgba(126, 8, 184, 0.48) 100%);
+      --cf-m-border: #D264FE;
+      --cf-m-text: #F3E8FF;
+      --cf-m-glow: rgba(188, 19, 254, 0.35);
 
-      --cf-spec-bg: linear-gradient(135deg, rgba(20, 184, 166, 0.25) 0%, rgba(15, 118, 110, 0.4) 100%);
-      --cf-spec-border: #2DD4BF;
-      --cf-spec-text: #99F6E4;
-      --cf-spec-glow: rgba(45, 212, 191, 0.3);
+      --cf-cm-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(30, 64, 175, 0.45) 100%);
+      --cf-cm-border: #60A5FA;
+      --cf-cm-text: #93C5FD;
+      --cf-cm-glow: rgba(96, 165, 250, 0.35);
 
-      --gold-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.26) 0%, rgba(217, 119, 6, 0.38) 100%);
-      --gold-surface: rgba(245, 158, 11, 0.11);
-      --gold-border: #FBBF24;
-      --gold-text: #FDE68A;
+      --cf-spec-bg: linear-gradient(135deg, rgba(56, 189, 248, 0.28) 0%, rgba(2, 132, 199, 0.45) 100%);
+      --cf-spec-border: #38BDF8;
+      --cf-spec-text: #E0F2FE;
+      --cf-spec-glow: rgba(56, 189, 248, 0.35)
 
-      --silver-bg: linear-gradient(135deg, rgba(148, 163, 184, 0.24) 0%, rgba(203, 213, 225, 0.34) 100%);
-      --silver-surface: rgba(148, 163, 184, 0.11);
+      --gold-bg: linear-gradient(135deg, rgba(254, 240, 138, 0.25) 0%, rgba(202, 138, 4, 0.35) 100%);
+      --gold-surface: rgba(253, 230, 138, 0.1);
+      --gold-border: #FDE047;
+      --gold-text: #FEF08A;
+
+      --silver-bg: linear-gradient(135deg, rgba(226, 232, 240, 0.2) 0%, rgba(100, 116, 139, 0.3) 100%);
+      --silver-surface: rgba(226, 232, 240, 0.08);
       --silver-border: #CBD5E1;
       --silver-text: #F1F5F9;
 
-      --bronze-bg: linear-gradient(135deg, rgba(234, 88, 12, 0.25) 0%, rgba(194, 65, 12, 0.38) 100%);
-      --bronze-surface: rgba(234, 88, 12, 0.11);
-      --bronze-border: #FB923C;
-      --bronze-text: #FED7AA;
+      --bronze-bg: linear-gradient(135deg, rgba(217, 119, 6, 0.28) 0%, rgba(146, 64, 14, 0.42) 100%);
+      --bronze-surface: rgba(245, 158, 11, 0.1);
+      --bronze-border: #F59E0B;
+      --bronze-text: #FDE68A;
+
+      --special-bg: transparent;
+      --special-surface: rgba(192, 132, 252, 0.06);
+      --special-border: rgba(192, 132, 252, 0.25);
+      --special-text: var(--text-primary);
 
       --metallic-outer: linear-gradient(145deg, #3B2E56 0%, #4C3A70 32%, #221835 68%, #0F0A1A 100%);
       --metallic-inner: linear-gradient(160deg, #120D20 0%, #0F0A1A 100%);
@@ -337,10 +354,7 @@
     }
     .student-card[data-rank="cp-legend"] .student-card__avatar-frame { background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #B45309 100%); }
     .student-card__avatar { width: 100%; height: 100%; border-radius: 13px; object-fit: cover; object-position: center top; background: var(--bg-secondary); display: block; }
-    .student-card__year-tag {
-      position: absolute; bottom: -6px; right: -6px; background: var(--bg-card); border: 1.5px solid var(--brand-primary);
-      color: var(--brand-primary); font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; padding: 0.1rem 0.42rem; border-radius: 999px;
-    }
+    .student-card__year-tag { display: none !important; }
     .student-card__identity { min-width: 0; flex: 1; }
     
     .student-card__rank-chip {
@@ -355,15 +369,24 @@
     /* MÀU SẮC CODEFORCE CHO CÁC TIER TƯƠNG ỨNG */
     .featured-award { border-radius: 13px; padding: 0.75rem 0.85rem; border: 1px solid var(--border-subtle); background: var(--bg-card-subtle); position: relative; }
     
+    /* ÁNH XẠ MÀU NỀN CHO KHUNG FEATURED-AWARD TRÊN THẺ CARD */
     .featured-award[data-tier="lgm"] { background: var(--cf-lgm-bg); border-color: var(--cf-lgm-border); box-shadow: 0 6px 20px -6px var(--cf-lgm-glow); }
     .featured-award[data-tier="igm"] { background: var(--cf-igm-bg); border-color: var(--cf-igm-border); box-shadow: 0 6px 20px -6px var(--cf-igm-glow); }
     .featured-award[data-tier="gm"] { background: var(--cf-gm-bg); border-color: var(--cf-gm-border); box-shadow: 0 6px 20px -6px var(--cf-gm-glow); }
     .featured-award[data-tier="m"] { background: var(--cf-m-bg); border-color: var(--cf-m-border); box-shadow: 0 6px 20px -6px var(--cf-m-glow); }
-    .featured-award[data-tier="special"] { background: var(--cf-spec-bg); border-color: var(--cf-spec-border); box-shadow: 0 6px 20px -6px var(--cf-spec-glow); }
+    .featured-award[data-tier="cm"] { background: var(--cf-cm-bg); border-color: var(--cf-cm-border); box-shadow: 0 6px 20px -6px var(--cf-cm-glow); }
+    
+    /* Đội tuyển quốc gia (Xanh biển) */
+    .featured-award[data-tier="blue"] { background: var(--blue-bg); border-color: var(--blue-border); box-shadow: 0 6px 20px -6px var(--blue-glow); }
 
     .featured-award[data-tier="gold"] { background: var(--gold-surface); border-color: var(--gold-border); }
     .featured-award[data-tier="silver"] { background: var(--silver-surface); border-color: var(--silver-border); }
     .featured-award[data-tier="bronze"] { background: var(--bronze-surface); border-color: var(--bronze-border); }
+    .featured-award[data-tier="special"] {
+      background: var(--cf-spec-bg);
+      border-color: var(--cf-spec-border);
+      box-shadow: 0 6px 20px -6px var(--cf-spec-glow);
+    }
 
     .featured-award__head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.35rem; }
     
@@ -381,47 +404,29 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* 1. LGM (Đỏ đen - Giải nhất HSGQG) */
-    .award-badge[data-tier="lgm"] {
-      background: #7F1D1D;
-      color: #FCA5A5;
-      border: 1px solid #EF4444;
-    }
-
-    /* 2. IGM (Đỏ - TST) */
-    .award-badge[data-tier="igm"] {
-      background: #991B1B;
-      color: #FCA5A5;
-      border: 1px solid #F87171;
-    }
-
-    /* 3. GM (Đỏ nhạt hơn - Giải nhì & TST) */
-    .award-badge[data-tier="gm"] {
-      background: #B91C1C;
-      color: #FEE2E2;
-      border: 1px solid #FCA5A5;
-    }
-
-    /* 4. M (Vàng - Giải ba) */
-    .award-badge[data-tier="m"] {
-      background: #B45309;
-      color: #FEF3C7;
-      border: 1px solid #FBBF24;
-    }
-
-    /* 5. Specialist (Xanh ngọc - Khuyến khích) */
+    /* 1. LGM (Giải nhất quốc gia: Đen đỏ) */
+    .award-badge[data-tier="lgm"] { background: #7F1D1D; color: #FCA5A5; border: 1px solid #EF4444; }
+    /* 2. IGM (TST: Vàng neon sáng hơn) */
+    .award-badge[data-tier="igm"] { background: #CA8A04; color: #FEF08A; border: 1px solid #FDE047; }
+    /* 3. GM (Giải nhì quốc gia: Đỏ) */
+    .award-badge[data-tier="gm"] { background: #B91C1C; color: #FEE2E2; border: 1px solid #FCA5A5; }
+    /* 4. M (Giải ba quốc gia: Tím neon sáng) */
+    .award-badge[data-tier="m"] { background: #7E22CE; color: #F3E8FF; border: 1px solid #D8B4FE; box-shadow: 0 0 12px rgba(192, 132, 252, 0.4); }
+    /* 5. CM (Giải khuyến khích quốc gia: Xanh dương neon sáng) */
+    .award-badge[data-tier="cm"] { background: #1D4ED8; color: #93C5FD; border: 1px solid #60A5FA; box-shadow: 0 0 12px rgba(59, 130, 246, 0.4); }
+    /* 6. Gold (Huy chương vàng: Vàng nhạt) */
+    .award-badge[data-tier="gold"] { background: #FEF08A; color: #713F12; border: 1px solid #FACC15; }
+    /* 7. Silver (Huy chương bạc: Xám nhạt) */
+    .award-badge[data-tier="silver"] { background: #E2E8F0; color: #334155; border: 1px solid #94A3B8; }
+    /* 8. Bronze (Huy chương đồng: Nâu sáng neon) */
+    .award-badge[data-tier="bronze"] { background: #D97706; color: #FEF3C7; border: 1px solid #FBBF24; }
     .award-badge[data-tier="special"] {
-      background: #0F766E;
-      color: #99F6E4;
-      border: 1px solid #2DD4BF;
+      background: #0284C7;
+      color: #E0F2FE;
+      border: 1px solid #38BDF8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
     }
 
-    /* Các huy chương khác */
-    .award-badge[data-tier="gold"] { background: #D97706; color: #FEF3C7; border: 1px solid #FBBF24; }
-    .award-badge[data-tier="silver"] { background: #475569; color: #F1F5F9; border: 1px solid #CBD5E1; }
-    .award-badge[data-tier="bronze"] { background: #C2410C; color: #FFEDD5; border: 1px solid #FB923C; }
-    .award-badge[data-tier="consolation"] { background: #475569; color: #F1F5F9; border: 1px solid #94A3B8; }
-    
     .featured-award__year { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--text-muted); }
     .featured-award__title {
       font-size: 0.96rem; font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); line-height: 1.4;
@@ -500,28 +505,10 @@
     .cp-metallic-frame__pcb-svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.14; pointer-events: none; }
 
     .cp-metallic-frame__photo-wrap {
-      position: relative;
-      width: 100%;
-      background: #1E293B;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1.5px solid rgba(255, 255, 255, 0.22);
-      margin-bottom: 0.65rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-height: 380px;
+      position: relative; width: 100%; background: #1E293B; border-radius: 10px; overflow: hidden;
+      border: 1.5px solid rgba(255, 255, 255, 0.22); margin-bottom: 0.65rem; display: flex; align-items: center; justify-content: center; max-height: 380px;
     }
-
-    .cp-metallic-frame__photo {
-      width: 100%;
-      height: auto;
-      max-height: 380px;
-      object-fit: contain; 
-      object-position: center;
-      display: block;
-      background: #0F0A1A;
-    }
+    .cp-metallic-frame__photo { width: 100%; height: auto; max-height: 380px; object-fit: contain; object-position: center; display: block; background: #0F0A1A; }
     .cp-metallic-frame__badge {
       position: absolute; top: 10px; left: 10px; padding: 0.25rem 0.65rem; border-radius: 999px;
       font-family: var(--font-mono); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em;
@@ -539,6 +526,13 @@
       display: flex; justify-content: space-between; align-items: center;
       font-family: var(--font-mono); font-size: 0.7rem; color: #64748B; border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 0.55rem;
     }
+
+    /* Bảng chú thích màu sắc động */
+    .student-legend-box { margin-top: 0.85rem; padding: 0.7rem 0.85rem; background: rgba(255, 255, 255, 0.05); border: 1px dashed rgba(255, 255, 255, 0.15); border-radius: 12px; text-align: left; }
+    .student-legend-title { font-size: 0.75rem; font-weight: 700; color: #93C5FD; margin-bottom: 0.45rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; }
+    .student-legend-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .legend-pill { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 6px; color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.2); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
     .history-panel__header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.75rem; border-bottom: 1.5px solid var(--border-subtle); }
     .history-panel__title { font-size: 1.2rem; font-weight: 800; }
@@ -565,8 +559,18 @@
     .timeline-item[data-tier="m"] { background: var(--cf-m-bg); border-color: var(--cf-m-border); box-shadow: 0 6px 20px -6px var(--cf-m-glow); }
     .timeline-item[data-tier="m"] .timeline-item__dot { border-color: var(--cf-m-border); background: var(--cf-m-border); }
 
-    .timeline-item[data-tier="special"] { background: var(--cf-spec-bg); border-color: var(--cf-spec-border); box-shadow: 0 6px 20px -6px var(--cf-spec-glow); }
-    .timeline-item[data-tier="special"] .timeline-item__dot { border-color: var(--cf-spec-border); background: var(--cf-spec-border); }
+    .timeline-item[data-tier="cm"] { background: var(--cf-cm-bg); border-color: var(--cf-cm-border); box-shadow: 0 6px 20px -6px var(--cf-cm-glow); }
+    .timeline-item[data-tier="cm"] .timeline-item__dot { border-color: var(--cf-cm-border); background: var(--cf-cm-border); }
+
+    .timeline-item[data-tier="special"] {
+      background: var(--cf-spec-bg);
+      border-color: var(--cf-spec-border);
+      box-shadow: 0 6px 20px -6px var(--cf-spec-glow);
+    }
+    .timeline-item[data-tier="special"] .timeline-item__dot {
+      border-color: var(--cf-spec-border);
+      background: var(--cf-spec-border);
+    }
 
     .timeline-item[data-tier="gold"] { background: var(--gold-surface); border-color: var(--gold-border); box-shadow: 0 6px 20px -6px var(--gold-glow); }
     .timeline-item[data-tier="gold"] .timeline-item__dot { border-color: var(--gold-border); background: var(--gold-accent); }
@@ -615,6 +619,7 @@
       .toolbar__right { justify-content: space-between; }
     }
     #particleCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 3; }
+    .student-card__year-tag { display: none !important; }
   </style>
 </head>
 <body>
@@ -664,7 +669,7 @@
       <div id="categoryPillsContainer" class="categories-list" role="tablist"></div>
     </section>
 
-    <section class="toolbar" aria-label="Công cụ tìm kiếm và sắp xếp">
+    <section class="toolbar" aria-label="Công cụ tìm kiếm và lọc">
       <div class="search-box">
         <svg class="search-box__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         <input type="search" id="searchInput" class="search-box__input" placeholder="Tìm kiếm học viên, thành tích hoặc kỳ thi..." autocomplete="off" />
@@ -682,13 +687,9 @@
         </div>
 
         <div class="sort-select-wrap">
-          <label for="sortSelect">Sắp xếp:</label>
-          <select id="sortSelect" class="sort-select" aria-label="Tiêu chí sắp xếp học viên">
-            <option value="custom_order">Thứ tự ưu tiên (Sheet)</option>
-            <option value="year_desc">Năm thành tích mới nhất</option>
-            <option value="achievement_count_desc">Số lượng thành tích</option>
-            <option value="name_asc">Tên học viên A – Z</option>
-            <option value="name_desc">Tên học viên Z – A</option>
+          <label for="schoolSelect">Trường:</label>
+          <select id="schoolSelect" class="sort-select" aria-label="Lọc học viên theo Trường">
+            <option value="Tất cả">Tất cả</option>
           </select>
         </div>
       </div>
@@ -768,72 +769,78 @@
         .replace(/'/g, '&#39;');
     }
 
-    // HỆ THỐNG PHÂN LOẠI TIER CODEFORCE (QUÉT CẢ AWARD_LEVEL LẪN CATEGORY CHO TST)
+    // 1. RESOLVE AWARD TIER ĐƯỢC ĐỒNG BỘ CHUẨN XÁC THEO YÊU CẦU MỚI
     function resolveAwardTier(awardLevel, category = '', achName = '') {
       const norm = normalizeVietnamese(awardLevel);
       const normCat = normalizeVietnamese(category);
       const normName = normalizeVietnamese(achName);
       
-      const isHSGQG = normCat.includes('hoc sinh gioi quoc gia') || normCat.includes('hsgqg') || normName.includes('hoc sinh gioi quoc gia') || normName.includes('hsgqg');
-      const isTHTQG = (normCat.includes('tin hoc tre') || normCat.includes('tht') || normName.includes('tin hoc tre') || normName.includes('tht')) && (normCat.includes('quoc gia') || normCat.includes('toan quoc') || normName.includes('quoc gia') || normName.includes('toan quoc'));
+      const isHSGQG = normCat.includes('hoc sinh gioi quoc gia') || normCat.includes('hsgqg') || normName.includes('hoc sinh gioi quoc gia');
+      const isTHTQG = (normCat.includes('tin hoc tre') || normCat.includes('tht') || normName.includes('tin hoc tre')) && (normCat.includes('quoc gia') || normCat.includes('toan quoc'));
       const isTst = norm.includes('tst') || normCat.includes('tst') || normName.includes('tst');
+      const isDTQG = normCat.includes('doi tuyen quoc gia') || normCat.includes('dtqg');
+      const isHSGTinh = normCat.includes('tinh') || normCat.includes('hsg tinh') || normName.includes('tinh');
 
-      const isNhat = norm.includes('nhat') || norm.includes('vang') || norm.includes('hcv') || norm.includes('gold') || norm.includes('thu khoa') || norm.includes('tam khoa') || norm.includes('vo dich');
+      const isNhat = norm.includes('nhat') || norm.includes('vang') || norm.includes('hcv') || norm.includes('gold') || norm.includes('thu khoa');
       const isNhi = norm.includes('nhi') || norm.includes('bac') || norm.includes('hcb') || norm.includes('silver') || norm.includes('a khoa');
       const isBa = norm.includes('ba') || norm.includes('dong') || norm.includes('hcd') || norm.includes('bronze');
       const isKK = norm.includes('khuyen khich') || norm.includes('kk');
 
       if ((isHSGQG || isTHTQG) && isNhat && !isTst) return { tier: 'lgm', priority: 1, icon: '★' };
-      
-      // CHO TST DÙNG CHUNG TIER 'gm' (MÀU ĐỎ NHẠT GIỐNG HỆT NHÌ QUỐC GIA)
-      if (isTst) return { tier: 'gm', priority: 2, icon: '◆' };
-      
+      if (isTst) return { tier: 'igm', priority: 2, icon: '★' };
       if ((isHSGQG || isTHTQG) && isNhi) return { tier: 'gm', priority: 3, icon: '◆' };
-      if (isNhi) return { tier: 'gm', priority: 3, icon: '◆' };
-      
       if ((isHSGQG || isTHTQG) && isBa) return { tier: 'm', priority: 4, icon: '▲' };
-      if (isBa) return { tier: 'm', priority: 4, icon: '▲' };
-      
-      if (isKK) return { tier: 'special', priority: 5, icon: '●' };
-      if (isNhat) return { tier: 'gold', priority: 1, icon: '★' };
+      if ((isHSGQG || isTHTQG) && isKK) return { tier: 'cm', priority: 5, icon: '●' };
+
+      // Đội tuyển quốc gia nhận màu xanh da trời neon chuẩn Specialist (tier 'special')
+      if (isDTQG) return { tier: 'special', priority: 15, icon: '✦' };
+
+      if (!isHSGQG && !isTHTQG && (isNhat || isNhi || isBa)) {
+        return { tier: 'gold', priority: 10, icon: '◆' };
+      }
+
+      if (isHSGTinh || isKK) {
+        return { tier: 'special', priority: 20, icon: '●' };
+      }
 
       return { tier: 'special', priority: 5, icon: '✦' };
     }
 
-    // HÀM TÍNH ĐIỂM ƯU TIÊN DÙNG CHUNG CHO MỌI NƠI (CARD, POPUP, VÀ TRANG CHỦ)
-    // Điểm càng nhỏ thứ hạng càng cao: Nhất HSGQG (1) > Nhất THTQG (2) > TST (3) > Nhì HSGQG (4)...
+    // 2. HÀM TÍNH ĐIỂM XẾP HẠNG (THỨ TỰ ƯU TIÊN HOÀN CHỈNH)
     function computeAchievementRankScore(ach) {
       if (!ach) return 99;
       const cat = normalizeVietnamese(ach.category || '');
       const name = normalizeVietnamese(ach.achievement_name || '');
       const lvl = normalizeVietnamese(ach.award_level || '');
       
-      const isHSGQG = cat.includes('hoc sinh gioi quoc gia') || cat.includes('hsgqg') || name.includes('hoc sinh gioi quoc gia') || name.includes('hsgqg');
-      const isTHTQG = (cat.includes('tin hoc tre') || cat.includes('tht') || name.includes('tin hoc tre') || name.includes('tht')) && (cat.includes('quoc gia') || cat.includes('toan quoc') || name.includes('quoc gia') || name.includes('toan quoc'));
+      const isHSGQG = cat.includes('hoc sinh gioi quoc gia') || cat.includes('hsgqg') || name.includes('hoc sinh gioi quoc gia');
+      const isTHTQG = (cat.includes('tin hoc tre') || cat.includes('tht') || name.includes('tin hoc tre')) && (cat.includes('quoc gia') || cat.includes('toan quoc'));
       const isTst = lvl.includes('tst') || cat.includes('tst') || name.includes('tst');
-      const isDTQG = cat.includes('doi tuyen quoc gia') || cat.includes('dtqg') || name.includes('doi tuyen quoc gia') || name.includes('dtqg') || lvl.includes('doi tuyen quoc gia') || lvl.includes('dtqg');
+      const isDTQG = cat.includes('doi tuyen quoc gia') || cat.includes('dtqg');
 
       const isNhat = lvl.includes('nhat') || lvl.includes('vang') || lvl.includes('hcv') || lvl.includes('gold') || lvl.includes('thu khoa');
       const isNhi = lvl.includes('nhi') || lvl.includes('bac') || lvl.includes('hcb') || lvl.includes('silver') || lvl.includes('a khoa');
       const isBa = lvl.includes('ba') || lvl.includes('dong') || lvl.includes('hcd') || lvl.includes('bronze');
       const isKK = lvl.includes('khuyen khich') || lvl.includes('kk');
+      const isHSGTinh = cat.includes('tinh') || cat.includes('hsg tinh') || name.includes('tinh');
 
-      if (isHSGQG && isNhat && !isTst) return 1; // 1. Nhất HSGQG
-      if (isTHTQG && isNhat && !isTst) return 2; // 2. Nhất THTQG
-      if (isTst) return 3;                       // 3. TST (Luôn xếp trên Nhì HSGQG)
-      if (isHSGQG && isNhi) return 4;            // 4. Nhì HSGQG
-      if (isTHTQG && isNhi) return 5;            // 5. Nhì THTQG
-      if (isHSGQG && isBa) return 6;             // 6. Ba HSGQG
-      if (isTHTQG && isBa) return 7;             // 7. Ba THTQG
-      if (isHSGQG && isKK) return 8;             // 8. KK HSGQG
-      if (isTHTQG && isKK) return 9;             // 9. KK THTQG
+      if (isHSGQG && isNhat && !isTst) return 1;  // Nhất HSGQG
+      if (isTst) return 2;                        // TST
+      if (isHSGQG && isNhi) return 3;             // Nhì HSGQG
+      if (isTHTQG && isNhat && !isTst) return 4;  // Nhất THTQG
+      if (isTHTQG && isNhi) return 5;             // Nhì THTQG
+      if (isHSGQG && isBa) return 6;              // Ba HSGQG
+      if (isTHTQG && isBa) return 7;              // Ba THTQG
+      if (isHSGQG && isKK) return 8;              // KK HSGQG
+      if (isTHTQG && isKK) return 9;              // KK THTQG
 
-      if (isDTQG) return 15;                     // 15. Đội tuyển quốc gia
+      if (isDTQG) return 15;                      // Đội tuyển quốc gia
 
-      if (isNhat) return 20;                     // 20. HCV / Nhất các giải khác
-      if (isNhi) return 21;                      // 21. HCB / Nhì các giải khác
-      if (isBa) return 22;                       // 22. HCĐ / Ba các giải khác
-      if (isKK) return 23;                       // 23. KK các giải khác
+      // HCV, HCB, HCĐ các kì thi khác -> Thành tích trung
+      if (!isHSGQG && !isTHTQG && (isNhat || isNhi || isBa)) return 20;
+
+      // Giải nhất, nhì, ba, KK tỉnh -> Thành tích nhỏ
+      if (isHSGTinh || isKK) return 25;
 
       return 30 + (ach.tierPriority || 5);
     }
@@ -857,12 +864,13 @@
       profiles: [],
       categories: [],
       hashtags: [],
+      schools: [],
       totalAchievementsCount: 0,
       yearRangeText: '—',
       selectedCategory: 'Tất cả',
       selectedHashtag: 'Tất cả',
+      selectedSchool: 'Tất cả',
       searchQuery: '',
-      sortBy: 'custom_order',
       activeStudentId: null,
       dataHash: '',
       isLoading: true,
@@ -974,6 +982,8 @@
       });
 
       const allUniqueHashtags = new Set();
+      const allUniqueSchools = new Set();
+
       visibleStudents.forEach(s => {
         const tagStr = String(s.hastag || s.hashtag || '').trim();
         if (tagStr) {
@@ -981,8 +991,12 @@
             allUniqueHashtags.add(tag);
           });
         }
+        const sch = String(s.school || '').trim();
+        if (sch) allUniqueSchools.add(sch);
       });
+
       state.hashtags = Array.from(allUniqueHashtags);
+      state.schools = Array.from(allUniqueSchools).sort();
 
       const profiles = visibleStudents.map(student => {
         const sid = String(student.student_id).trim();
@@ -990,20 +1004,34 @@
         const rawTag = String(student.hastag || student.hashtag || '').trim();
         const studentHashtags = rawTag ? rawTag.split(',').map(t => t.trim()).filter(Boolean) : [];
 
-        // Sắp xếp thành tích trong Popup & chọn thành tích cao nhất hiển thị ngoài Card
         const sortedChronological = [...studentAchs].sort((a, b) => {
+          const tierOrder = {
+            'lgm': 1, 'igm': 2, 'gm': 3, 'm': 4, 'cm': 5, 'gold': 6, 'blue': 7, 'special': 8, 'silver': 9, 'bronze': 10, 'consolation': 11
+          };
+          const orderA = tierOrder[a.tier] || 50;
+          const orderB = tierOrder[b.tier] || 50;
+          if (orderA !== orderB) return orderA - orderB;
+
           const scoreA = computeAchievementRankScore(a);
           const scoreB = computeAchievementRankScore(b);
           if (scoreA !== scoreB) return scoreA - scoreB;
 
-          const yA = a.award_year || 0;
-          const yB = b.award_year || 0;
+          const yA = a.award_year || 0; const yB = b.award_year || 0;
           if (yB !== yA) return yB - yA;
-
           return a.display_order - b.display_order;
         });
 
-        const topAchievement = sortedChronological[0] || null;
+        const bestSorted = [...studentAchs].sort((a, b) => {
+          const scoreA = computeAchievementRankScore(a);
+          const scoreB = computeAchievementRankScore(b);
+          if (scoreA !== scoreB) return scoreA - scoreB;
+
+          const yA = a.award_year || 0; const yB = b.award_year || 0;
+          if (yB !== yA) return yB - yA;
+          return a.display_order - b.display_order;
+        });
+
+        const topAchievement = bestSorted[0] || null;
         const years = studentAchs.map(x => x.award_year).filter(y => y !== null);
         const latestYear = years.length > 0 ? Math.max(...years) : null;
         const highestTier = topAchievement ? topAchievement.tier : 'special';
@@ -1227,6 +1255,21 @@
       }).join('');
     }
 
+    function renderSchoolSelect() {
+      const select = document.getElementById('schoolSelect');
+      if (!select) return;
+      if (state.selectedSchool !== 'Tất cả' && !state.schools.includes(state.selectedSchool)) {
+        state.selectedSchool = 'Tất cả';
+      }
+      const options = ['Tất cả', ...state.schools];
+      select.innerHTML = options.map(sch => {
+        const count = sch === 'Tất cả' ? state.profiles.length : state.profiles.filter(p => p.school === sch).length;
+        const label = sch === 'Tất cả' ? `Tất cả (${count})` : `${sch} (${count})`;
+        const selected = state.selectedSchool === sch ? 'selected' : '';
+        return `<option value="${escapeHtml(sch)}" ${selected}>${escapeHtml(label)}</option>`;
+      }).join('');
+    }
+
     function getStudentTopScore(student) {
       let bestScore = 99;
       for (const ach of (student.achievements || [])) {
@@ -1243,7 +1286,9 @@
       const filtered = state.profiles.filter(profile => {
         const matchCategory = state.selectedCategory === 'Tất cả' || profile.categories.includes(state.selectedCategory);
         const matchHashtag = state.selectedHashtag === 'Tất cả' || (profile.hashtags && profile.hashtags.includes(state.selectedHashtag));
-        if (!matchCategory || !matchHashtag) return false;
+        const matchSchool = state.selectedSchool === 'Tất cả' || profile.school === state.selectedSchool;
+        
+        if (!matchCategory || !matchHashtag || !matchSchool) return false;
         if (!normQuery) return true;
         return profile.searchIndex.includes(normQuery);
       });
@@ -1265,23 +1310,8 @@
           if (bestA !== bestB) return bestA - bestB;
         }
 
-        switch (state.sortBy) {
-          case 'name_asc': return a.full_name.localeCompare(b.full_name, 'vi');
-          case 'name_desc': return b.full_name.localeCompare(a.full_name, 'vi');
-          case 'year_desc': {
-            const yA = a.latestYear || 0; const yB = b.latestYear || 0;
-            if (yB !== yA) return yB - yA;
-            return a.display_order - b.display_order;
-          }
-          case 'achievement_count_desc': {
-            if (b.achievements.length !== a.achievements.length) return b.achievements.length - a.achievements.length;
-            return a.display_order - b.display_order;
-          }
-          case 'custom_order':
-          default:
-            if (a.display_order !== b.display_order) return a.display_order - b.display_order;
-            return a.full_name.localeCompare(b.full_name, 'vi');
-        }
+        if (a.display_order !== b.display_order) return a.display_order - b.display_order;
+        return a.full_name.localeCompare(b.full_name, 'vi');
       });
     }
 
@@ -1321,11 +1351,13 @@
         document.getElementById('btnResetFilters')?.addEventListener('click', () => {
           state.selectedCategory = 'Tất cả';
           state.selectedHashtag = 'Tất cả';
+          state.selectedSchool = 'Tất cả';
           state.searchQuery = '';
           document.getElementById('searchInput').value = '';
           document.getElementById('btnClearSearch').classList.remove('is-visible');
           renderCategoryPills();
           renderHashtagSelect();
+          renderSchoolSelect();
           renderStudentCards();
         });
         return;
@@ -1334,9 +1366,7 @@
       grid.innerHTML = list.map(student => {
         let featured = student.topAchievement;
         if (state.selectedCategory !== 'Tất cả') {
-          const matchCatAch = student.achievements
-            .filter(a => a.category === state.selectedCategory)
-            .sort((a, b) => computeAchievementRankScore(a) - computeAchievementRankScore(b))[0];
+          const matchCatAch = student.achievements.filter(a => a.category === state.selectedCategory).sort((a, b) => computeAchievementRankScore(a) - computeAchievementRankScore(b))[0];
           if (matchCatAch) featured = matchCatAch;
         }
 
@@ -1411,6 +1441,24 @@
       const fallbackAvatar = createFallbackAvatarDataUri(student.full_name);
       const avatarSrc = student.avatar_url || fallbackAvatar;
 
+      const activeTiers = Array.from(new Set(student.achievements.map(a => a.tier)));
+      // Ánh xạ linh hoạt: Nhiều tier màu sắc khác nhau có thể cùng trỏ về một nhãn và lấy đúng màu của tier đó
+      const tierLegendMap = {
+        'lgm':     { label: 'Thành tích để đời', color: '#EF4444', bg: 'rgba(239, 68, 68, 0.2)' },   // Đen đỏ / Đỏ
+        'igm':     { label: 'Thành tích để đời', color: '#FACC15', bg: 'rgba(250, 204, 21, 0.2)' },  // Vàng neon (TST)
+        'gm':      { label: 'Thành tích để đời', color: '#EF4444', bg: 'rgba(239, 68, 68, 0.2)' },   // Đỏ
+        'm':       { label: 'Thành tích để đời', color: '#BC13FE', bg: 'rgba(188, 19, 254, 0.2)' },   // Tím neon
+        
+        'cm':      { label: 'Thành tích lớn', color: '#3B82F6', bg: 'rgba(59, 130, 246, 0.2)' },     // Xanh dương neon (KK Quốc gia)
+        
+        'gold':    { label: 'Thành tích trung', color: '#FDE047', bg: 'rgba(253, 224, 71, 0.2)' },   // Vàng nhạt (HCV)
+        'silver':  { label: 'Thành tích trung', color: '#94A3B8', bg: 'rgba(148, 163, 184, 0.2)' }, // Xám nhạt (HCB)
+        'bronze':  { label: 'Thành tích trung', color: '#F59E0B', bg: 'rgba(245, 158, 11, 0.2)' },  // Nâu sáng neon (HCĐ)
+        'blue':    { label: 'Thành tích trung', color: '#38BDF8', bg: 'rgba(56, 189, 248, 0.2)' },   // Xanh da trời (Specialist / ĐTQG)
+        
+        'special': { label: 'Thành tích nhỏ', color: '#A855F7', bg: 'rgba(168, 85, 247, 0.2)' }      // Transparent / Khác
+      };
+
       content.innerHTML = `
         <aside class="cp-metallic-frame" data-rank="${escapeHtml(student.cpRankBadge)}">
           <span class="pcb-corner tl"></span><span class="pcb-corner tr"></span><span class="pcb-corner bl"></span><span class="pcb-corner br"></span>
@@ -1433,6 +1481,23 @@
                 <span>AC: ${student.achievements.length} awards</span>
                 <span>O(log N)</span>
               </div>
+
+              ${activeTiers.length > 0 ? `
+                <div class="student-legend-box">
+                  <div class="student-legend-title">Chú thích thành tích</div>
+                  <div class="student-legend-list">
+                    ${activeTiers.map(t => {
+                      const leg = tierLegendMap[t] || { label: 'Thành tích khác', color: '#94A3B8', bg: 'rgba(148,163,184,0.2)' };
+                      return `
+                        <span class="legend-pill" style="background: ${leg.bg};">
+                          <span class="legend-dot" style="background: ${leg.color};"></span>
+                          <span>${leg.label}</span>
+                        </span>
+                      `;
+                    }).join('')}
+                  </div>
+                </div>
+              ` : ''}
             </div>
           </div>
         </aside>
@@ -1522,6 +1587,7 @@
       renderStats();
       renderCategoryPills();
       renderHashtagSelect();
+      renderSchoolSelect();
       renderStudentCards();
       if (state.activeStudentId) { openStudentModal(state.activeStudentId, false); }
     }
@@ -1557,10 +1623,13 @@
         });
       }
 
-      document.getElementById('sortSelect').addEventListener('change', (e) => {
-        state.sortBy = e.target.value;
-        renderStudentCards();
-      });
+      const schoolSelect = document.getElementById('schoolSelect');
+      if (schoolSelect) {
+        schoolSelect.addEventListener('change', (e) => {
+          state.selectedSchool = e.target.value || 'Tất cả';
+          renderStudentCards();
+        });
+      }
 
       document.getElementById('btnCloseStudentModal').addEventListener('click', closeStudentModal);
       document.getElementById('studentModalBackdrop').addEventListener('click', (e) => {
