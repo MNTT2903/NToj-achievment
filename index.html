@@ -72,7 +72,7 @@
       --cf-igm-text: #F87171;
       --cf-igm-glow: rgba(220, 38, 38, 0.25);
 
-      /* 3. GM (Đỏ nhạt hơn - Giải nhì) */
+      /* 3. GM (Đỏ nhạt hơn - Giải nhì & TST) */
       --cf-gm-bg: linear-gradient(135deg, rgba(248, 113, 113, 0.18) 0%, rgba(239, 68, 68, 0.25) 100%);
       --cf-gm-border: #F87171;
       --cf-gm-text: #FCA5A5;
@@ -371,11 +371,14 @@
     .award-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.32rem;
-      padding: 0.22rem 0.7rem;
+      gap: 0.35rem;
+      padding: 0.25rem 0.75rem;
       border-radius: 999px;
-      font-size: 0.74rem;
-      font-weight: 800;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* 1. LGM (Đỏ đen - Giải nhất HSGQG) */
@@ -392,7 +395,7 @@
       border: 1px solid #F87171;
     }
 
-    /* 3. GM (Đỏ nhạt hơn - Giải nhì) */
+    /* 3. GM (Đỏ nhạt hơn - Giải nhì & TST) */
     .award-badge[data-tier="gm"] {
       background: #B91C1C;
       color: #FEE2E2;
@@ -418,8 +421,13 @@
     .award-badge[data-tier="silver"] { background: #475569; color: #F1F5F9; border: 1px solid #CBD5E1; }
     .award-badge[data-tier="bronze"] { background: #C2410C; color: #FFEDD5; border: 1px solid #FB923C; }
     .award-badge[data-tier="consolation"] { background: #475569; color: #F1F5F9; border: 1px solid #94A3B8; }
+    
     .featured-award__year { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--text-muted); }
-    .featured-award__title { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); line-height: 1.38; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .featured-award__title {
+      font-size: 0.96rem; font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); line-height: 1.4;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
 
     .student-card__categories { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
     .mini-cat-tag { font-size: 0.72rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 7px; background: var(--bg-secondary); color: var(--text-secondary); border: 1px solid var(--border-subtle); }
@@ -494,7 +502,6 @@
     .cp-metallic-frame__photo-wrap {
       position: relative;
       width: 100%;
-      /* Bỏ giới hạn cứng kích thước cố định, cho phép ảnh tự co giãn theo tỷ lệ thực tế của nó */
       background: #1E293B;
       border-radius: 10px;
       overflow: hidden;
@@ -503,18 +510,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      max-height: 380px; /* Giới hạn chiều cao tối đa để popup không bị quá dài */
+      max-height: 380px;
     }
 
     .cp-metallic-frame__photo {
       width: 100%;
       height: auto;
       max-height: 380px;
-      /* Dùng contain thay vì cover để thấy được toàn bộ bức ảnh gốc không bị cắt mất viền */
       object-fit: contain; 
       object-position: center;
       display: block;
-      background: #0F0A1A; /* Màu nền lót xung quanh nếu ảnh có tỷ lệ lạ */
+      background: #0F0A1A;
     }
     .cp-metallic-frame__badge {
       position: absolute; top: 10px; left: 10px; padding: 0.25rem 0.65rem; border-radius: 999px;
@@ -571,7 +577,7 @@
 
     .timeline-item__top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-bottom: 0.45rem; }
     .timeline-item__year { font-family: var(--font-mono); font-size: 0.84rem; font-weight: 800; padding: 0.18rem 0.6rem; border-radius: 7px; background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); }
-    .timeline-item__name { font-size: 1.02rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.25rem; }
+    .timeline-item__name { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); margin-bottom: 0.25rem; -webkit-font-smoothing: antialiased; }
     .timeline-item__competition { font-size: 0.86rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.35rem; }
     .timeline-item__desc { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px dashed var(--border-subtle); }
 
@@ -762,38 +768,74 @@
         .replace(/'/g, '&#39;');
     }
 
-    // HỆ THỐNG PHÂN LOẠI TIER CODEFORCE THEO YÊU CẦU
-    function resolveAwardTier(awardLevel, category = '') {
+    // HỆ THỐNG PHÂN LOẠI TIER CODEFORCE (QUÉT CẢ AWARD_LEVEL LẪN CATEGORY CHO TST)
+    function resolveAwardTier(awardLevel, category = '', achName = '') {
       const norm = normalizeVietnamese(awardLevel);
       const normCat = normalizeVietnamese(category);
+      const normName = normalizeVietnamese(achName);
       
-      const isHSGQG = normCat.includes('hoc sinh gioi quoc gia') || normCat.includes('hsgqg');
-      // Nhận diện thêm Tin học trẻ quốc gia/toàn quốc
-      const isTHTQG = (normCat.includes('tin hoc tre') || normCat.includes('tht')) && (normCat.includes('quoc gia') || normCat.includes('toan quoc'));
-      const isTst = normCat.includes('tst');
-      const isDTQG = normCat.includes('doi tuyen quoc gia') || normCat.includes('dtqg');
+      const isHSGQG = normCat.includes('hoc sinh gioi quoc gia') || normCat.includes('hsgqg') || normName.includes('hoc sinh gioi quoc gia') || normName.includes('hsgqg');
+      const isTHTQG = (normCat.includes('tin hoc tre') || normCat.includes('tht') || normName.includes('tin hoc tre') || normName.includes('tht')) && (normCat.includes('quoc gia') || normCat.includes('toan quoc') || normName.includes('quoc gia') || normName.includes('toan quoc'));
+      const isTst = norm.includes('tst') || normCat.includes('tst') || normName.includes('tst');
 
       const isNhat = norm.includes('nhat') || norm.includes('vang') || norm.includes('hcv') || norm.includes('gold') || norm.includes('thu khoa') || norm.includes('tam khoa') || norm.includes('vo dich');
       const isNhi = norm.includes('nhi') || norm.includes('bac') || norm.includes('hcb') || norm.includes('silver') || norm.includes('a khoa');
       const isBa = norm.includes('ba') || norm.includes('dong') || norm.includes('hcd') || norm.includes('bronze');
       const isKK = norm.includes('khuyen khich') || norm.includes('kk');
 
-      // 1. Giải nhất HSGQG hoặc Nhất Tin học trẻ quốc gia -> LGM (Đỏ đen)
-      if ((isHSGQG || isTHTQG) && isNhat) return { tier: 'lgm', priority: 1, icon: '★' };
-      // 2. TST -> IGM (Đỏ)
-      if (isTst) return { tier: 'igm', priority: 2, icon: '★' };
-      // 3. Giải nhì (HSGQG hoặc THTQG hoặc Nhì thường) -> GM (Đỏ nhạt hơn)
+      if ((isHSGQG || isTHTQG) && isNhat && !isTst) return { tier: 'lgm', priority: 1, icon: '★' };
+      
+      // CHO TST DÙNG CHUNG TIER 'gm' (MÀU ĐỎ NHẠT GIỐNG HỆT NHÌ QUỐC GIA)
+      if (isTst) return { tier: 'gm', priority: 2, icon: '◆' };
+      
       if ((isHSGQG || isTHTQG) && isNhi) return { tier: 'gm', priority: 3, icon: '◆' };
       if (isNhi) return { tier: 'gm', priority: 3, icon: '◆' };
-      // 4. Giải ba (HSGQG hoặc THTQG hoặc Ba thường) -> M (Vàng)
+      
       if ((isHSGQG || isTHTQG) && isBa) return { tier: 'm', priority: 4, icon: '▲' };
       if (isBa) return { tier: 'm', priority: 4, icon: '▲' };
-      // 5. Giải khuyến khích (HSGQG hoặc THTQG hoặc KK chung) -> Specialist (Xanh ngọc)
+      
       if (isKK) return { tier: 'special', priority: 5, icon: '●' };
-
       if (isNhat) return { tier: 'gold', priority: 1, icon: '★' };
 
       return { tier: 'special', priority: 5, icon: '✦' };
+    }
+
+    // HÀM TÍNH ĐIỂM ƯU TIÊN DÙNG CHUNG CHO MỌI NƠI (CARD, POPUP, VÀ TRANG CHỦ)
+    // Điểm càng nhỏ thứ hạng càng cao: Nhất HSGQG (1) > Nhất THTQG (2) > TST (3) > Nhì HSGQG (4)...
+    function computeAchievementRankScore(ach) {
+      if (!ach) return 99;
+      const cat = normalizeVietnamese(ach.category || '');
+      const name = normalizeVietnamese(ach.achievement_name || '');
+      const lvl = normalizeVietnamese(ach.award_level || '');
+      
+      const isHSGQG = cat.includes('hoc sinh gioi quoc gia') || cat.includes('hsgqg') || name.includes('hoc sinh gioi quoc gia') || name.includes('hsgqg');
+      const isTHTQG = (cat.includes('tin hoc tre') || cat.includes('tht') || name.includes('tin hoc tre') || name.includes('tht')) && (cat.includes('quoc gia') || cat.includes('toan quoc') || name.includes('quoc gia') || name.includes('toan quoc'));
+      const isTst = lvl.includes('tst') || cat.includes('tst') || name.includes('tst');
+      const isDTQG = cat.includes('doi tuyen quoc gia') || cat.includes('dtqg') || name.includes('doi tuyen quoc gia') || name.includes('dtqg') || lvl.includes('doi tuyen quoc gia') || lvl.includes('dtqg');
+
+      const isNhat = lvl.includes('nhat') || lvl.includes('vang') || lvl.includes('hcv') || lvl.includes('gold') || lvl.includes('thu khoa');
+      const isNhi = lvl.includes('nhi') || lvl.includes('bac') || lvl.includes('hcb') || lvl.includes('silver') || lvl.includes('a khoa');
+      const isBa = lvl.includes('ba') || lvl.includes('dong') || lvl.includes('hcd') || lvl.includes('bronze');
+      const isKK = lvl.includes('khuyen khich') || lvl.includes('kk');
+
+      if (isHSGQG && isNhat && !isTst) return 1; // 1. Nhất HSGQG
+      if (isTHTQG && isNhat && !isTst) return 2; // 2. Nhất THTQG
+      if (isTst) return 3;                       // 3. TST (Luôn xếp trên Nhì HSGQG)
+      if (isHSGQG && isNhi) return 4;            // 4. Nhì HSGQG
+      if (isTHTQG && isNhi) return 5;            // 5. Nhì THTQG
+      if (isHSGQG && isBa) return 6;             // 6. Ba HSGQG
+      if (isTHTQG && isBa) return 7;             // 7. Ba THTQG
+      if (isHSGQG && isKK) return 8;             // 8. KK HSGQG
+      if (isTHTQG && isKK) return 9;             // 9. KK THTQG
+
+      if (isDTQG) return 15;                     // 15. Đội tuyển quốc gia
+
+      if (isNhat) return 20;                     // 20. HCV / Nhất các giải khác
+      if (isNhi) return 21;                      // 21. HCB / Nhì các giải khác
+      if (isBa) return 22;                       // 22. HCĐ / Ba các giải khác
+      if (isKK) return 23;                       // 23. KK các giải khác
+
+      return 30 + (ach.tierPriority || 5);
     }
 
     function createFallbackAvatarDataUri(fullName) {
@@ -907,7 +949,7 @@
 
           const parsedYear = (a.award_year !== null && a.award_year !== undefined && String(a.award_year).trim() !== '') ? Number(a.award_year) : null;
           const validYear = (parsedYear && !Number.isNaN(parsedYear) && parsedYear > 1990 && parsedYear < 2100) ? parsedYear : null;
-          const tierInfo = resolveAwardTier(a.award_level || '', catName);
+          const tierInfo = resolveAwardTier(a.award_level || '', catName, achName);
 
           return {
             achievement_id: String(a.achievement_id || ''),
@@ -948,45 +990,12 @@
         const rawTag = String(student.hastag || student.hashtag || '').trim();
         const studentHashtags = rawTag ? rawTag.split(',').map(t => t.trim()).filter(Boolean) : [];
 
-        // Logic sắp xếp thành tích chuẩn: Nhất > Nhì (TST) > Nhì thường > Ba > Khuyến khích
-       // Sắp xếp thành tích trong Popup: Ưu tiên giải cao nhất lên trên cùng
+        // Sắp xếp thành tích trong Popup & chọn thành tích cao nhất hiển thị ngoài Card
         const sortedChronological = [...studentAchs].sort((a, b) => {
-          function getPopupSortScore(ach) {
-            const cat = normalizeVietnamese(ach.category || '');
-            const lvl = normalizeVietnamese(ach.award_level || '');
-            
-            const isHSGQG = cat.includes('hoc sinh gioi quoc gia') || cat.includes('hsgqg');
-            const isTHTQG = (cat.includes('tin hoc tre') || cat.includes('tht')) && (cat.includes('quoc gia') || cat.includes('toan quoc'));
-            const isTst = cat.includes('tst');
-            const isDTQG = cat.includes('doi tuyen quoc gia') || cat.includes('dtqg');
-
-            const isNhat = lvl.includes('nhat') || lvl.includes('vang') || lvl.includes('hcv') || lvl.includes('gold') || lvl.includes('thu khoa');
-            const isNhi = lvl.includes('nhi') || lvl.includes('bac') || lvl.includes('hcb') || lvl.includes('silver') || lvl.includes('a khoa');
-            const isBa = lvl.includes('ba') || lvl.includes('dong') || lvl.includes('hcd') || lvl.includes('bronze');
-            const isKK = lvl.includes('khuyen khich') || lvl.includes('kk');
-
-            // 1. Các giải Quốc gia và TST luôn ở vị trí cao nhất
-            if ((isHSGQG || isTHTQG) && isNhat) return 1;
-            if (isTst) return 2;
-            if ((isHSGQG || isTHTQG) && isNhi) return 3;
-            if ((isHSGQG || isTHTQG) && isBa) return 4;
-            if ((isHSGQG || isTHTQG) && isKK) return 5;
-
-            // 2. Các giải khác xét theo thứ tự HCV > HCB > HCĐ > KK
-            if (isNhat) return 10;
-            if (isNhi) return 11;
-            if (isBa) return 12;
-            if (isKK) return 13;
-
-            if (isDTQG) return 20;
-            return 30 + (ach.tierPriority || 5);
-          }
-
-          const scoreA = getPopupSortScore(a);
-          const scoreB = getPopupSortScore(b);
+          const scoreA = computeAchievementRankScore(a);
+          const scoreB = computeAchievementRankScore(b);
           if (scoreA !== scoreB) return scoreA - scoreB;
 
-          // Nếu cùng loại giải, xét năm mới nhất lên trên
           const yA = a.award_year || 0;
           const yB = b.award_year || 0;
           if (yB !== yA) return yB - yA;
@@ -994,53 +1003,7 @@
           return a.display_order - b.display_order;
         });
 
-        const bestSorted = [...studentAchs].sort((a, b) => {
-          function getAchScore(ach) {
-            const cat = normalizeVietnamese(ach.category || '');
-            const lvl = normalizeVietnamese(ach.award_level || '');
-            
-            const isHSGQG = cat.includes('hoc sinh gioi quoc gia') || cat.includes('hsgqg');
-            const isTHTQG = (cat.includes('tin hoc tre') || cat.includes('tht')) && (cat.includes('quoc gia') || cat.includes('toan quoc'));
-            const isTst = cat.includes('tst');
-            const isDTQG = cat.includes('doi tuyen quoc gia') || cat.includes('dtqg');
-
-            const isNhat = lvl.includes('nhat') || lvl.includes('vang') || lvl.includes('hcv') || lvl.includes('gold') || lvl.includes('thu khoa');
-            const isNhi = lvl.includes('nhi') || lvl.includes('bac') || lvl.includes('hcb') || lvl.includes('silver') || lvl.includes('a khoa');
-            const isBa = lvl.includes('ba') || lvl.includes('dong') || lvl.includes('hcd') || lvl.includes('bronze');
-            const isKK = lvl.includes('khuyen khich') || lvl.includes('kk');
-
-            // --- QUY CHUẨN THỨ TỰ ƯU TIÊN MỚI ---
-            if (isHSGQG && isNhat) return 1;  // Nhất HSGQG
-            if (isTst) return 2;             // TST
-            if (isTHTQG && isNhat) return 3; // Nhất THTQG
-            
-            if (isHSGQG && isNhi) return 4;  // Nhì HSGQG
-            if (isTHTQG && isNhi) return 5; // Nhì THTQG
-            
-            if (isHSGQG && isBa) return 6;   // Ba HSGQG
-            if (isTHTQG && isBa) return 7;   // Ba THTQG
-            
-            if ((isHSGQG || isTHTQG) && isKK) return 8; // Khuyến khích HSGQG & THTQG
-
-            if (isDTQG) return 15;           // Đội tuyển quốc gia
-
-            // Các giải còn lại theo thứ tự huy chương Vàng > Bạc > Đồng > Khuyến khích
-            if (isNhat) return 20;
-            if (isNhi) return 21;
-            if (isBa) return 22;
-            if (isKK) return 23;
-
-            return 30 + (ach.tierPriority || 5);
-          }
-          const scoreA = getAchScore(a); const scoreB = getAchScore(b);
-          if (scoreA !== scoreB) return scoreA - scoreB;
-          if (a.tierPriority !== b.tierPriority) return a.tierPriority - b.tierPriority;
-          const yA = a.award_year || 0; const yB = b.award_year || 0;
-          if (yB !== yA) return yB - yA;
-          return a.display_order - b.display_order;
-        });
-
-        const topAchievement = bestSorted[0] || null;
+        const topAchievement = sortedChronological[0] || null;
         const years = studentAchs.map(x => x.award_year).filter(y => y !== null);
         const latestYear = years.length > 0 ? Math.max(...years) : null;
         const highestTier = topAchievement ? topAchievement.tier : 'special';
@@ -1049,7 +1012,8 @@
         const hasNationalOrTst = studentAchs.some(x => {
           const c = normalizeVietnamese(x.category || '');
           const n = normalizeVietnamese(x.achievement_name || '');
-          return c.includes('quoc gia') || n.includes('quoc gia') || c.includes('tst');
+          const l = normalizeVietnamese(x.award_level || '');
+          return c.includes('quoc gia') || n.includes('quoc gia') || c.includes('tst') || n.includes('tst') || l.includes('tst');
         });
         
         if (highestTier === 'lgm' || (highestTier === 'gold' && (hasNationalOrTst || studentAchs.length >= 3))) {
@@ -1266,42 +1230,7 @@
     function getStudentTopScore(student) {
       let bestScore = 99;
       for (const ach of (student.achievements || [])) {
-        const cat = normalizeVietnamese(ach.category || '');
-        const lvl = normalizeVietnamese(ach.award_level || '');
-        let score = 50; 
-        
-        const isHSGQG = cat.includes('hoc sinh gioi quoc gia') || cat.includes('hsgqg');
-        const isTHTQG = (cat.includes('tin hoc tre') || cat.includes('tht')) && (cat.includes('quoc gia') || cat.includes('toan quoc'));
-        const isTst = cat.includes('tst');
-        const isNhat = lvl.includes('nhat') || lvl.includes('vang') || lvl.includes('hcv') || lvl.includes('gold') || lvl.includes('thu khoa');
-        const isNhi = lvl.includes('nhi') || lvl.includes('bac') || lvl.includes('hcb') || lvl.includes('silver') || lvl.includes('a khoa');
-        const isBa = lvl.includes('ba') || lvl.includes('dong') || lvl.includes('hcd') || lvl.includes('bronze');
-        const isKK = lvl.includes('khuyen khich') || lvl.includes('kk');
-        const isDTQG = cat.includes('doi tuyen quoc gia') || cat.includes('dtqg');
-
-        // Gán chung mức điểm ưu tiên tương đương
-        if ((isHSGQG || isTHTQG) && isNhat) {
-          score = 1; // Nhất quốc gia & Nhất THT Quốc gia
-        } else if (isTst) {
-          score = 2; // TST
-        } else if ((isHSGQG || isTHTQG) && isNhi) {
-          score = 3; // Nhì quốc gia & Nhì THT Quốc gia
-        } else if ((isHSGQG || isTHTQG) && isBa) {
-          score = 4; // Ba quốc gia & Ba THT Quốc gia
-        } else if ((isHSGQG || isTHTQG) && isKK) {
-          score = 5; // Khuyến khích quốc gia & KK THT Quốc gia
-        } else if (isNhi) {
-          score = 6; // Nhì thường
-        } else if (isBa) {
-          score = 7; // Ba thường
-        } else if (isKK) {
-          score = 8; // Khuyến khích thường
-        } else if (isDTQG) {
-          score = 20; 
-        } else {
-          score = 50; 
-        }
-
+        const score = computeAchievementRankScore(ach);
         if (score < bestScore) {
           bestScore = score;
         }
@@ -1331,8 +1260,8 @@
         } else {
           const aAchInCat = a.achievements.filter(x => x.category === activeCat);
           const bAchInCat = b.achievements.filter(x => x.category === activeCat);
-          const bestA = aAchInCat.length > 0 ? Math.min(...aAchInCat.map(x => x.tierPriority)) : 99;
-          const bestB = bAchInCat.length > 0 ? Math.min(...bAchInCat.map(x => x.tierPriority)) : 99;
+          const bestA = aAchInCat.length > 0 ? Math.min(...aAchInCat.map(x => computeAchievementRankScore(x))) : 99;
+          const bestB = bAchInCat.length > 0 ? Math.min(...bAchInCat.map(x => computeAchievementRankScore(x))) : 99;
           if (bestA !== bestB) return bestA - bestB;
         }
 
@@ -1405,7 +1334,9 @@
       grid.innerHTML = list.map(student => {
         let featured = student.topAchievement;
         if (state.selectedCategory !== 'Tất cả') {
-          const matchCatAch = student.achievements.filter(a => a.category === state.selectedCategory).sort((a, b) => a.tierPriority - b.tierPriority)[0];
+          const matchCatAch = student.achievements
+            .filter(a => a.category === state.selectedCategory)
+            .sort((a, b) => computeAchievementRankScore(a) - computeAchievementRankScore(b))[0];
           if (matchCatAch) featured = matchCatAch;
         }
 
