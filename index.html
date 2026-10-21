@@ -1116,7 +1116,7 @@
       return bestScore;
     }
 
-    function getFilteredAndSortedStudents() {
+   function getFilteredAndSortedStudents() {
       const normQuery = normalizeVietnamese(state.searchQuery);
       const filtered = state.profiles.filter(profile => {
         const matchCategory = state.selectedCategory === 'Tất cả' || profile.categories.includes(state.selectedCategory);
@@ -1129,9 +1129,21 @@
       });
 
       return filtered.sort((a, b) => {
-        // TỰ ĐỘNG SORT THEO THÀNH TÍCH CAO NHẤT (Ở TẤT CẢ CÁC MỤC)
-        const scoreA = getStudentTopScore(a);
-        const scoreB = getStudentTopScore(b);
+        const activeCat = state.selectedCategory;
+        let scoreA, scoreB;
+
+        // NẾU Ở TAB "TẤT CẢ" -> SORT THEO GIẢI CAO NHẤT TỔNG THỂ
+        if (!activeCat || activeCat === 'Tất cả') {
+          scoreA = getStudentTopScore(a);
+          scoreB = getStudentTopScore(b);
+        } else {
+          // NẾU Ở TAB CATEGORY CỤ THỂ -> SORT THEO GIẢI CAO NHẤT TRONG RIÊNG KỲ THI ĐÓ
+          const aAchInCat = a.achievements.filter(x => x.category === activeCat);
+          const bAchInCat = b.achievements.filter(x => x.category === activeCat);
+          scoreA = aAchInCat.length > 0 ? Math.min(...aAchInCat.map(x => x.tierPriority)) : 99;
+          scoreB = bAchInCat.length > 0 ? Math.min(...bAchInCat.map(x => x.tierPriority)) : 99;
+        }
+
         if (scoreA !== scoreB) return scoreA - scoreB;
 
         if (a.display_order !== b.display_order) return a.display_order - b.display_order;
@@ -1188,15 +1200,19 @@
       }
 
       grid.innerHTML = list.map(student => {
+        // NẾU ĐANG Ở TAB CATEGORY CỤ THỂ -> LẤY GIẢI CAO NHẤT CỦA RIÊNG KỲ THI ĐÓ ĐỂ HIỂN THỊ
         let featured = student.topAchievement;
         if (state.selectedCategory !== 'Tất cả') {
-          const matchCatAch = student.achievements.filter(a => a.category === state.selectedCategory).sort((a, b) => a.tierPriority - b.tierPriority)[0];
+          const matchCatAch = student.achievements
+            .filter(a => a.category === state.selectedCategory)
+            .sort((a, b) => a.tierPriority - b.tierPriority)[0];
           if (matchCatAch) featured = matchCatAch;
         }
 
         const fallbackAvatar = createFallbackAvatarDataUri(student.full_name);
         const avatarSrc = student.avatar_url || fallbackAvatar;
         const yearBadge = featured && featured.award_year ? featured.award_year : (student.latestYear || 'NTOJ');
+        // ... (phần còn lại của card giữ nguyên)
 
         return `
           <article class="student-card" data-rank="${escapeHtml(student.cpRankBadge)}" data-student-id="${escapeHtml(student.student_id)}" tabindex="0" role="button">
