@@ -1399,7 +1399,7 @@
       if (state.activeStudentId) { openStudentModal(state.activeStudentId, false); }
     }
 
-    document.addEventListener('DOMContentLoaded', async () => {
+    document.addEventListener('DOMContentLoaded', () => {
       renderThemeIcon();
       document.getElementById('btnThemeToggle').addEventListener('click', toggleTheme);
 
@@ -1455,23 +1455,39 @@
         syncFromGoogleSheets({ isSilentPolling: false });
       });
 
-      renderStudentCards();
-      await syncFromGoogleSheets({ isSilentPolling: false });
+      // 1. HIỂN THỊ NGAY LẬP TỨC KHI VỪA VÀO WEB (DÙNG CACHE ĐỂ KHÔNG BỊ KHỰNG)
+      try {
+        const cached = localStorage.getItem(STORAGE_KEYS.CACHE);
+        if (cached) { 
+          buildRelationalData(JSON.parse(cached)); 
+          state.isLoading = false;  // <--- THÊM DÒNG NÀY: Tắt ngay hiệu ứng loading (ô xám) vì đã có sẵn dữ liệu Cache!
+        } else { 
+          buildRelationalData(INITIAL_NTOJ_DATA); 
+        }
+      } catch (_) { 
+        buildRelationalData(INITIAL_NTOJ_DATA); 
+      }
+      renderAll();
+
+      // 2. ĐỒNG BỘ GOOGLE SHEETS NGẦM (KHÔNG CHẶN LUỒNG HIỂN THỊ BAN ĐẦU)
+      syncFromGoogleSheets({ isSilentPolling: true });
 
       const params = new URLSearchParams(window.location.search);
       const sharedStudentId = params.get('student');
       if (sharedStudentId) { openStudentModal(sharedStudentId, false); }
 
-      setInterval(() => {
-        if (document.visibilityState === 'visible') { syncFromGoogleSheets({ isSilentPolling: true }); }
-      }, state.config.POLL_INTERVAL_MS);
-
-      // TỰ ĐỘNG RESET/REFRESH TRANG SAU MỖI 5 PHÚT (300.000 ms)
+      // 3. TỰ ĐỘNG RELOAD TRANG SAU MỖI 5 PHÚT (300.000 ms)
       setInterval(() => {
         if (document.visibilityState === 'visible') {
           window.location.reload();
         }
       }, 300000);
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') { 
+          // Có thể bật lại sync ngầm khi người dùng quay lại tab web
+        }
+      });
     });
   </script>
 </body>
