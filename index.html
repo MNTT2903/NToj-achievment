@@ -60,7 +60,6 @@
       --border-focus: #7C3AED;
 
       /* === HỆ MÀU LOGIC MỚI === */
-      
       /* 1. TST & Nhất QG: Đỏ nền, viền đen đậm (Light) */
       --cf-igm-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(185, 28, 28, 0.4) 100%);
       --cf-igm-solid: #000000;
@@ -560,6 +559,13 @@
         <div id="resultCounter" class="result-meta">Hiển thị <strong>0</strong> học viên</div>
         
         <div class="sort-select-wrap">
+          <label for="provinceSelect">Tỉnh thành:</label>
+          <select id="provinceSelect" class="sort-select" aria-label="Lọc học viên theo Tỉnh thành">
+            <option value="Tất cả">Tất cả</option>
+          </select>
+        </div>
+
+        <div class="sort-select-wrap">
           <label for="hashtagSelect">Hashtag:</label>
           <select id="hashtagSelect" class="sort-select" aria-label="Lọc học viên theo Hashtag">
             <option value="Tất cả">Tất cả</option>
@@ -621,7 +627,7 @@
       { category_id: 'CAT02', category_name: 'Đội tuyển quốc gia', color_token: 'blue', display_order: 3, is_visible: true },
       { category_id: 'CAT03', category_name: 'Duyên hải Bắc Bộ', color_token: 'indigo', display_order: 4, is_visible: true },
       { category_id: 'CAT04', category_name: 'Olympic 30/4', color_token: 'rose', display_order: 5, is_visible: true },
-      { category_id: 'CAT07', category_name: 'Học sinh giỏi tỉnh', color_token: 'emerald', display_order: 6, is_visible: true },
+      { category_id: 'CAT07', category_name: 'Học sinh giỏi tỉnh cấp 3', color_token: 'emerald', display_order: 6, is_visible: true },
       { category_id: 'CAT05', category_name: 'Tuyển sinh 10', color_token: 'cyan', display_order: 7, is_visible: true }
     ];
 
@@ -649,7 +655,48 @@
         .replace(/'/g, '&#39;');
     }
 
-    // 1. NHẬN DIỆN MÀU CẬP NHẬT 100% THEO ĐÚNG 6 NHÓM CỦA BẠN
+    // TỰ ĐỘNG CHUYỂN ĐỔI TỈNH THÀNH (NGHỊ ĐỊNH 07/2025)
+    function convertToNewProvince(oldName) {
+      if (!oldName) return '';
+      const norm = normalizeVietnamese(oldName);
+      
+      // Bảng map quy đổi: 'tên cũ (không dấu, thường)': 'Tên Mới Hiển Thị'
+      const map2025 = {
+        'ha giang': 'Tuyên Quang',
+        'yen bai': 'Lào Cai',
+        'bac kan': 'Thái Nguyên',
+        'vinh phuc': 'Phú Thọ',
+        'hoa binh': 'Phú Thọ',
+        'bac giang': 'Bắc Ninh',
+        'thai binh': 'Hưng Yên',
+        'hai duong': 'Hải Phòng',
+        'ha nam': 'Ninh Bình',
+        'nam dinh': 'Ninh Bình',
+        'quang binh': 'Quảng Trị',
+        'quang nam': 'Đà Nẵng',
+        'kon tum': 'Quảng Ngãi',
+        'binh dinh': 'Gia Lai',
+        'ninh thuan': 'Khánh Hòa',
+        'dak nong': 'Lâm Đồng',
+        'binh thuan': 'Lâm Đồng',
+        'phu yen': 'Đắk Lắk',
+        'ba ria vung tau': 'Thành phố Hồ Chí Minh',
+        'binh duong': 'Thành phố Hồ Chí Minh',
+        'binh phuoc': 'Đồng Nai',
+        'long an': 'Tây Ninh',
+        'soc trang': 'Cần Thơ',
+        'hau giang': 'Cần Thơ',
+        'ben tre': 'Vĩnh Long',
+        'tra vinh': 'Vĩnh Long',
+        'tien giang': 'Đồng Tháp',
+        'bac lieu': 'Cà Mau',
+        'kien giang': 'An Giang'
+      };
+
+      return map2025[norm] || oldName.trim();
+    }
+
+    // NHẬN DIỆN MÀU CẬP NHẬT 100% THEO ĐÚNG 6 NHÓM
     function resolveAwardTier(awardLevel, category = '', achName = '') {
       const norm = normalizeVietnamese(awardLevel);
       const normCat = normalizeVietnamese(category);
@@ -689,14 +736,11 @@
       // 6. Xanh lá (green): KK các kỳ thi, Ba các kỳ thi, HCĐ, v.v.
       if (isKK || isBa || norm.includes('hcd') || norm.includes('dong')) return { tier: 'green', priority: 6, icon: '■' };
 
-      // Fallback
       return { tier: 'green', priority: 6, icon: '■' };
     }
 
-    // GỌN NHẸ HÓA HÀM TÍNH ĐIỂM BẰNG CÁCH DÙNG TRỰC TIẾP priority TỪ TIER
-    function computeAchievementRankScore(ach) {
-      if (!ach) return 99;
-      return ach.tierPriority || 99;
+    function normLevelMatch(lvl, keywords) {
+      return keywords.some(kw => lvl.includes(kw));
     }
 
     function createFallbackAvatarDataUri(fullName) {
@@ -719,11 +763,13 @@
       categories: [],
       hashtags: [],
       schools: [],
+      provinces: [],
       totalAchievementsCount: 0,
       yearRangeText: '—',
       selectedCategory: 'Tất cả',
       selectedHashtag: 'Tất cả',
       selectedSchool: 'Tất cả',
+      selectedProvince: 'Tất cả',
       searchQuery: '',
       activeStudentId: null,
       dataHash: '',
@@ -784,7 +830,6 @@
           const normAch = normalizeVietnamese(achName);
           const normRawCat = normalizeVietnamese(parts[2] || a.category || '');
           
-          // TỰ ĐỘNG NHẬN DIỆN VÀ CHUẨN HÓA TÊN CATEGORY CHÍNH XÁC
           let catName = parts[2] || a.category || '';
           const fullCheck = normAch + ' ' + normRawCat;
 
@@ -817,7 +862,6 @@
           const parsedYear = (a.award_year !== null && a.award_year !== undefined && String(a.award_year).trim() !== '') ? Number(a.award_year) : null;
           const validYear = (parsedYear && !Number.isNaN(parsedYear) && parsedYear > 1990 && parsedYear < 2100) ? parsedYear : null;
           
-          // Gắn trực tiếp tier và priority ngay từ lúc build
           const tierInfo = resolveAwardTier(a.award_level || '', catName, achName);
 
           return {
@@ -844,6 +888,7 @@
 
       const allUniqueHashtags = new Set();
       const allUniqueSchools = new Set();
+      const allUniqueProvinces = new Set();
 
       visibleStudents.forEach(s => {
         const tagStr = String(s.hastag || s.hashtag || '').trim();
@@ -854,18 +899,25 @@
         }
         const sch = String(s.school || '').trim();
         if (sch) allUniqueSchools.add(sch);
+        
+        const rawProv = String(s.provinces || s.province || '').trim();
+        const newProv = convertToNewProvince(rawProv);
+        if (newProv) allUniqueProvinces.add(newProv);
       });
 
       state.hashtags = Array.from(allUniqueHashtags);
       state.schools = Array.from(allUniqueSchools).sort();
+      state.provinces = Array.from(allUniqueProvinces).sort();
 
       const profiles = visibleStudents.map(student => {
         const sid = String(student.student_id).trim();
         const studentAchs = achByStudent.get(sid) || [];
         const rawTag = String(student.hastag || student.hashtag || '').trim();
         const studentHashtags = rawTag ? rawTag.split(',').map(t => t.trim()).filter(Boolean) : [];
+        
+        const rawProv = String(student.provinces || student.province || '').trim();
+        const studentProvince = convertToNewProvince(rawProv);
 
-        // Sắp xếp thứ tự giải thưởng CHUẨN XÁC theo priority: 1 -> 6
         const sortedChronological = [...studentAchs].sort((a, b) => {
           if (a.tierPriority !== b.tierPriority) return a.tierPriority - b.tierPriority;
           const yA = a.award_year || 0; const yB = b.award_year || 0;
@@ -897,6 +949,7 @@
         const uniqueCategories = Array.from(new Set(studentAchs.map(x => x.category).filter(Boolean)));
         const searchIndex = normalizeVietnamese([
           student.full_name,
+          studentProvince,
           ...studentHashtags,
           ...studentAchs.map(a => `${a.achievement_name} ${a.competition_name} ${a.category} ${a.award_level} ${a.award_year || ''}`)
         ].join(' '));
@@ -906,6 +959,7 @@
           full_name: String(student.full_name || 'Học viên NTOJ').trim(),
           avatar_url: String(student.avatar_url || '').trim(),
           school: String(student.school || '').trim(),
+          province: studentProvince,
           introduction: String(student.introduction || '').trim(),
           display_order: Number(student.display_order) || 999,
           achievements: sortedChronological,
@@ -1076,6 +1130,21 @@
       });
     }
 
+    function renderProvinceSelect() {
+      const select = document.getElementById('provinceSelect');
+      if (!select) return;
+      if (state.selectedProvince !== 'Tất cả' && !state.provinces.includes(state.selectedProvince)) {
+        state.selectedProvince = 'Tất cả';
+      }
+      const options = ['Tất cả', ...state.provinces];
+      select.innerHTML = options.map(prov => {
+        const count = prov === 'Tất cả' ? state.profiles.length : state.profiles.filter(p => p.province === prov).length;
+        const label = prov === 'Tất cả' ? `Tất cả (${count})` : `${prov} (${count})`;
+        const selected = state.selectedProvince === prov ? 'selected' : '';
+        return `<option value="${escapeHtml(prov)}" ${selected}>${escapeHtml(label)}</option>`;
+      }).join('');
+    }
+
     function renderHashtagSelect() {
       const select = document.getElementById('hashtagSelect');
       if (!select) return;
@@ -1122,8 +1191,9 @@
         const matchCategory = state.selectedCategory === 'Tất cả' || profile.categories.includes(state.selectedCategory);
         const matchHashtag = state.selectedHashtag === 'Tất cả' || (profile.hashtags && profile.hashtags.includes(state.selectedHashtag));
         const matchSchool = state.selectedSchool === 'Tất cả' || profile.school === state.selectedSchool;
+        const matchProvince = state.selectedProvince === 'Tất cả' || profile.province === state.selectedProvince;
         
-        if (!matchCategory || !matchHashtag || !matchSchool) return false;
+        if (!matchCategory || !matchHashtag || !matchSchool || !matchProvince) return false;
         if (!normQuery) return true;
         return profile.searchIndex.includes(normQuery);
       });
@@ -1132,21 +1202,29 @@
         const activeCat = state.selectedCategory;
         let scoreA, scoreB;
 
-        // NẾU Ở TAB "TẤT CẢ" -> SORT THEO GIẢI CAO NHẤT TỔNG THỂ
+        // 1. LẤY ĐIỂM XẾP HẠNG THEO TAB HIỆN TẠI
         if (!activeCat || activeCat === 'Tất cả') {
           scoreA = getStudentTopScore(a);
           scoreB = getStudentTopScore(b);
         } else {
-          // NẾU Ở TAB CATEGORY CỤ THỂ -> SORT THEO GIẢI CAO NHẤT TRONG RIÊNG KỲ THI ĐÓ
           const aAchInCat = a.achievements.filter(x => x.category === activeCat);
           const bAchInCat = b.achievements.filter(x => x.category === activeCat);
           scoreA = aAchInCat.length > 0 ? Math.min(...aAchInCat.map(x => x.tierPriority)) : 99;
           scoreB = bAchInCat.length > 0 ? Math.min(...bAchInCat.map(x => x.tierPriority)) : 99;
         }
 
+        // TIÊU CHÍ 1: So sánh giải trong tab đang xem
         if (scoreA !== scoreB) return scoreA - scoreB;
 
+        // TIÊU CHÍ 2: NẾU BẰNG GIẢI NHAU -> So sánh tiếp bằng "Thành tích cao nhất tổng thể" của học viên
+        const overallA = getStudentTopScore(a);
+        const overallB = getStudentTopScore(b);
+        if (overallA !== overallB) return overallA - overallB;
+
+        // TIÊU CHÍ 3: Ưu tiên thủ công (display_order)
         if (a.display_order !== b.display_order) return a.display_order - b.display_order;
+        
+        // TIÊU CHÍ 4: Bảng chữ cái ABC
         return a.full_name.localeCompare(b.full_name, 'vi');
       });
     }
@@ -1186,12 +1264,14 @@
         `;
         document.getElementById('btnResetFilters')?.addEventListener('click', () => {
           state.selectedCategory = 'Tất cả';
+          state.selectedProvince = 'Tất cả';
           state.selectedHashtag = 'Tất cả';
           state.selectedSchool = 'Tất cả';
           state.searchQuery = '';
           document.getElementById('searchInput').value = '';
           document.getElementById('btnClearSearch').classList.remove('is-visible');
           renderCategoryPills();
+          renderProvinceSelect();
           renderHashtagSelect();
           renderSchoolSelect();
           renderStudentCards();
@@ -1200,7 +1280,6 @@
       }
 
       grid.innerHTML = list.map(student => {
-        // NẾU ĐANG Ở TAB CATEGORY CỤ THỂ -> LẤY GIẢI CAO NHẤT CỦA RIÊNG KỲ THI ĐÓ ĐỂ HIỂN THỊ
         let featured = student.topAchievement;
         if (state.selectedCategory !== 'Tất cả') {
           const matchCatAch = student.achievements
@@ -1212,7 +1291,6 @@
         const fallbackAvatar = createFallbackAvatarDataUri(student.full_name);
         const avatarSrc = student.avatar_url || fallbackAvatar;
         const yearBadge = featured && featured.award_year ? featured.award_year : (student.latestYear || 'NTOJ');
-        // ... (phần còn lại của card giữ nguyên)
 
         return `
           <article class="student-card" data-rank="${escapeHtml(student.cpRankBadge)}" data-student-id="${escapeHtml(student.student_id)}" tabindex="0" role="button">
@@ -1225,6 +1303,7 @@
                 ${student.hashtags && student.hashtags.length > 0 ? `<div style="display:flex;gap:0.3rem;flex-wrap:wrap;margin-bottom:0.3rem;">${student.hashtags.map(t => `<span class="student-card__rank-chip" style="margin-bottom:0;">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
                 <h2 class="student-card__name" title="${escapeHtml(student.full_name)}">${escapeHtml(student.full_name)}</h2>
                 <p class="student-card__class" title="${escapeHtml(student.school)}">${escapeHtml(student.school)}</p>
+                ${student.province ? `<p style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600;">${escapeHtml(student.province)}</p>` : ''}
               </div>
             </div>
 
@@ -1281,8 +1360,6 @@
       const fallbackAvatar = createFallbackAvatarDataUri(student.full_name);
       const avatarSrc = student.avatar_url || fallbackAvatar;
 
-      // XÓA HẲN BẢNG CHÚ THÍCH THEO YÊU CẦU
-
       content.innerHTML = `
         <aside class="cp-metallic-frame" data-rank="${escapeHtml(student.cpRankBadge)}">
           <span class="pcb-corner tl"></span><span class="pcb-corner tr"></span><span class="pcb-corner bl"></span><span class="pcb-corner br"></span>
@@ -1299,6 +1376,7 @@
             <div class="cp-metallic-frame__info">
               <h2 id="modalStudentName" class="cp-metallic-frame__name">${escapeHtml(student.full_name)}</h2>
               <div class="cp-metallic-frame__class">${escapeHtml(student.school)}</div>
+              ${student.province ? `<div style="font-size:0.75rem; color:#A78BFA; margin-bottom:0.5rem; font-weight:600;">📍 ${escapeHtml(student.province)}</div>` : ''}
               ${student.introduction ? `<p class="cp-metallic-frame__bio">${escapeHtml(student.introduction)}</p>` : ''}
               <div class="cp-metallic-frame__code-footer">
                 <span>ID: ${escapeHtml(student.student_id)}</span>
@@ -1312,7 +1390,6 @@
         <section class="history-panel" aria-label="Lịch sử thành tích học viên">
           <div class="history-panel__header">
             <h3 class="history-panel__title"><span>Hành trình Chinh phục Giải thưởng</span></h3>
-           
           </div>
 
           ${student.achievements.length > 0 ? `
@@ -1393,6 +1470,7 @@
     function renderAll() {
       renderStats();
       renderCategoryPills();
+      renderProvinceSelect();
       renderHashtagSelect();
       renderSchoolSelect();
       renderStudentCards();
@@ -1421,6 +1499,14 @@
         renderStudentCards();
         searchInput.focus();
       });
+
+      const provinceSelect = document.getElementById('provinceSelect');
+      if (provinceSelect) {
+        provinceSelect.addEventListener('change', (e) => {
+          state.selectedProvince = e.target.value || 'Tất cả';
+          renderStudentCards();
+        });
+      }
 
       const hashtagSelect = document.getElementById('hashtagSelect');
       if (hashtagSelect) {
@@ -1455,12 +1541,12 @@
         syncFromGoogleSheets({ isSilentPolling: false });
       });
 
-      // 1. HIỂN THỊ NGAY LẬP TỨC KHI VỪA VÀO WEB (DÙNG CACHE ĐỂ KHÔNG BỊ KHỰNG)
+      // 1. HIỂN THỊ DỮ LIỆU TỪ CACHE NGAY LẬP TỨC (KHÔNG BỊ KHỰNG/LOAD)
       try {
         const cached = localStorage.getItem(STORAGE_KEYS.CACHE);
         if (cached) { 
           buildRelationalData(JSON.parse(cached)); 
-          state.isLoading = false;  // <--- THÊM DÒNG NÀY: Tắt ngay hiệu ứng loading (ô xám) vì đã có sẵn dữ liệu Cache!
+          state.isLoading = false; // Tắt trạng thái đang tải
         } else { 
           buildRelationalData(INITIAL_NTOJ_DATA); 
         }
@@ -1469,7 +1555,7 @@
       }
       renderAll();
 
-      // 2. ĐỒNG BỘ GOOGLE SHEETS NGẦM (KHÔNG CHẶN LUỒNG HIỂN THỊ BAN ĐẦU)
+      // 2. ĐỒNG BỘ GOOGLE SHEETS CHẠY NGẦM (LẤY DỮ LIỆU MỚI)
       syncFromGoogleSheets({ isSilentPolling: true });
 
       const params = new URLSearchParams(window.location.search);
@@ -1482,12 +1568,6 @@
           window.location.reload();
         }
       }, 300000);
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') { 
-          // Có thể bật lại sync ngầm khi người dùng quay lại tab web
-        }
-      });
     });
   </script>
 </body>
