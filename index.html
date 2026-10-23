@@ -429,6 +429,10 @@
 
     .history-panel__header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.75rem; border-bottom: 1.5px solid var(--border-subtle); }
     .history-panel__title { font-size: 1.2rem; font-weight: 800; }
+    .history-panel__order-note {
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--brand-primary);
+      background: var(--brand-soft-bg); padding: 0.25rem 0.65rem; border-radius: 999px; border: 1px solid var(--border-tech);
+    }
 
     .timeline-list { position: relative; padding-left: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
     .timeline-list::before { content: ""; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: var(--border-tech); }
@@ -555,9 +559,10 @@
         <div id="resultCounter" class="result-meta">Hiển thị <strong>0</strong> học viên</div>
         
         <div class="sort-select-wrap">
-          <label for="provinceInput">Tỉnh thành:</label>
-          <input type="text" id="provinceInput" list="provinceList" class="sort-select" placeholder="Tất cả..." autocomplete="off" style="width: 130px; cursor: text;">
-          <datalist id="provinceList"></datalist>
+          <label for="provinceSelect">Tỉnh thành:</label>
+          <select id="provinceSelect" class="sort-select" aria-label="Lọc học viên theo Tỉnh thành">
+            <option value="Tất cả">Tất cả</option>
+          </select>
         </div>
 
         <div class="sort-select-wrap">
@@ -568,9 +573,10 @@
         </div>
 
         <div class="sort-select-wrap">
-          <label for="schoolInput">Trường:</label>
-          <input type="text" id="schoolInput" list="schoolList" class="sort-select" placeholder="Tất cả..." autocomplete="off" style="width: 180px; cursor: text;">
-          <datalist id="schoolList"></datalist>
+          <label for="schoolSelect">Trường:</label>
+          <select id="schoolSelect" class="sort-select" aria-label="Lọc học viên theo Trường">
+            <option value="Tất cả">Tất cả</option>
+          </select>
         </div>
       </div>
     </section>
@@ -654,41 +660,103 @@
       if (!oldName) return '';
       const norm = normalizeVietnamese(oldName);
       
+      // Bảng map quy đổi: 'tên cũ (không dấu, thường)': 'Tên Mới Hiển Thị'
       const map2025 = {
         'ha giang': 'Tuyên Quang',
+        'tuyen quang': 'Tuyên Quang',
         'yen bai': 'Lào Cai',
+        'lao cai': 'Lào Cai',
         'bac kan': 'Thái Nguyên',
+        'thai nguyen': 'Thái Nguyên',
         'vinh phuc': 'Phú Thọ',
         'hoa binh': 'Phú Thọ',
+        'phu tho': 'Phú Thọ',
         'bac giang': 'Bắc Ninh',
+        'bac ninh': 'Bắc Ninh',
         'thai binh': 'Hưng Yên',
+        'hung yen': 'Hưng Yên',
         'hai duong': 'Hải Phòng',
+        'hai phong': 'Hải Phòng',
+        'tp hai phong': 'Hải Phòng',
         'ha nam': 'Ninh Bình',
         'nam dinh': 'Ninh Bình',
+        'ninh binh': 'Ninh Bình',
         'quang binh': 'Quảng Trị',
+        'quang tri': 'Quảng Trị',
         'quang nam': 'Đà Nẵng',
+        'da nang': 'Đà Nẵng',
+        'tp da nang': 'Đà Nẵng',
         'kon tum': 'Quảng Ngãi',
+        'quang ngai': 'Quảng Ngãi',
         'binh dinh': 'Gia Lai',
+        'gia lai': 'Gia Lai',
         'ninh thuan': 'Khánh Hòa',
+        'khanh hoa': 'Khánh Hòa',
         'dak nong': 'Lâm Đồng',
         'binh thuan': 'Lâm Đồng',
+        'lam dong': 'Lâm Đồng',
         'phu yen': 'Đắk Lắk',
+        'dak lak': 'Đắk Lắk',
         'ba ria vung tau': 'Thành phố Hồ Chí Minh',
         'binh duong': 'Thành phố Hồ Chí Minh',
+        'ho chi minh': 'Thành phố Hồ Chí Minh',
+        'tp ho chi minh': 'Thành phố Hồ Chí Minh',
+        'tphcm': 'Thành phố Hồ Chí Minh',
         'binh phuoc': 'Đồng Nai',
+        'dong nai': 'Đồng Nai',
         'long an': 'Tây Ninh',
+        'tay ninh': 'Tây Ninh',
         'soc trang': 'Cần Thơ',
         'hau giang': 'Cần Thơ',
+        'can tho': 'Cần Thơ',
+        'tp can tho': 'Cần Thơ',
         'ben tre': 'Vĩnh Long',
         'tra vinh': 'Vĩnh Long',
+        'vinh long': 'Vĩnh Long',
         'tien giang': 'Đồng Tháp',
+        'dong thap': 'Đồng Tháp',
         'bac lieu': 'Cà Mau',
-        'kien giang': 'An Giang'
+        'ca mau': 'Cà Mau',
+        'kien giang': 'An Giang',
+        'an giang': 'An Giang'
       };
 
       return map2025[norm] || oldName.trim();
     }
 
+    // HIỂN THỊ TÊN TỈNH TRONG BỘ LỌC: "Tỉnh mới - tỉnh cũ - tỉnh cũ 2 (nếu có)"
+    function getMergedProvinceLabel(newProv) {
+      if (!newProv) return '';
+      const norm = normalizeVietnamese(newProv);
+      const mergedDisplayMap = {
+        'tuyen quang': 'Tuyên Quang - Hà Giang',
+        'lao cai': 'Lào Cai - Yên Bái',
+        'thai nguyen': 'Thái Nguyên - Bắc Kạn',
+        'phu tho': 'Phú Thọ - Vĩnh Phúc - Hòa Bình',
+        'bac ninh': 'Bắc Ninh - Bắc Giang',
+        'hung yen': 'Hưng Yên - Thái Bình',
+        'hai phong': 'Hải Phòng - Hải Dương',
+        'ninh binh': 'Ninh Bình - Hà Nam - Nam Định',
+        'quang tri': 'Quảng Trị - Quảng Bình',
+        'da nang': 'Đà Nẵng - Quảng Nam',
+        'quang ngai': 'Quảng Ngãi - Kon Tum',
+        'gia lai': 'Gia Lai - Bình Định',
+        'khanh hoa': 'Khánh Hòa - Ninh Thuận',
+        'lam dong': 'Lâm Đồng - Đắk Nông - Bình Thuận',
+        'dak lak': 'Đắk Lắk - Phú Yên',
+        'thanh pho ho chi minh': 'Thành phố Hồ Chí Minh - Bình Dương - Bà Rịa Vũng Tàu',
+        'dong nai': 'Đồng Nai - Bình Phước',
+        'tay ninh': 'Tây Ninh - Long An',
+        'can tho': 'Cần Thơ - Hậu Giang - Sóc Trăng',
+        'vinh long': 'Vĩnh Long - Bến Tre - Trà Vinh',
+        'dong thap': 'Đồng Tháp - Tiền Giang',
+        'ca mau': 'Cà Mau - Bạc Liêu',
+        'an giang': 'An Giang - Kiên Giang'
+      };
+      return mergedDisplayMap[norm] || newProv;
+    }
+
+    // NHẬN DIỆN MÀU CẬP NHẬT 100% THEO ĐÚNG 6 NHÓM
     // NHẬN DIỆN MÀU VÀ ƯU TIÊN SẮP XẾP BÊN TRONG CÙNG MỘT MÀU
     function resolveAwardTier(awardLevel, category = '', achName = '') {
       const norm = normalizeVietnamese(awardLevel);
@@ -703,7 +771,7 @@
       const isTst = norm.includes('tst') || normCat.includes('tst') || normName.includes('tst');
       const isDTQG = normCat.includes('doi tuyen quoc gia') || normCat.includes('dtqg') || normName.includes('doi tuyen quoc gia');
 
-      // 1. TST - Đỏ đen
+      // 1. TST - Đỏ đen (Và ghép thêm Nhất Quốc gia vào nhóm này nếu có)
       if (isTst) return { tier: 'igm', priority: 10, icon: '★' };
       if (isQuocGia && (norm.includes('nhat') || norm.includes('vang') || norm.includes('hcv'))) return { tier: 'igm', priority: 11, icon: '★' };
 
@@ -730,8 +798,12 @@
       if (norm.includes('ba')) return { tier: 'green', priority: 61, icon: '■' };
       if (norm.includes('hcd') || norm.includes('dong') || norm.includes('bronze')) return { tier: 'green', priority: 62, icon: '■' };
 
-      // Fallback
+      // Dành cho các thành tích không nằm trong format
       return { tier: 'green', priority: 99, icon: '■' };
+    }
+
+    function normLevelMatch(lvl, keywords) {
+      return keywords.some(kw => lvl.includes(kw));
     }
 
     function createFallbackAvatarDataUri(fullName) {
@@ -940,7 +1012,9 @@
         const uniqueCategories = Array.from(new Set(studentAchs.map(x => x.category).filter(Boolean)));
         const searchIndex = normalizeVietnamese([
           student.full_name,
+          rawProv,
           studentProvince,
+          getMergedProvinceLabel(studentProvince),
           ...studentHashtags,
           ...studentAchs.map(a => `${a.achievement_name} ${a.competition_name} ${a.category} ${a.award_level} ${a.award_year || ''}`)
         ].join(' '));
@@ -1122,11 +1196,18 @@
     }
 
     function renderProvinceSelect() {
-      const datalist = document.getElementById('provinceList');
-      if (!datalist) return;
-      datalist.innerHTML = state.provinces.map(prov => {
-        const count = state.profiles.filter(p => p.province === prov).length;
-        return `<option value="${escapeHtml(prov)}">(${count} học viên)</option>`;
+      const select = document.getElementById('provinceSelect');
+      if (!select) return;
+      if (state.selectedProvince !== 'Tất cả' && !state.provinces.includes(state.selectedProvince)) {
+        state.selectedProvince = 'Tất cả';
+      }
+      const options = ['Tất cả', ...state.provinces];
+      select.innerHTML = options.map(prov => {
+        const count = prov === 'Tất cả' ? state.profiles.length : state.profiles.filter(p => p.province === prov).length;
+        const displayProv = prov === 'Tất cả' ? 'Tất cả' : getMergedProvinceLabel(prov);
+        const label = `${displayProv} (${count})`;
+        const selected = state.selectedProvince === prov ? 'selected' : '';
+        return `<option value="${escapeHtml(prov)}" ${selected}>${escapeHtml(label)}</option>`;
       }).join('');
     }
 
@@ -1146,11 +1227,17 @@
     }
 
     function renderSchoolSelect() {
-      const datalist = document.getElementById('schoolList');
-      if (!datalist) return;
-      datalist.innerHTML = state.schools.map(sch => {
-        const count = state.profiles.filter(p => p.school === sch).length;
-        return `<option value="${escapeHtml(sch)}">(${count} học viên)</option>`;
+      const select = document.getElementById('schoolSelect');
+      if (!select) return;
+      if (state.selectedSchool !== 'Tất cả' && !state.schools.includes(state.selectedSchool)) {
+        state.selectedSchool = 'Tất cả';
+      }
+      const options = ['Tất cả', ...state.schools];
+      select.innerHTML = options.map(sch => {
+        const count = sch === 'Tất cả' ? state.profiles.length : state.profiles.filter(p => p.school === sch).length;
+        const label = sch === 'Tất cả' ? `Tất cả (${count})` : `${sch} (${count})`;
+        const selected = state.selectedSchool === sch ? 'selected' : '';
+        return `<option value="${escapeHtml(sch)}" ${selected}>${escapeHtml(label)}</option>`;
       }).join('');
     }
 
@@ -1164,19 +1251,13 @@
       return bestScore;
     }
 
-    function getFilteredAndSortedStudents() {
+   function getFilteredAndSortedStudents() {
       const normQuery = normalizeVietnamese(state.searchQuery);
-      
       const filtered = state.profiles.filter(profile => {
         const matchCategory = state.selectedCategory === 'Tất cả' || profile.categories.includes(state.selectedCategory);
         const matchHashtag = state.selectedHashtag === 'Tất cả' || (profile.hashtags && profile.hashtags.includes(state.selectedHashtag));
-        
-        // Chức năng search thông minh cho Tỉnh và Trường
-        const normProvQuery = normalizeVietnamese(state.selectedProvince);
-        const matchProvince = state.selectedProvince === 'Tất cả' || (profile.province && normalizeVietnamese(profile.province).includes(normProvQuery));
-        
-        const normSchQuery = normalizeVietnamese(state.selectedSchool);
-        const matchSchool = state.selectedSchool === 'Tất cả' || (profile.school && normalizeVietnamese(profile.school).includes(normSchQuery));
+        const matchSchool = state.selectedSchool === 'Tất cả' || profile.school === state.selectedSchool;
+        const matchProvince = state.selectedProvince === 'Tất cả' || profile.province === state.selectedProvince;
         
         if (!matchCategory || !matchHashtag || !matchSchool || !matchProvince) return false;
         if (!normQuery) return true;
@@ -1201,7 +1282,7 @@
         // TIÊU CHÍ 1: So sánh giải trong tab đang xem
         if (scoreA !== scoreB) return scoreA - scoreB;
 
-        // TIÊU CHÍ 2: NẾU BẰNG GIẢI NHAU -> So sánh tiếp bằng "Thành tích cao nhất tổng thể"
+        // TIÊU CHÍ 2: NẾU BẰNG GIẢI NHAU -> So sánh tiếp bằng "Thành tích cao nhất tổng thể" của học viên
         const overallA = getStudentTopScore(a);
         const overallB = getStudentTopScore(b);
         if (overallA !== overallB) return overallA - overallB;
@@ -1254,8 +1335,6 @@
           state.selectedSchool = 'Tất cả';
           state.searchQuery = '';
           document.getElementById('searchInput').value = '';
-          document.getElementById('provinceInput').value = ''; 
-          document.getElementById('schoolInput').value = '';   
           document.getElementById('btnClearSearch').classList.remove('is-visible');
           renderCategoryPills();
           renderProvinceSelect();
@@ -1487,11 +1566,10 @@
         searchInput.focus();
       });
 
-      const provinceInput = document.getElementById('provinceInput');
-      if (provinceInput) {
-        provinceInput.addEventListener('input', (e) => {
-          const val = e.target.value.trim();
-          state.selectedProvince = val === '' ? 'Tất cả' : val;
+      const provinceSelect = document.getElementById('provinceSelect');
+      if (provinceSelect) {
+        provinceSelect.addEventListener('change', (e) => {
+          state.selectedProvince = e.target.value || 'Tất cả';
           renderStudentCards();
         });
       }
@@ -1504,11 +1582,10 @@
         });
       }
 
-      const schoolInput = document.getElementById('schoolInput');
-      if (schoolInput) {
-        schoolInput.addEventListener('input', (e) => {
-          const val = e.target.value.trim();
-          state.selectedSchool = val === '' ? 'Tất cả' : val;
+      const schoolSelect = document.getElementById('schoolSelect');
+      if (schoolSelect) {
+        schoolSelect.addEventListener('change', (e) => {
+          state.selectedSchool = e.target.value || 'Tất cả';
           renderStudentCards();
         });
       }
