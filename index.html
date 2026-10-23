@@ -556,7 +556,7 @@
         
         <div class="sort-select-wrap">
           <label for="provinceInput">Tỉnh thành:</label>
-          <input type="text" id="provinceInput" list="provinceList" class="sort-select" placeholder="Tất cả..." autocomplete="off" style="width: 130px; cursor: text;">
+          <input type="text" id="provinceInput" list="provinceList" class="sort-select" placeholder="Tìm tỉnh cũ/mới..." autocomplete="off" style="width: 195px; cursor: text;">
           <datalist id="provinceList"></datalist>
         </div>
 
@@ -656,37 +656,97 @@
       
       const map2025 = {
         'ha giang': 'Tuyên Quang',
+        'tuyen quang': 'Tuyên Quang',
         'yen bai': 'Lào Cai',
+        'lao cai': 'Lào Cai',
         'bac kan': 'Thái Nguyên',
+        'thai nguyen': 'Thái Nguyên',
         'vinh phuc': 'Phú Thọ',
         'hoa binh': 'Phú Thọ',
+        'phu tho': 'Phú Thọ',
         'bac giang': 'Bắc Ninh',
+        'bac ninh': 'Bắc Ninh',
         'thai binh': 'Hưng Yên',
+        'hung yen': 'Hưng Yên',
         'hai duong': 'Hải Phòng',
+        'hai phong': 'Hải Phòng',
+        'tp hai phong': 'Hải Phòng',
         'ha nam': 'Ninh Bình',
         'nam dinh': 'Ninh Bình',
+        'ninh binh': 'Ninh Bình',
         'quang binh': 'Quảng Trị',
+        'quang tri': 'Quảng Trị',
         'quang nam': 'Đà Nẵng',
+        'da nang': 'Đà Nẵng',
+        'tp da nang': 'Đà Nẵng',
         'kon tum': 'Quảng Ngãi',
+        'quang ngai': 'Quảng Ngãi',
         'binh dinh': 'Gia Lai',
+        'gia lai': 'Gia Lai',
         'ninh thuan': 'Khánh Hòa',
+        'khanh hoa': 'Khánh Hòa',
         'dak nong': 'Lâm Đồng',
         'binh thuan': 'Lâm Đồng',
+        'lam dong': 'Lâm Đồng',
         'phu yen': 'Đắk Lắk',
+        'dak lak': 'Đắk Lắk',
         'ba ria vung tau': 'Thành phố Hồ Chí Minh',
         'binh duong': 'Thành phố Hồ Chí Minh',
+        'ho chi minh': 'Thành phố Hồ Chí Minh',
+        'tp ho chi minh': 'Thành phố Hồ Chí Minh',
+        'tphcm': 'Thành phố Hồ Chí Minh',
         'binh phuoc': 'Đồng Nai',
+        'dong nai': 'Đồng Nai',
         'long an': 'Tây Ninh',
+        'tay ninh': 'Tây Ninh',
         'soc trang': 'Cần Thơ',
         'hau giang': 'Cần Thơ',
+        'can tho': 'Cần Thơ',
+        'tp can tho': 'Cần Thơ',
         'ben tre': 'Vĩnh Long',
         'tra vinh': 'Vĩnh Long',
+        'vinh long': 'Vĩnh Long',
         'tien giang': 'Đồng Tháp',
+        'dong thap': 'Đồng Tháp',
         'bac lieu': 'Cà Mau',
-        'kien giang': 'An Giang'
+        'ca mau': 'Cà Mau',
+        'kien giang': 'An Giang',
+        'an giang': 'An Giang'
       };
 
       return map2025[norm] || oldName.trim();
+    }
+
+    // HIỂN THỊ TÊN TỈNH TRONG BỘ LỌC: "Tỉnh mới - tỉnh cũ - tỉnh cũ 2 (nếu có)"
+    function getMergedProvinceLabel(newProv) {
+      if (!newProv) return '';
+      const norm = normalizeVietnamese(newProv);
+      const mergedDisplayMap = {
+        'tuyen quang': 'Tuyên Quang - Hà Giang',
+        'lao cai': 'Lào Cai - Yên Bái',
+        'thai nguyen': 'Thái Nguyên - Bắc Kạn',
+        'phu tho': 'Phú Thọ - Vĩnh Phúc - Hòa Bình',
+        'bac ninh': 'Bắc Ninh - Bắc Giang',
+        'hung yen': 'Hưng Yên - Thái Bình',
+        'hai phong': 'Hải Phòng - Hải Dương',
+        'ninh binh': 'Ninh Bình - Hà Nam - Nam Định',
+        'quang tri': 'Quảng Trị - Quảng Bình',
+        'da nang': 'Đà Nẵng - Quảng Nam',
+        'quang ngai': 'Quảng Ngãi - Kon Tum',
+        'gia lai': 'Gia Lai - Bình Định',
+        'khanh hoa': 'Khánh Hòa - Ninh Thuận',
+        'lam dong': 'Lâm Đồng - Đắk Nông - Bình Thuận',
+        'dak lak': 'Đắk Lắk - Phú Yên',
+        'thanh pho ho chi minh': 'Thành phố Hồ Chí Minh - Bình Dương - Bà Rịa Vũng Tàu',
+        'dong nai': 'Đồng Nai - Bình Phước',
+        'tay ninh': 'Tây Ninh - Long An',
+        'can tho': 'Cần Thơ - Hậu Giang - Sóc Trăng',
+        'vinh long': 'Vĩnh Long - Bến Tre - Trà Vinh',
+        'dong thap': 'Đồng Tháp - Tiền Giang',
+        'ca mau': 'Cà Mau - Bạc Liêu',
+        'an giang': 'An Giang - Kiên Giang'
+      };
+      return mergedDisplayMap[norm] || newProv;
     }
 
     // NHẬN DIỆN MÀU VÀ ƯU TIÊN SẮP XẾP BÊN TRONG CÙNG MỘT MÀU
@@ -757,7 +817,7 @@
       provinces: [],
       totalAchievementsCount: 0,
       yearRangeText: '—',
-      selectedCategory: 'Tất cả',
+      selectedCategories: [],
       selectedHashtag: 'Tất cả',
       selectedSchool: 'Tất cả',
       selectedProvince: 'Tất cả',
@@ -938,9 +998,13 @@
         }
 
         const uniqueCategories = Array.from(new Set(studentAchs.map(x => x.category).filter(Boolean)));
+        const mergedProvince = getMergedProvinceLabel(studentProvince);
         const searchIndex = normalizeVietnamese([
           student.full_name,
+          student.school,
+          rawProv,
           studentProvince,
+          mergedProvince,
           ...studentHashtags,
           ...studentAchs.map(a => `${a.achievement_name} ${a.competition_name} ${a.category} ${a.award_level} ${a.award_year || ''}`)
         ].join(' '));
@@ -950,7 +1014,9 @@
           full_name: String(student.full_name || 'Học viên NTOJ').trim(),
           avatar_url: String(student.avatar_url || '').trim(),
           school: String(student.school || '').trim(),
+          rawProvince: rawProv,
           province: studentProvince,
+          mergedProvince: mergedProvince,
           introduction: String(student.introduction || '').trim(),
           display_order: Number(student.display_order) || 999,
           achievements: sortedChronological,
@@ -1103,7 +1169,9 @@
       const items = [allItem, ...catItems];
 
       container.innerHTML = items.map(item => {
-        const isActive = state.selectedCategory === item.name;
+        const isActive = item.name === 'Tất cả'
+          ? state.selectedCategories.length === 0
+          : state.selectedCategories.includes(item.name);
         return `
           <button type="button" role="tab" aria-selected="${isActive}" class="category-pill ${isActive ? 'is-active' : ''}" data-category="${escapeHtml(item.name)}" data-color="${escapeHtml(item.color)}">
             <span>${escapeHtml(item.name)}</span>
@@ -1114,7 +1182,17 @@
 
       container.querySelectorAll('.category-pill').forEach(btn => {
         btn.addEventListener('click', () => {
-          state.selectedCategory = btn.getAttribute('data-category') || 'Tất cả';
+          const clickedCat = btn.getAttribute('data-category') || 'Tất cả';
+          if (clickedCat === 'Tất cả') {
+            state.selectedCategories = [];
+          } else {
+            const idx = state.selectedCategories.indexOf(clickedCat);
+            if (idx > -1) {
+              state.selectedCategories.splice(idx, 1);
+            } else {
+              state.selectedCategories.push(clickedCat);
+            }
+          }
           renderCategoryPills();
           renderStudentCards();
         });
@@ -1126,7 +1204,8 @@
       if (!datalist) return;
       datalist.innerHTML = state.provinces.map(prov => {
         const count = state.profiles.filter(p => p.province === prov).length;
-        return `<option value="${escapeHtml(prov)}">(${count} học viên)</option>`;
+        const mergedLabel = getMergedProvinceLabel(prov);
+        return `<option value="${escapeHtml(mergedLabel)}">(${count} học viên)</option>`;
       }).join('');
     }
 
@@ -1168,32 +1247,41 @@
       const normQuery = normalizeVietnamese(state.searchQuery);
       
       const filtered = state.profiles.filter(profile => {
-        const matchCategory = state.selectedCategory === 'Tất cả' || profile.categories.includes(state.selectedCategory);
+        // Lọc nhiều danh mục (học viên phải đạt tất cả các tag danh mục đang chọn)
+        const matchCategory = state.selectedCategories.length === 0 ||
+          state.selectedCategories.every(cat => profile.categories.includes(cat));
         const matchHashtag = state.selectedHashtag === 'Tất cả' || (profile.hashtags && profile.hashtags.includes(state.selectedHashtag));
         
-        // Chức năng search thông minh cho Tỉnh và Trường
+        // Chức năng search thông minh cho Tỉnh (hỗ trợ tìm theo cả tỉnh cũ trước sáp nhập, tỉnh mới, hoặc chuỗi gộp) và Trường
         const normProvQuery = normalizeVietnamese(state.selectedProvince);
-        const matchProvince = state.selectedProvince === 'Tất cả' || (profile.province && normalizeVietnamese(profile.province).includes(normProvQuery));
+        const convertedProvQuery = normalizeVietnamese(convertToNewProvince(state.selectedProvince));
+        const profileProvIndex = normalizeVietnamese(`${profile.province || ''} ${profile.rawProvince || ''} ${profile.mergedProvince || ''}`);
+        const matchProvince = state.selectedProvince === 'Tất cả' ||
+          (profileProvIndex && (
+            profileProvIndex.includes(normProvQuery) ||
+            (convertedProvQuery && profileProvIndex.includes(convertedProvQuery))
+          ));
         
         const normSchQuery = normalizeVietnamese(state.selectedSchool);
         const matchSchool = state.selectedSchool === 'Tất cả' || (profile.school && normalizeVietnamese(profile.school).includes(normSchQuery));
         
         if (!matchCategory || !matchHashtag || !matchSchool || !matchProvince) return false;
         if (!normQuery) return true;
-        return profile.searchIndex.includes(normQuery);
+        const convertedMainQuery = normalizeVietnamese(convertToNewProvince(state.searchQuery));
+        return profile.searchIndex.includes(normQuery) || (convertedMainQuery && profile.searchIndex.includes(convertedMainQuery));
       });
 
       return filtered.sort((a, b) => {
-        const activeCat = state.selectedCategory;
+        const activeCats = state.selectedCategories;
         let scoreA, scoreB;
 
-        // 1. LẤY ĐIỂM XẾP HẠNG THEO TAB HIỆN TẠI
-        if (!activeCat || activeCat === 'Tất cả') {
+        // 1. LẤY ĐIỂM XẾP HẠNG THEO CÁC TAB HIỆN TẠI
+        if (!activeCats || activeCats.length === 0) {
           scoreA = getStudentTopScore(a);
           scoreB = getStudentTopScore(b);
         } else {
-          const aAchInCat = a.achievements.filter(x => x.category === activeCat);
-          const bAchInCat = b.achievements.filter(x => x.category === activeCat);
+          const aAchInCat = a.achievements.filter(x => activeCats.includes(x.category));
+          const bAchInCat = b.achievements.filter(x => activeCats.includes(x.category));
           scoreA = aAchInCat.length > 0 ? Math.min(...aAchInCat.map(x => x.tierPriority)) : 99;
           scoreB = bAchInCat.length > 0 ? Math.min(...bAchInCat.map(x => x.tierPriority)) : 99;
         }
@@ -1248,7 +1336,7 @@
           </div>
         `;
         document.getElementById('btnResetFilters')?.addEventListener('click', () => {
-          state.selectedCategory = 'Tất cả';
+          state.selectedCategories = [];
           state.selectedProvince = 'Tất cả';
           state.selectedHashtag = 'Tất cả';
           state.selectedSchool = 'Tất cả';
@@ -1268,9 +1356,9 @@
 
       grid.innerHTML = list.map(student => {
         let featured = student.topAchievement;
-        if (state.selectedCategory !== 'Tất cả') {
+        if (state.selectedCategories.length > 0) {
           const matchCatAch = student.achievements
-            .filter(a => a.category === state.selectedCategory)
+            .filter(a => state.selectedCategories.includes(a.category))
             .sort((a, b) => a.tierPriority - b.tierPriority)[0];
           if (matchCatAch) featured = matchCatAch;
         }
