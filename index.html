@@ -697,6 +697,7 @@
     }
 
     // NHẬN DIỆN MÀU CẬP NHẬT 100% THEO ĐÚNG 6 NHÓM
+    // NHẬN DIỆN MÀU VÀ ƯU TIÊN SẮP XẾP BÊN TRONG CÙNG MỘT MÀU
     function resolveAwardTier(awardLevel, category = '', achName = '') {
       const norm = normalizeVietnamese(awardLevel);
       const normCat = normalizeVietnamese(category);
@@ -708,35 +709,37 @@
       
       const isQuocGia = isHSGQG || isTHTQG;
       const isTst = norm.includes('tst') || normCat.includes('tst') || normName.includes('tst');
-      const isDTQG = normCat.includes('doi tuyen quoc gia') || normCat.includes('dtqg');
-      
-      const isThuKhoa = norm.includes('thu khoa');
-      const isAKhoa = norm.includes('a khoa');
+      const isDTQG = normCat.includes('doi tuyen quoc gia') || normCat.includes('dtqg') || normName.includes('doi tuyen quoc gia');
 
-      const isNhat = norm.includes('nhat') || norm.includes('vang') || norm.includes('hcv') || norm.includes('gold') || isThuKhoa;
-      const isNhi = norm.includes('nhi') || norm.includes('bac') || norm.includes('hcb') || norm.includes('silver') || isAKhoa;
-      const isBa = norm.includes('ba') || norm.includes('dong') || norm.includes('hcd') || norm.includes('bronze');
-      const isKK = norm.includes('khuyen khich') || norm.includes('kk');
+      // 1. TST - Đỏ đen (Và ghép thêm Nhất Quốc gia vào nhóm này nếu có)
+      if (isTst) return { tier: 'igm', priority: 10, icon: '★' };
+      if (isQuocGia && (norm.includes('nhat') || norm.includes('vang') || norm.includes('hcv'))) return { tier: 'igm', priority: 11, icon: '★' };
 
-      // 1. Đỏ viền đen/trắng (igm): TST (và Nhất QG cho đồng bộ)
-      if (isTst || (isQuocGia && isNhat)) return { tier: 'igm', priority: 1, icon: '★' };
-      
-      // 2. Đỏ (gm): Nhì QG, Thủ khoa ĐTQG
-      if ((isQuocGia && isNhi) || (isDTQG && isThuKhoa)) return { tier: 'gm', priority: 2, icon: '◆' };
-      
-      // 3. Vàng (m): Ba QG, Á khoa ĐTQG
-      if ((isQuocGia && isBa) || (isDTQG && isAKhoa)) return { tier: 'm', priority: 3, icon: '▲' };
+      // 2. Nhì quốc gia > thủ khoa ĐTQG : Đỏ
+      if (isQuocGia && (norm.includes('nhi') || norm.includes('bac') || norm.includes('hcb'))) return { tier: 'gm', priority: 20, icon: '◆' };
+      if (isDTQG && norm.includes('thu khoa')) return { tier: 'gm', priority: 21, icon: '◆' };
 
-      // 4. Tím (cm): KK QG, Nhất các kỳ thi, HCV
-      if ((isQuocGia && isKK) || isNhat || norm.includes('hcv') || norm.includes('vang')) return { tier: 'cm', priority: 4, icon: '●' };
+      // 3. Ba quốc gia > á khoa ĐTQG : Vàng
+      if (isQuocGia && (norm.includes('ba') || norm.includes('dong') || norm.includes('hcd'))) return { tier: 'm', priority: 30, icon: '▲' };
+      if (isDTQG && norm.includes('a khoa')) return { tier: 'm', priority: 31, icon: '▲' };
 
-      // 5. Xanh biển (blue): ĐTQG (còn lại), Nhì các kỳ thi, HCB
-      if (isDTQG || isNhi || norm.includes('hcb') || norm.includes('bac')) return { tier: 'blue', priority: 5, icon: '✦' };
+      // 4. KK Quốc gia > nhất các kỳ thi > HCV : Tím
+      if (isQuocGia && (norm.includes('khuyen khich') || norm.includes('kk'))) return { tier: 'cm', priority: 40, icon: '●' };
+      if (norm.includes('nhat') || norm.includes('thu khoa')) return { tier: 'cm', priority: 41, icon: '●' };
+      if (norm.includes('hcv') || norm.includes('vang') || norm.includes('gold')) return { tier: 'cm', priority: 42, icon: '●' };
 
-      // 6. Xanh lá (green): KK các kỳ thi, Ba các kỳ thi, HCĐ, v.v.
-      if (isKK || isBa || norm.includes('hcd') || norm.includes('dong')) return { tier: 'green', priority: 6, icon: '■' };
+      // 5. ĐTQG > nhì các kỳ thi > HCB : Xanh biển
+      if (isDTQG) return { tier: 'blue', priority: 50, icon: '✦' };
+      if (norm.includes('nhi') || norm.includes('a khoa')) return { tier: 'blue', priority: 51, icon: '✦' };
+      if (norm.includes('hcb') || norm.includes('bac') || norm.includes('silver')) return { tier: 'blue', priority: 52, icon: '✦' };
 
-      return { tier: 'green', priority: 6, icon: '■' };
+      // 6. KK các kỳ thi > Ba các kỳ thi > HCĐ : Xanh lá
+      if (norm.includes('khuyen khich') || norm.includes('kk')) return { tier: 'green', priority: 60, icon: '■' };
+      if (norm.includes('ba')) return { tier: 'green', priority: 61, icon: '■' };
+      if (norm.includes('hcd') || norm.includes('dong') || norm.includes('bronze')) return { tier: 'green', priority: 62, icon: '■' };
+
+      // Dành cho các thành tích không nằm trong format
+      return { tier: 'green', priority: 99, icon: '■' };
     }
 
     function normLevelMatch(lvl, keywords) {
